@@ -1,0 +1,3 @@
+nessesary reference 
+	http://kenai.com/projects/steelseries/sources/trunk/show/SteelSeries/src/eu/hansolo/steelseries/gauges
+	http://kenai.com/projects/steelseries/sources/trunk/show/SteelSeries/src/eu/hansolo/steelseries/tools
