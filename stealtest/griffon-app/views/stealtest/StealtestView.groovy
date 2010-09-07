@@ -1,10 +1,14 @@
 package stealtest
 
 
+import com.jidesoft.swing.AnimatorListener
+import static com.jidesoft.swing.MeterProgressBar.*
+
+
 import eu.hansolo.steelseries.tools.*
 import java.awt.*
 
-application(title: 'stealtest',
+frame = application(title: 'stealtest',
   size: [900,600],
   //pack: true,
   //location: [50,50],
@@ -43,12 +47,44 @@ application(title: 'stealtest',
 			radial1VerticalGauge(preferredSize: [100,100]) 
 		}
 		panel(constraints: SOUTH){
-		   boxLayout()
+		  boxLayout()
 			radial2Gauge(preferredSize: [100,100]) 
 			radial2LcdGauge(preferredSize: [100,100]) 
 			radial3Gauge(preferredSize: [100,100]) 
 			radial3LcdGauge(preferredSize: [100,100]) 
 			radial4Gauge(preferredSize: [100,100]) 
 			radial4LcdGauge(preferredSize: [100,100]) 
+
+			panel(){
+				migLayout(constraints: "growx, wrap, gaptop 0")
+				meterProgressBar(id :'m2', style: STYLE_PLAIN,constraints: "growx, wrap, gaptop 0, gapright 0")
+				meterProgressBar(id :'m1', style: STYLE_GRADIENT,constraints: "gaptop 0, gapright 0")
+				
+				//toggleButton(id:'serarchB',constraints: "")
+				//animator(id: 'anim', source: serarchB, delay: 30, totalSteps: 100)
+				animator(id: 'anim', source: m1, delay: 30, totalSteps: 100)
+				anim.addAnimatorListener([
+					animationStarts: { source -> },
+					animationFrame: { source, totalSteps, frame ->
+								   m1.value = m2.value = frame
+								 if(frame==100)anim._currentStep=0
+					},
+					animationEnds: { source ->}
+				] as com.jidesoft.swing.AnimatorListener)
+				anim.start()
+			}
 		}
+
+	//ダブルクリックで表示、非表示
+	systemTray {
+		trayIcon(id: "trayIcon",
+				resource: "/griffon-icon-48x48.png",
+				class: groovy.ui.Console,
+				toolTip: getMessage("view.tray.tooltip") ,
+				actionPerformed: { 	frame.visible = !frame.visible }) {
+		}
+	}
+
 }
+
+

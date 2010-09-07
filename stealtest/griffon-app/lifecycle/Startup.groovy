@@ -11,3 +11,9 @@
  * - execAsync { // your code }
  * - execSync { // your code }
  */
+
+ //スプラッシュスクリーンの設定
+ def splashScreen = SplashScreen.getInstance()
+ splashScreen.showStatus(app.getMessage("splash.initialize.onstartupend.start") )//'開始処理中')
+
+
