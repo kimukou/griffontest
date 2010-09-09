@@ -88,9 +88,23 @@ frame = application(title: 'stealtest',
 			}
 		}
 
-	Thread.start{
+	//ダブルクリックで表示、非表示
+	systemTray {
+		trayIcon(id: "trayIcon",
+				resource: "/griffon-icon-48x48.png",
+				class: groovy.ui.Console,
+				toolTip: getMessage("view.tray.tooltip") ,
+				actionPerformed: { 	frame.visible = !frame.visible }) {
+		}
+	}
+}
+
+def pausef=false
+def t =  new Thread()
+t.start{
 		while(true){
 			 sleep(1000)
+			 if(pausef)continue
 			 //CPU
 			 def c2 = new Date()
 			 float usage = CpuUsageAnalyzer.getCpuUsage()
@@ -108,19 +122,48 @@ frame = application(title: 'stealtest',
 	 			 view.circular.setValueAnimated(0)
        }
 		}
-	}
-
-
-	//ダブルクリックで表示、非表示
-	systemTray {
-		trayIcon(id: "trayIcon",
-				resource: "/griffon-icon-48x48.png",
-				class: groovy.ui.Console,
-				toolTip: getMessage("view.tray.tooltip") ,
-				actionPerformed: { 	frame.visible = !frame.visible }) {
-		}
-	}
-
 }
+
+
+/*
+frame.windowOpened={println 'Opened'}//初回起動時
+frame.windowClosing={println 'closing'}//システムメニューでウィンドウを閉じようとしたとき
+frame.windowClosed={println 'closed'}//disposeが呼ばれた時
+*/
+//通常＝＞最小化
+frame.windowIconified={
+	println 'Iconified'
+	view.anim.stop()
+	//t.yield()
+	pausef=true
+}	
+//最小化＝＞通常
+frame.windowDeiconified={
+	println 'Deiconified'
+	view.anim.start()
+	//t.resume()
+	pausef=false
+}
+
+//アクティブな時
+frame.windowActivated={
+	println 'Activated'
+	if(!frame.visible)return
+	view.anim.start()
+	//t.resume()
+	pausef=false
+}
+
+//アクティブじゃない時
+frame.windowDeactivated={
+	println 'Deactivated'
+	if(frame.visible)return
+	view.anim.stop()
+	//t.yield()
+	pausef=true
+}
+
+
+
 
 

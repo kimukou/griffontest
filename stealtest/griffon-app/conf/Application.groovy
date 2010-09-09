@@ -17,3 +17,9 @@ mvcGroups {
     }
 
 }
+
+
+def controller
+def view
+def model
+

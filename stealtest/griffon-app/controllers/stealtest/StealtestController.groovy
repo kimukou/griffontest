@@ -6,7 +6,9 @@ class StealtestController {
     def view
 
     void mvcGroupInit(Map args) {
-        // this method is called after model and view are injected
+			app.config.controller = args.controller
+			app.config.view = args.view
+			app.config.model = args.model
     }
 
     /*
