@@ -18,16 +18,18 @@
  import java.nio.channels.FileChannel
  import java.nio.channels.FileLock
   
- //起動チェック
- final FileOutputStream fos = new FileOutputStream(new File("lock"))
+ //double start check
+ File fn =new File("lock")
+ fn.deleteOnExit() //Not Action!!
+ final FileOutputStream fos = new FileOutputStream(fn)
  final FileChannel fc = fos.getChannel()
  final FileLock lock = fc.tryLock()
  if (lock == null) {
-	 //既に起動されているので終了する
+	 //process exists,but exit
 	 System.exit(0)
 	 return
  }
- //ロック開放処理を登録
+ //lock free
  Runtime.getRuntime().addShutdownHook(
 	 new Thread() {
 		 public void run() {
@@ -42,7 +44,7 @@
 
 //===============================================================================================
 
-//Exceptionをロガーでキャッチできるようにする設定
+//Exception handing logger
 import groovy.swing.SwingBuilder
 import griffon.util.GriffonPlatformHelper
 import static griffon.util.GriffonApplicationUtils.*
@@ -84,7 +86,7 @@ SwingBuilder.lookAndFeel((isMacOSX ? 'system' : 'nimbus'), 'gtk', ['metal', [bol
 
 //===============================================================================================
 
-//スプラッシュスクリーンの設定
+//splash screen setting
 def splashScreen = SplashScreen.getInstance()
 
 // Setting a splash image
@@ -93,7 +95,7 @@ def splashScreen = SplashScreen.getInstance()
 //
 // Setting Status Text
 // SplashScreen.getInstance().showStatus("Initializing the Controller")
-splashScreen.showStatus('初期化中')
+splashScreen.showStatus('Initialize ZZZZ')
 splashScreen.splash()
 splashScreen.waitForSplash()
 

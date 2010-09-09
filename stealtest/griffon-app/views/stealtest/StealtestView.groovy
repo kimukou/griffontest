@@ -7,14 +7,60 @@ import static com.jidesoft.swing.MeterProgressBar.*
 
 import eu.hansolo.steelseries.tools.*
 import java.awt.*
+import java.awt.event.*
 
 import com.dreamarts.system.utils.*
 import net.miginfocom.swing.MigLayout
 
+/*
+FrameDesign.BLACK_METAL
+FrameDesign.METAL
+FrameDesign.SHINY_METAL
+
+LcdColor.BEIGE_LCD
+LcdColor.BLUE_LCD
+LcdColor.ORANGE_LCD
+LcdColor.RED_LCD
+LcdColor.YELLOW_LCD
+LcdColor.WHITE_LCD
+LcdColor.GRAY_LCD
+LcdColor.BLACK_LCD
+LcdColor.GREEN_LCD
+LcdColor.BLUEBLACK_LCD
+LcdColor.BLUEDARKBLUE_LCD
+LcdColor.BLUEGRAY_LCD
+LcdColor.STANDARD_LCD
+LcdColor.BLUEBLUE_LCD
+
+BackgroundColor.DARK_GRAY
+BackgroundColor.LIGHT_GRAY
+BackgroundColor.WHITE
+BackgroundColor.BLACK
+BackgroundColor.BEIGE
+BackgroundColor.RED
+BackgroundColor.GREEN
+BackgroundColor.BLUE
+
+
+LedColor.RED_LED
+LedColor.GREEN_LED
+LedColor.BLUE_LED
+LedColor.YELLOW_LED
+LedColor.ORANGE_LED
+
+PointerColor.RED
+PointerColor.GREEN
+PointerColor.BLUE
+PointerColor.ORANGE
+PointerColor.YELLOW
+
+*/
+
+
 frame = application(title: 'stealtest',
-  //size: [1500,1000],
+  //size: [800,800],
   pack: true,
-  //location: [50,50],
+  //location: [100,100],
   locationByPlatform:true,
   iconImage: imageIcon('/griffon-icon-48x48.png').image,
   iconImages: [imageIcon('/griffon-icon-48x48.png').image,
@@ -24,11 +70,21 @@ frame = application(title: 'stealtest',
     //borderLayout()
 	  migLayout(layoutConstraints: "gap 0,insets 0,fill")
 
-
 		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
 	   boxLayout()
-			clock(id:'clock',preferredSize: [100,100],backgroundColor:BackgroundColor.WHITE,frameDesign:FrameDesign.SHINY_METAL)
-			compass (preferredSize: [100,100])
+			poi(name:'hogehoge',lat:30,lon:70)
+			altimeter(preferredSize: [70,70])
+			clock(id:'clock',preferredSize: [70,70],backgroundColor:BackgroundColor.WHITE,frameDesign:FrameDesign.SHINY_METAL)
+			compass (preferredSize: [70,70])
+
+			clock.CLOCK_TIMER.addActionListener([
+					actionPerformed: { source -> 
+							println "clock == ${view.clock.hour}:${view.clock.minute} <${java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)}:${view.clock.minute}>"
+					}
+				] as ActionListener)
+		}
+		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+	   boxLayout()
 			digitalRadialGauge (preferredSize: [100,100])
 			digitalRadialLcdGauge (id:'lcdgauge',minValue:0,maxValue:100,lcdValue:50,title:'ほげほげ',unitString:'ふがふが',lcdUnitString:'まいう',preferredSize: [100,100])
 			//displayCircular(id:'circular',minValue:0,maxValue:100,lcdValue:50,title:'ほげほげ',unitString:'ふがふが',lcdUnitString:'まいう',preferredSize: [100,100])
