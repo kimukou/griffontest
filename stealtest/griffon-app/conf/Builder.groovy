@@ -23,3 +23,6 @@ root.'I18nGriffonAddon'.addon=true
 root.'griffon.builder.jide.JideBuilder'.view = '*'
 
 root.'MiglayoutGriffonAddon'.addon=true
+
+root.'griffon.builder.css.CSSBuilder'.view = '*'
+root.'griffon.builder.css.CSSBuilder'.controller = ['CSS']

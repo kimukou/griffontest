@@ -12,6 +12,37 @@ import java.awt.event.*
 import com.dreamarts.system.utils.*
 import net.miginfocom.swing.MigLayout
 
+
+
+import griffon.builder.css.CSSDecorator
+
+// make all components have a white background
+def style = """
+/*
+* {
+  background-color: red;
+}
+*/
+
+jbutton {
+  background-color: blue;
+  font-size: 120%;
+}
+
+#button1 {
+  background-color: green;
+  font-style: italic;
+}
+
+.active {
+  background-color: yellow;
+  font-weight: bold;
+}
+
+"""
+
+
+
 /*
 FrameDesign.BLACK_METAL
 FrameDesign.METAL
@@ -98,7 +129,7 @@ frame = application(title: 'stealtest',
 			displayRectangular(preferredSize: [100,100]) 
 			displaySingle(preferredSize: [100,100]) 
 		}
-		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0), cssClass: "active"){
 	   boxLayout()
 			level (preferredSize: [100,100])
 			linearGauge (preferredSize: [100,100])
@@ -144,6 +175,9 @@ frame = application(title: 'stealtest',
 			}
 		}
 
+	//CSSDecorator.applyStyle(style,app.appFrames[0]) //CSS適応(from griffon 0.3)
+	CSSDecorator.applyStyle(style,app.windowManager.windows[0]) //CSS適応(from griffon 0.9)
+
 	//ダブルクリックで表示、非表示
 	systemTray {
 		trayIcon(id: "trayIcon",
@@ -153,6 +187,7 @@ frame = application(title: 'stealtest',
 				actionPerformed: { 	frame.visible = !frame.visible }) {
 		}
 	}
+
 }
 
 def pausef=false
