@@ -12,9 +12,7 @@ root.'LookandfeelGriffonAddon'.addon=true
 
 root.'LookandfeelJtattooGriffonAddon'.addon=true
 
-root.'griffon.builder.trident.TridentBuilder'.view = '*'
 
-root.'SteelGriffonAddon'.addon=true
 
 root.'TrayBuilderGriffonAddon'.addon=true
 
@@ -26,3 +24,13 @@ root.'MiglayoutGriffonAddon'.addon=true
 
 root.'griffon.builder.css.CSSBuilder'.view = '*'
 root.'griffon.builder.css.CSSBuilder'.controller = ['CSS']
+
+
+
+
+
+
+
+root.'griffon.builder.trident.TridentBuilder'.view = '*'
+
+root.'SteelGriffonAddon'.addon=true

@@ -104,6 +104,7 @@ frame = application(title: 'stealtest',
 		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
 	   boxLayout()
 			poi(name:'hogehoge',lat:30,lon:70)
+			//poi(id:'hogehoge',name:'hogehoge',lat:30,lon:70)
 			altimeter(preferredSize: [70,70])
 			clock(id:'clock',preferredSize: [70,70],backgroundColor:BackgroundColor.WHITE,frameDesign:FrameDesign.SHINY_METAL)
 			compass (preferredSize: [70,70])
@@ -135,6 +136,7 @@ frame = application(title: 'stealtest',
 			linearGauge (preferredSize: [100,100])
 			linearLcdGauge(preferredSize: [100,100]) 
 			radar(id:'radar',preferredSize: [100,100])
+			//radar.add(hogehoge)
 			radar.animate() 
 		}
 		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
@@ -173,6 +175,11 @@ frame = application(title: 'stealtest',
 				] as com.jidesoft.swing.AnimatorListener)
 				anim.start()
 			}
+			//this.registerBeanFactory("radial2TopGauge", eu.hansolo.steelseries.gauges.Radial2Top.class)
+			//radial2TopGauge(preferredSize: [100,100])
+			//this.registerBeanFactory("radialCounterGauge", eu.hansolo.steelseries.gauges.RadialCounter.class)
+			//radialCounterGauge(preferredSize: [100,100])
+
 		}
 
 	//CSSDecorator.applyStyle(style,app.appFrames[0]) //CSS適応(from griffon 0.3)
