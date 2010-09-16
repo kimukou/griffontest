@@ -1,3 +1,7 @@
 nessesary reference 
 	http://kenai.com/projects/steelseries/sources/trunk/show/SteelSeries/src/eu/hansolo/steelseries/gauges
 	http://kenai.com/projects/steelseries/sources/trunk/show/SteelSeries/src/eu/hansolo/steelseries/tools
+
+
+reference
+	http://harmoniccode.blogspot.com/2010/09/steelseries-updates.html
