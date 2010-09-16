@@ -1,6 +1,6 @@
 application {
-    title = 'Stealtest'
-    startupGroups = ['stealtest']
+    title = 'Steeltest'
+    startupGroups = ['steeltest']
 
     // Should Griffon exit when no Griffon created frames are showing?
     autoShutdown = true
@@ -9,11 +9,11 @@ application {
     //frameClass = 'javax.swing.JFrame'
 }
 mvcGroups {
-    // MVC Group for "stealtest"
-    'stealtest' {
-        model = 'stealtest.StealtestModel'
-        controller = 'stealtest.StealtestController'
-        view = 'stealtest.StealtestView'
+    // MVC Group for "steeltest"
+    'steeltest' {
+        model = 'steeltest.SteeltestModel'
+        controller = 'steeltest.SteeltestController'
+        view = 'steeltest.SteeltestView'
     }
 
 }

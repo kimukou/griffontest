@@ -1,4 +1,4 @@
-package stealtest
+package steeltest
 
 
 import com.jidesoft.swing.AnimatorListener
@@ -118,7 +118,7 @@ PointerColor.WHITE	//from 0.2.1
 */
 
 
-frame = application(title: 'stealtest',
+frame = application(title: app.config.application.title,
   size: [800,800],
   //pack: true,
   //location: [150,150],

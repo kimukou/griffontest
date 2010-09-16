@@ -1,6 +1,6 @@
-package stealtest
+package steeltest
 
-class StealtestController {
+class SteeltestController {
     // these will be injected by Griffon
     def model
     def view
