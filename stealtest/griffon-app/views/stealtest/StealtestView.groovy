@@ -89,9 +89,9 @@ PointerColor.YELLOW
 
 
 frame = application(title: 'stealtest',
-  //size: [800,800],
-  pack: true,
-  //location: [100,100],
+  size: [800,800],
+  //pack: true,
+  //location: [150,150],
   locationByPlatform:true,
   iconImage: imageIcon('/griffon-icon-48x48.png').image,
   iconImages: [imageIcon('/griffon-icon-48x48.png').image,
@@ -101,63 +101,52 @@ frame = application(title: 'stealtest',
     //borderLayout()
 	  migLayout(layoutConstraints: "gap 0,insets 0,fill")
 
-		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
-	   boxLayout()
-			poi(name:'hogehoge',lat:30,lon:70)
-			//poi(id:'hogehoge',name:'hogehoge',lat:30,lon:70)
-			altimeter(preferredSize: [70,70])
-			clock(id:'clock',preferredSize: [70,70],backgroundColor:BackgroundColor.WHITE,frameDesign:FrameDesign.SHINY_METAL)
-			compass (preferredSize: [70,70])
+		//1
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+	   		boxLayout()
+			label(text:'1  ')
+			//poi(name:'hogehoge',lat:30,lon:70)
+			poi(id:'hogehoge',name:'hogehoge',lat:30,lon:70)
+			altimeter(preferredSize: [150,150])
+			clock(id:'clock',preferredSize: [150,150],backgroundColor:BackgroundColor.WHITE,frameDesign:FrameDesign.SHINY_METAL)
+			compass (preferredSize: [150,150])
 
 			clock.CLOCK_TIMER.addActionListener([
 					actionPerformed: { source -> 
 							println "clock == ${view.clock.hour}:${view.clock.minute} <${java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)}:${view.clock.minute}>"
 					}
 				] as ActionListener)
+			digitalRadialGauge (preferredSize: [150,150])
+			digitalRadialLcdGauge (id:'lcdgauge',minValue:0,maxValue:100,lcdValue:50,title:'ほげほげ',unitString:'ふがふが',lcdUnitString:'まいう',preferredSize: [150,150])
+			//displayCircular(id:'circular',minValue:0,maxValue:100,lcdValue:50,title:'ほげほげ',unitString:'ふがふが',lcdUnitString:'まいう',preferredSize: [150,150])
 		}
-		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
-	   boxLayout()
-			digitalRadialGauge (preferredSize: [100,100])
-			digitalRadialLcdGauge (id:'lcdgauge',minValue:0,maxValue:100,lcdValue:50,title:'ほげほげ',unitString:'ふがふが',lcdUnitString:'まいう',preferredSize: [100,100])
-			//displayCircular(id:'circular',minValue:0,maxValue:100,lcdValue:50,title:'ほげほげ',unitString:'ふがふが',lcdUnitString:'まいう',preferredSize: [100,100])
-			displayCircular(id:'circular',value:0,lcdDecimals:3,unitString:'SEC',lcdColor:LcdColor.ORANGE_LCD,backgroundColor:BackgroundColor.GREEN,frameDesign:FrameDesign.BLACK_METAL,digitalFont:true,preferredSize: [100,100])
+		//2
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0),preferredSize: [800,150]){
+	   		boxLayout()
+			label(text:'2  ')
+			displayCircular(id:'circular',value:0,lcdDecimals:3,unitString:'SEC',lcdColor:LcdColor.ORANGE_LCD,backgroundColor:BackgroundColor.GREEN,frameDesign:FrameDesign.BLACK_METAL,digitalFont:true,preferredSize: [150,150])
 			//circular.setValueAnimated model.count
-			displayCircular(id:'circular2',value:bind{model.count},lcdDecimals:0,unitString:'SEC',lcdColor:LcdColor.BLUEBLUE_LCD,backgroundColor:BackgroundColor.RED,frameDesign:FrameDesign.BLACK_METAL,digitalFont:true,preferredSize: [100,100])
-		}
-		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
-	   boxLayout()
-			displayMulti(preferredSize: [100,100])
-			displayRectangular(preferredSize: [100,100]) 
-			displaySingle(preferredSize: [100,100]) 
-		}
-		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0), cssClass: "active"){
-	   boxLayout()
-			level (preferredSize: [100,100])
-			linearGauge (preferredSize: [100,100])
-			linearLcdGauge(preferredSize: [100,100]) 
-			radar(id:'radar',preferredSize: [100,100])
-			//radar.add(hogehoge)
-			radar.animate() 
-		}
-		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
-	   boxLayout()
-			radial1Gauge(preferredSize: [70,70]) 
-			radial1LcdGauge(preferredSize: [100,100],value:bind{model.cpu_usage},thresholdVisible:true,minMeasuredValueVisible :true,maxMeasuredValueVisible :true) 
-			radial1SquareGauge(id:'squaregauge',preferredSize: [100,100],minValue:0,maxValue:100,title:'cpu meter',unitString:'%') 
-			radial1VerticalGauge(preferredSize: [100,100]) 
-		}
-		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
-		  boxLayout()
-			radial2Gauge(preferredSize: [100,100]) 
-			radial2LcdGauge(preferredSize: [100,100]) 
-			radial3Gauge(preferredSize: [100,100]) 
-			radial3LcdGauge(preferredSize: [100,100]) 
-		}
-		panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
-	   boxLayout()
-			radial4Gauge(preferredSize: [100,100]) 
-			radial4LcdGauge(preferredSize: [100,100]) 
+			displayCircular(id:'circular2',value:bind{model.count},lcdDecimals:0,unitString:'SEC',lcdColor:LcdColor.BLUEBLUE_LCD,backgroundColor:BackgroundColor.RED,frameDesign:FrameDesign.BLACK_METAL,digitalFont:true,preferredSize: [150,150])
 			panel(){
+		   		boxLayout(axis:javax.swing.BoxLayout.PAGE_AXIS)
+				displayMulti(preferredSize: [140,40])
+				displayRectangular(preferredSize: [140,60],minimumSize: [140,60]) 
+				displaySingle(preferredSize: [140,40]) 
+			}
+			radial2TopGauge(preferredSize: [150,150])
+			radialCounterGauge(preferredSize: [150,150])
+		}
+		//3
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0), cssClass: "active"){
+	   		boxLayout()
+			label(text:'3  ')
+			level (preferredSize: [150,150])
+			linearGauge (preferredSize: [150,150])
+			linearLcdGauge(preferredSize: [150,150]) 
+			radar(id:'radar',preferredSize: [150,150])
+			radar.add(hogehoge)
+			radar.animate() 
+			panel(cssClass: "active"){
 				migLayout(constraints: "growx, wrap, gaptop 0")
 				meterProgressBar(id :'m2', style: STYLE_PLAIN,constraints: "growx, wrap, gaptop 0, gapright 0")
 				meterProgressBar(id :'m1', style: STYLE_GRADIENT,constraints: "gaptop 0, gapright 0")
@@ -175,11 +164,26 @@ frame = application(title: 'stealtest',
 				] as com.jidesoft.swing.AnimatorListener)
 				anim.start()
 			}
-			//this.registerBeanFactory("radial2TopGauge", eu.hansolo.steelseries.gauges.Radial2Top.class)
-			//radial2TopGauge(preferredSize: [100,100])
-			//this.registerBeanFactory("radialCounterGauge", eu.hansolo.steelseries.gauges.RadialCounter.class)
-			//radialCounterGauge(preferredSize: [100,100])
-
+		}
+		//4
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+	   		boxLayout()
+			label(text:'4  ')
+			radial1Gauge(preferredSize: [150,150],minValue:0,maxValue:10000) 
+			radial1LcdGauge(preferredSize: [150,150],value:bind{model.cpu_usage},thresholdVisible:true,minMeasuredValueVisible :true,maxMeasuredValueVisible :true) 
+			radial1SquareGauge(id:'squaregauge',preferredSize: [150,150],minValue:0,maxValue:100,title:'cpu meter',unitString:'%') 
+			radial1VerticalGauge(preferredSize: [150,150]) 
+			radial2Gauge(preferredSize: [150,150]) 
+		}
+		//5
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+		  	boxLayout()
+			label(text:'5  ')
+			radial2LcdGauge(preferredSize: [150,150]) 
+			radial3Gauge(preferredSize: [150,150]) 
+			radial3LcdGauge(preferredSize: [150,150]) 
+			radial4Gauge(preferredSize: [150,150]) 
+			radial4LcdGauge(preferredSize: [150,150]) 
 		}
 
 	//CSSDecorator.applyStyle(style,app.appFrames[0]) //CSS適応(from griffon 0.3)
