@@ -1,8 +1,8 @@
-package stealtest
+package steeltest
 
 import groovy.beans.Bindable
 
-class StealtestModel {
+class SteeltestModel {
    // @Bindable String propName
 
 	@Bindable def count = 30

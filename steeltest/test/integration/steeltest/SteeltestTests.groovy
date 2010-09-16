@@ -1,9 +1,9 @@
-package stealtest
+package steeltest
 
 import griffon.core.GriffonApplication
 import griffon.test.*
 
-class StealtestTests extends GriffonUnitTestCase {
+class SteeltestTests extends GriffonUnitTestCase {
     GriffonApplication app
 
     protected void setUp() {
