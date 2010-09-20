@@ -223,8 +223,9 @@ frame = application(title: app.config.application.title,
 
 			//Support for large ranges ?
 			radial1Gauge(preferredSize: [150,150],minValue:0,maxValue:10000,
-				trackVisible :true,
-				trackSection :100
+				scaleDividerPower:3
+				//trackVisible :true,
+				//trackSection :100
 			)
 			 
 			radial1LcdGauge(preferredSize: [150,150],value:bind{model.cpu_usage},
