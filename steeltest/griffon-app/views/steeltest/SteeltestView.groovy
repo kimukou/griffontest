@@ -13,6 +13,8 @@ import com.dreamarts.system.utils.*
 import net.miginfocom.swing.MigLayout
 
 
+import griffon.transitions.FadeTransition2D
+
 
 import griffon.builder.css.CSSDecorator
 
@@ -121,7 +123,7 @@ PointerColor.WHITE	//from 0.2.1
 frame = application(title: app.config.application.title,
   size: [800,800],
   //pack: true,
-  //location: [150,150],
+  //location: [300,300],
   locationByPlatform:true,
   iconImage: imageIcon('/griffon-icon-48x48.png').image,
   iconImages: [imageIcon('/griffon-icon-48x48.png').image,
@@ -129,17 +131,20 @@ frame = application(title: app.config.application.title,
                imageIcon('/griffon-icon-16x16.png').image]) {
     // add content here
     //borderLayout()
-	  migLayout(layoutConstraints: "gap 0,insets 0,fill")
 
+current.contentPane.background = Color.BLACK
+main = current.contentPane
+transitionLayout(defaultDuration: 2000, defaultTransition: new FadeTransition2D(Color.BLACK))
+
+panel(constraints: 'page1', opaque: false) {
+	  migLayout(layoutConstraints: "gap 0,insets 0,fill")
 		//1
 		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
 	   		boxLayout()
 			label(text:'1  ')
-			//poi(name:'hogehoge',lat:30,lon:70)
-			poi(id:'hogehoge',name:'hogehoge',lat:30,lon:70)
 
-			altimeter(preferredSize: [150,150])
-			clock(id:'clock',preferredSize: [150,150],
+			altimeter(preferredSize: [300,300])
+			clock(id:'clock',preferredSize: [300,300],
 						backgroundColor:BackgroundColor.WHITE,
 						frameDesign:FrameDesign.SHINY_METAL)
 
@@ -150,7 +155,7 @@ frame = application(title: app.config.application.title,
 			g.drawString("Sine Wave", 0, 0); // Draw some text
 			g.dispose()
 
-			compass (id:'compass',preferredSize: [150,150])
+			compass (id:'compass',preferredSize: [300,300])
 			compass.setValueAnimated 90
 
 			clock.CLOCK_TIMER.addActionListener([
@@ -158,46 +163,99 @@ frame = application(title: app.config.application.title,
 							println "clock == ${view.clock.hour}:${view.clock.minute} <${java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)}:${view.clock.minute}>"
 					}
 				] as ActionListener)
-			digitalRadialGauge (preferredSize: [150,150])
-			digitalRadialLcdGauge (id:'lcdgauge',minValue:0,maxValue:100,lcdValue:50,title:'ほげほげ',unitString:'ふがふが',lcdUnitString:'まいう',preferredSize: [150,150])
-			//displayCircular(id:'circular',minValue:0,maxValue:100,lcdValue:50,title:'ほげほげ',unitString:'ふがふが',lcdUnitString:'まいう',preferredSize: [150,150])
 		}
 		//2
-		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0),preferredSize: [800,150]){
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
 	   		boxLayout()
 			label(text:'2  ')
+			digitalRadialGauge (preferredSize: [300,300])
+			digitalRadialLcdGauge (id:'lcdgauge',minValue:0,maxValue:100,lcdValue:50,title:'ほげほげ',unitString:'ふがふが',lcdUnitString:'まいう',preferredSize: [300,300])
+
+			//displayCircular(id:'circular',minValue:0,maxValue:100,lcdValue:50,title:'ほげほげ',unitString:'ふがふが',lcdUnitString:'まいう',preferredSize: [300,300])
 			displayCircular(id:'circular',value:0,lcdDecimals:3,unitString:'SEC',
 					lcdColor:LcdColor.ORANGE_LCD,
 					backgroundColor:BackgroundColor.GREEN,
 					frameDesign:FrameDesign.BLACK_METAL,
 					digitalFont:true,
-					preferredSize: [150,150])
+					preferredSize: [300,300])
 			//circular.setValueAnimated model.count
 			displayCircular(id:'circular2',value:bind{model.count},lcdDecimals:0,unitString:'SEC',
 					lcdColor:LcdColor.BLUEBLUE_LCD,
 					backgroundColor:BackgroundColor.RED,
 					frameDesign:FrameDesign.BLACK_METAL,
-					digitalFont:true,preferredSize: [150,150])
+					digitalFont:true,preferredSize: [300,300])
+		}
+		//3
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+	   		boxLayout()
+			label(text:'3  ')
 			panel(){
 		   		boxLayout(axis:javax.swing.BoxLayout.PAGE_AXIS)
 				displayMulti(preferredSize: [140,40])
 				displayRectangular(preferredSize: [140,60],minimumSize: [140,60]) 
 				displaySingle(preferredSize: [140,40]) 
 			}
-			radial2TopGauge(preferredSize: [150,150],value:20)    //NEW★
-			radialCounterGauge(id:'radialCounter', preferredSize: [150,150],value:7) //NEW★
+			radial2TopGauge(preferredSize: [300,300],value:20)    //NEW★
+			radialCounterGauge(id:'radialCounter', preferredSize: [300,300],value:7) //NEW★
 		}
-		//3
+}
+
+panel(constraints: 'page2', opaque: false) {
+	  migLayout(layoutConstraints: "gap 0,insets 0,fill")
+		//4
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+	   		boxLayout()
+			label(text:'4  ')
+			level (preferredSize: [300,300])
+			linearGauge (preferredSize: [300,300])
+			linearLcdGauge(preferredSize: [300,300]) 
+		}
+
+		//5
 		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0), cssClass: "active"){
 	   		boxLayout()
-			label(text:'3  ')
-			level (preferredSize: [150,150])
-			linearGauge (preferredSize: [150,150])
-			linearLcdGauge(preferredSize: [150,150]) 
-			radar(id:'radar',preferredSize: [150,150])
+			label(text:'5  ')
+
+			radial1SquareGauge(id:'squaregauge',preferredSize: [300,300],
+				minValue:0,maxValue:100,title:'cpu meter',unitString:'%') 
+
+			radial1VerticalGauge(id:'radial1Vertical',preferredSize: [300,300],
+				backgroundColorFromTheme:false	//★ NEED!!
+			) 
+			radial1Vertical.setCustomBackground(
+				new java.awt.LinearGradientPaint(
+						new java.awt.geom.Point2D.Double(radial1Vertical.bounds2D.minX + 20, radial1Vertical.bounds2D.minY + 20), 
+						new java.awt.geom.Point2D.Double(radial1Vertical.bounds2D.maxX - 20, radial1Vertical.bounds2D.maxY - 20), 
+						[0.0f,0.25f,0.5f,0.75f,1.0f ] as float[], 
+						[java.awt.Color.MAGENTA,java.awt.Color.YELLOW,java.awt.Color.GREEN,java.awt.Color.BLUE,java.awt.Color.RED] as java.awt.Color[]
+					)
+			)
+
+			radial2Gauge(id:'radial2',preferredSize: [300,300],
+				backgroundColorFromTheme:false	//★ NEED!!
+			) 
+			radial2.setCustomBackground(
+					new java.awt.RadialGradientPaint(
+						//radial2.center, 
+						radial1Vertical.center, 
+						(float)(radial2.bounds2D.width * 0.4f), 
+						[0.0f,0.25f,0.5f,0.75f,1.0f ] as float[], 
+						[java.awt.Color.MAGENTA,java.awt.Color.YELLOW,java.awt.Color.GREEN,java.awt.Color.BLUE,java.awt.Color.RED] as java.awt.Color[]
+					)
+			)
+		}
+
+		//6
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+	   		boxLayout()
+			label(text:'6  ')
+			radar(id:'radar',preferredSize: [300,300])
+			//poi(name:'hogehoge',lat:30,lon:70)
+			poi(id:'hogehoge',name:'hogehoge',lat:30,lon:70)
 			radar.add(hogehoge)
 			radar.animate() 
-			panel(cssClass: "active"){
+
+			panel(){
 				migLayout(constraints: "growx, wrap, gaptop 0")
 				meterProgressBar(id :'m2', style: STYLE_PLAIN,constraints: "growx, wrap, gaptop 0, gapright 0")
 				meterProgressBar(id :'m1', style: STYLE_GRADIENT,constraints: "gaptop 0, gapright 0")
@@ -215,72 +273,49 @@ frame = application(title: app.config.application.title,
 				] as com.jidesoft.swing.AnimatorListener)
 				anim.start()
 			}
-		}
-		//4
-		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
-	   		boxLayout()
-			label(text:'4  ')
 
 			//Support for large ranges ?
-			radial1Gauge(preferredSize: [150,150],minValue:0,maxValue:10000,
+			radial1Gauge(id:'radial1',preferredSize: [300,300],minValue:0,maxValue:10000,
 				scaleDividerPower:3
 				//trackVisible :true,
 				//trackSection :100
 			)
 			 
-			radial1LcdGauge(preferredSize: [150,150],value:bind{model.cpu_usage},
+			radial1LcdGauge(id:'radial1Lcd',preferredSize: [300,300],value:bind{model.cpu_usage},
 				thresholdVisible:true,minMeasuredValueVisible :true,maxMeasuredValueVisible :true) 
-			radial1SquareGauge(id:'squaregauge',preferredSize: [150,150],
-				minValue:0,maxValue:100,title:'cpu meter',unitString:'%') 
 
-			radial1VerticalGauge(id:'radial1Vertical',preferredSize: [150,150],
-				backgroundColorFromTheme:false	//★ NEED!!
-			) 
-			radial1Vertical.setCustomBackground(
-				new java.awt.LinearGradientPaint(
-						new java.awt.geom.Point2D.Double(radial1Vertical.bounds2D.minX + 20, radial1Vertical.bounds2D.minY + 20), 
-						new java.awt.geom.Point2D.Double(radial1Vertical.bounds2D.maxX - 20, radial1Vertical.bounds2D.maxY - 20), 
-						[0.0f,0.25f,0.5f,0.75f,1.0f ] as float[], 
-						[java.awt.Color.MAGENTA,java.awt.Color.YELLOW,java.awt.Color.GREEN,java.awt.Color.BLUE,java.awt.Color.RED] as java.awt.Color[]
-					)
-			)
-
-
-			radial2Gauge(id:'radial2',preferredSize: [150,150],
-				backgroundColorFromTheme:false	//★ NEED!!
-			) 
-			radial2.setCustomBackground(
-					new java.awt.RadialGradientPaint(
-						//radial2.center, 
-						radial1Vertical.center, 
-						(float)(radial2.bounds2D.width * 0.4f), 
-						[0.0f,0.25f,0.5f,0.75f,1.0f ] as float[], 
-						[java.awt.Color.MAGENTA,java.awt.Color.YELLOW,java.awt.Color.GREEN,java.awt.Color.BLUE,java.awt.Color.RED] as java.awt.Color[]
-					)
-			)
 		}
-		//5
+}
+
+panel(constraints: 'page3', opaque: false) {
+	  migLayout(layoutConstraints: "gap 0,insets 0,fill")
+		//7
 		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
 		  	boxLayout()
-			label(text:'5  ')
-			radial2LcdGauge(preferredSize: [150,150],
+			label(text:'7  ')
+			radial2LcdGauge(preferredSize: [300,300],
 				customBackground:java.awt.Color.MAGENTA,
 				,backgroundColorFromTheme:false //★ NEED!!
 			) 
 
-			radial3Gauge(preferredSize: [150,150],
+			radial3Gauge(preferredSize: [300,300],
 						sectionsVisible :true,//★ NEED!!
 						sections:[[0, 33, java.awt.Color.GREEN],[33, 66, java.awt.Color.YELLOW],[66, 100, java.awt.Color.RED]] as Section[] 
 			)
 
-			radial3LcdGauge(preferredSize: [150,150],
+			radial3LcdGauge(preferredSize: [300,300],
 						areaColor:java.awt.Color.CYAN,
 						areaStart:80,
 						//areaStop:90,			//■ERROR！
 						areaVisible:true	//★ NEED!!
 			) 
+		}
+		//8
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+		  	boxLayout()
+			label(text:'8  ')
 
-			radial4Gauge(preferredSize: [150,150],
+			radial4Gauge(preferredSize: [300,300],
 				title:'hogehoge',unitString:'fuga',
 				frameDesign:FrameDesign.BLACK_METAL,
 				pointerColor:PointerColor.BLUE,
@@ -292,13 +327,15 @@ frame = application(title: app.config.application.title,
 				trackStopColor:java.awt.Color.MAGENTA
 			) 
 
-				radial4LcdGauge(preferredSize: [150,150],
-					ledColor:LedColor.YELLOW_LED,
-					pointerColor:PointerColor.WHITE,
-					labelColor:java.awt.Color.GREEN,
-					labelColorFromTheme:false				//★ NEED!!
-					) 
+			radial4LcdGauge(preferredSize: [300,300],
+				ledColor:LedColor.YELLOW_LED,
+				pointerColor:PointerColor.WHITE,
+				labelColor:java.awt.Color.GREEN,
+				labelColorFromTheme:false				//★ NEED!!
+			) 
 		}
+}
+swingRepaintTimeline(main, loop: true)
 
 	//CSSDecorator.applyStyle(style,app.appFrames[0]) //CSS適応(from griffon 0.3)
 	CSSDecorator.applyStyle(style,app.windowManager.windows[0]) //CSS適応(from griffon 0.9)
@@ -313,13 +350,36 @@ frame = application(title: app.config.application.title,
 		}
 	}
 
+	//マウスジェスチャ。マウスを押しながら右、左で画面切替
+	def page=1
+	def page_min=1
+	def page_max=3
+	mouseGestures(start: true) {
+ 	   // receives gestures as they are recognized (cummulative)
+       onGestureMovementRecognized { String s -> println s }
+   	   // the final recognized gesture
+    	onProcessGesture { String s -> 
+			println "<< $s >>" 
+			if(s == 'R'){
+				page++
+				if(page>page_max)page=page_min
+				main.layout.show(main, "page${page}")
+			}
+			if(s == 'L'){
+				page--
+				if(page<page_min)page=page_max
+				main.layout.show(main, "page${page}")
+			}
+
+		}
+	}
 }
 
 def pausef=false
 def t =  new Thread()
 t.start{
 		while(true){
-			 sleep(1000)
+			 sleep(10000)
 			 if(pausef)continue
 			 //CPU
 			 def c2 = new Date()
@@ -334,9 +394,9 @@ t.start{
 			 if(view.circular.value ==0){
 			     view.circular.setValueAnimated(100)
 			 }
-       else if(view.circular.value ==100){
+       		 else if(view.circular.value ==100){
 	 			 view.circular.setValueAnimated(0)
-       }
+       		}
 		}
 }
 
