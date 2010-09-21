@@ -275,9 +275,9 @@ frame = application(title: app.config.application.title,
 
 			radial3LcdGauge(preferredSize: [150,150],
 						areaColor:java.awt.Color.CYAN,
-						areaStart :80,
-						//areaStop  :100,
-						areaVisible :true	//★ NEED!!
+						areaStart:80,
+						//areaStop:90,			//■ERROR！
+						areaVisible:true	//★ NEED!!
 			) 
 
 			radial4Gauge(preferredSize: [150,150],
