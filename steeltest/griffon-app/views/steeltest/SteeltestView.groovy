@@ -303,12 +303,15 @@ panel(constraints: 'page3', opaque: false) {
 						sections:[[0, 33, java.awt.Color.GREEN],[33, 66, java.awt.Color.YELLOW],[66, 100, java.awt.Color.RED]] as Section[] 
 			)
 
-			radial3LcdGauge(preferredSize: [300,300],
+			radial3LcdGauge(id:'radial3Lcd',
+						preferredSize: [300,300],
 						areaColor:java.awt.Color.CYAN,
 						areaStart:80,
 						//areaStop:90,			//■ERROR！
 						areaVisible:true	//★ NEED!!
 			) 
+			//radial3Lcd.setAreaStop(Double.valueOf(90))	//■ERROR！
+
 		}
 		//8
 		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
@@ -379,7 +382,7 @@ def pausef=false
 def t =  new Thread()
 t.start{
 		while(true){
-			 sleep(10000)
+			 sleep(1000)
 			 if(pausef)continue
 			 //CPU
 			 def c2 = new Date()
