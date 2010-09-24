@@ -283,7 +283,6 @@ panel(constraints: 'page2', opaque: false) {
 			 
 			radial1LcdGauge(id:'radial1Lcd',preferredSize: [300,300],value:bind{model.cpu_usage},
 				thresholdVisible:true,minMeasuredValueVisible :true,maxMeasuredValueVisible :true) 
-
 		}
 }
 
@@ -306,11 +305,11 @@ panel(constraints: 'page3', opaque: false) {
 			radial3LcdGauge(id:'radial3Lcd',
 						preferredSize: [300,300],
 						areaColor:java.awt.Color.CYAN,
-						areaStart:80,
-						//areaStop:90,			//■ERROR！
+						areaStart:40,
+						//areaStop:70,			//■ERROR！
 						areaVisible:true	//★ NEED!!
 			) 
-			//radial3Lcd.setAreaStop(Double.valueOf(90))	//■ERROR！
+			//radial3Lcd.setAreaStop(Double.valueOf(70))	//■ERROR！
 
 		}
 		//8

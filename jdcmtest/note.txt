@@ -1,0 +1,26 @@
+  griffon run-app is OK
+
+but 
+  griffon prod package
+  dist/jar/exec.bat is error occurd
+
+
+org.codehaus.groovy.runtime.InvokerInvocationException: sun.misc.ServiceConfigur
+ationError: javax.imageio.spi.ImageOutputStreamSpi: Provider com.sun.media.image
+ioimpl.stream.ChannelImageOutputStreamSpi could not be instantiated: java.lang.I
+llegalArgumentException: vendorName == null!
+        at $Proxy4.actionPerformed(Unknown Source)
+Caused by: sun.misc.ServiceConfigurationError: javax.imageio.spi.ImageOutputStre
+amSpi: Provider com.sun.media.imageioimpl.stream.ChannelImageOutputStreamSpi cou
+ld not be instantiated: java.lang.IllegalArgumentException: vendorName == null!
+        at jdcmtest.JdcmtestController$_closure1.class$(JdcmtestController.groov
+y)
+        at jdcmtest.JdcmtestController$_closure1.$get$$class$javax$imageio$Image
+IO(JdcmtestController.groovy)
+        at jdcmtest.JdcmtestController$_closure1.doCall(JdcmtestController.groov
+y:49)
+        ... 1 more
+Caused by: java.lang.IllegalArgumentException: vendorName == null!
+        at com.sun.media.imageioimpl.stream.ChannelImageOutputStreamSpi.<init>(C
+hannelImageOutputStreamSpi.java:64)
+        ... 4 more

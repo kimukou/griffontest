@@ -14,6 +14,7 @@ eventPackageEnd = {
 		new File("${destDir}").mkdirs()
 		new File("${destDir}/brimmywall.dcm") << new File("${basedir}/testdata/brimmywall.dcm").readBytes()
 		new File("${destDir}/exec.bat") << new File("${basedir}/testdata/exec.bat").readBytes()
+		new File("${destDir}/exec.sh") << new File("${basedir}/testdata/exec.sh").readBytes()
 	}
 }
 
