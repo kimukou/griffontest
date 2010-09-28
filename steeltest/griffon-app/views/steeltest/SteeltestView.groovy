@@ -4,8 +4,8 @@ package steeltest
 import com.jidesoft.swing.AnimatorListener
 import static com.jidesoft.swing.MeterProgressBar.*
 
-
 import eu.hansolo.steelseries.tools.*
+import eu.hansolo.steelseries.gauges.*
 import java.awt.*
 import java.awt.event.*
 
@@ -314,12 +314,13 @@ panel(constraints: 'page3', opaque: false) {
 				sections:[[0, 33, java.awt.Color.GREEN],[33, 66, java.awt.Color.YELLOW],[66, 100, java.awt.Color.RED]] as Section[] 
 			)
 
+			//this.registerBeanFactory("radial3LcdGauge", Radial3Lcd.class)
 			radial3LcdGauge(id:'radial3Lcd',
 				preferredSize: [300,300],
 				areaColor:java.awt.Color.CYAN,
 				areaStart:40,
-				areaStop:70,			//■ERROR！
-				//areaVisible:true	//★ NEED!!
+				//areaStop:70,			//■ERROR！
+				areaVisible:true	//★ NEED!!
 			) 
 			//radial3Lcd.setAreaStop(Double.valueOf(70))	//■ERROR！
 
