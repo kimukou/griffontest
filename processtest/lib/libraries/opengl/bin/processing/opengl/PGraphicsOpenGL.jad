@@ -1,0 +1,1402 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+// Source File Name:   PGraphicsOpenGL.java
+
+package processing.opengl;
+
+import com.sun.opengl.util.BufferUtil;
+import java.awt.*;
+import java.awt.font.GlyphMetrics;
+import java.awt.font.GlyphVector;
+import java.awt.geom.PathIterator;
+import java.nio.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.*;
+import processing.core.*;
+
+public class PGraphicsOpenGL extends PGraphics3D
+{
+    public class TessCallback extends GLUtessellatorCallbackAdapter
+    {
+
+        public void begin(int i)
+        {
+            switch(i)
+            {
+            case 6: // '\006'
+                beginShape(11);
+                break;
+
+            case 5: // '\005'
+                beginShape(10);
+                break;
+
+            case 4: // '\004'
+                beginShape(9);
+                break;
+            }
+        }
+
+        public void end()
+        {
+            endShape();
+        }
+
+        public void edge(boolean flag)
+        {
+            PGraphicsOpenGL.this.edge(flag);
+        }
+
+        public void vertex(Object obj)
+        {
+            if(obj instanceof double[])
+            {
+                double ad[] = (double[])(double[])obj;
+                if(ad.length != 3)
+                    throw new RuntimeException("TessCallback vertex() data isn't length 3");
+                PGraphicsOpenGL.this.vertex((float)ad[0], (float)ad[1], (float)ad[2]);
+            } else
+            {
+                throw new RuntimeException("TessCallback vertex() data not understood");
+            }
+        }
+
+        public void error(int i)
+        {
+            String s = glu.gluErrorString(i);
+            PGraphics.showWarning((new StringBuilder()).append("Tessellation Error: ").append(s).toString());
+        }
+
+        public void combine(double ad[], Object aobj[], float af[], Object aobj1[])
+        {
+            double ad1[] = new double[ad.length];
+            ad1[0] = ad[0];
+            ad1[1] = ad[1];
+            ad1[2] = ad[2];
+            aobj1[0] = ad1;
+        }
+
+        final PGraphicsOpenGL this$0;
+
+        public TessCallback()
+        {
+            this$0 = PGraphicsOpenGL.this;
+            super();
+        }
+    }
+
+    protected class ImageCache
+    {
+
+        protected void finalize()
+        {
+            if(textureDeleteQueue.length == textureDeleteQueueCount)
+                textureDeleteQueue = (int[])PApplet.expand(textureDeleteQueue);
+            if(tindex != -1)
+                textureDeleteQueue[textureDeleteQueueCount++] = tindex;
+        }
+
+        public void rebind(PImage pimage)
+        {
+            if(textureDeleteQueueCount != 0)
+            {
+                gl.glDeleteTextures(textureDeleteQueueCount, textureDeleteQueue, 0);
+                textureDeleteQueueCount = 0;
+            }
+            if(tindex != -1)
+                gl.glDeleteTextures(1, new int[] {
+                    tindex
+                }, 0);
+            int ai[] = new int[1];
+            gl.glGenTextures(1, ai, 0);
+            tindex = ai[0];
+            int i = nextPowerOfTwo(pimage.width);
+            int j = nextPowerOfTwo(pimage.height);
+            if(PGraphicsOpenGL.maxTextureSize == 0)
+            {
+                int ai1[] = new int[1];
+                gl.glGetIntegerv(3379, ai1, 0);
+                PGraphicsOpenGL.maxTextureSize = ai1[0];
+            }
+            if(i > PGraphicsOpenGL.maxTextureSize || j > PGraphicsOpenGL.maxTextureSize)
+                throw new RuntimeException((new StringBuilder()).append("Image width and height cannot be larger than ").append(PGraphicsOpenGL.maxTextureSize).append(" with this graphics card.").toString());
+            if(i > twidth || j > theight)
+                tpixels = null;
+            if(tpixels == null)
+            {
+                twidth = i;
+                theight = j;
+                tpixels = new int[twidth * theight];
+                tbuffer = BufferUtil.newIntBuffer(twidth * theight);
+            }
+            int k = 0;
+            int l = 0;
+            if(PGraphicsOpenGL.BIG_ENDIAN)
+                switch(pimage.format)
+                {
+                case 4: // '\004'
+                    for(int i1 = 0; i1 < pimage.height; i1++)
+                    {
+                        for(int k2 = 0; k2 < pimage.width; k2++)
+                            tpixels[l++] = 0xffffff00 | pimage.pixels[k++];
+
+                        l += twidth - pimage.width;
+                    }
+
+                    break;
+
+                case 1: // '\001'
+                    for(int j1 = 0; j1 < pimage.height; j1++)
+                    {
+                        for(int l2 = 0; l2 < pimage.width; l2++)
+                        {
+                            int i4 = pimage.pixels[k++];
+                            tpixels[l++] = i4 << 8 | 0xff;
+                        }
+
+                        l += twidth - pimage.width;
+                    }
+
+                    break;
+
+                case 2: // '\002'
+                    for(int k1 = 0; k1 < pimage.height; k1++)
+                    {
+                        for(int i3 = 0; i3 < pimage.width; i3++)
+                        {
+                            int j4 = pimage.pixels[k++];
+                            tpixels[l++] = j4 << 8 | j4 >> 24 & 0xff;
+                        }
+
+                        l += twidth - pimage.width;
+                    }
+
+                    break;
+                }
+            else
+label0:
+                switch(pimage.format)
+                {
+                case 3: // '\003'
+                default:
+                    break;
+
+                case 4: // '\004'
+                    for(int l1 = 0; l1 < pimage.height; l1++)
+                    {
+                        for(int j3 = 0; j3 < pimage.width; j3++)
+                            tpixels[l++] = pimage.pixels[k++] << 24 | 0xffffff;
+
+                        l += twidth - pimage.width;
+                    }
+
+                    break;
+
+                case 1: // '\001'
+                    int i2 = 0;
+                    do
+                    {
+                        if(i2 >= pimage.height)
+                            break label0;
+                        for(int k3 = 0; k3 < pimage.width; k3++)
+                        {
+                            int k4 = pimage.pixels[k++];
+                            tpixels[l++] = 0xff000000 | (k4 & 0xff) << 16 | (k4 & 0xff0000) >> 16 | k4 & 0xff00;
+                        }
+
+                        l += twidth - pimage.width;
+                        i2++;
+                    } while(true);
+
+                case 2: // '\002'
+                    int j2 = 0;
+                    do
+                    {
+                        if(j2 >= pimage.height)
+                            break label0;
+                        for(int l3 = 0; l3 < pimage.width; l3++)
+                        {
+                            int l4 = pimage.pixels[k++];
+                            tpixels[l++] = (l4 & 0xff) << 16 | (l4 & 0xff0000) >> 16 | l4 & 0xff00ff00;
+                        }
+
+                        l += twidth - pimage.width;
+                        j2++;
+                    } while(true);
+                }
+            tbuffer.put(tpixels);
+            tbuffer.rewind();
+            gl.glBindTexture(3553, tindex);
+            gl.glPixelStorei(3317, 1);
+            gl.glTexImage2D(3553, 0, 4, twidth, theight, 0, 6408, 5121, tbuffer);
+            gl.glTexParameterf(3553, 10240, 9729F);
+            gl.glTexParameterf(3553, 10241, 9729F);
+            glu.gluBuild2DMipmaps(3553, 4, twidth, theight, 6408, 5121, tbuffer);
+            gl.glTexParameterf(3553, 10240, 9729F);
+            gl.glTexParameterf(3553, 10241, 9987F);
+            gl.glTexParameterf(3553, 10242, 33071F);
+            gl.glTexParameterf(3553, 10243, 33071F);
+            gl.glTexEnvf(8960, 8704, 8448F);
+        }
+
+        private int nextPowerOfTwo(int i)
+        {
+            int j;
+            for(j = 1; j < i; j <<= 1);
+            return j;
+        }
+
+        int tindex;
+        int tpixels[];
+        IntBuffer tbuffer;
+        public int twidth;
+        public int theight;
+        int tp[];
+        final PGraphicsOpenGL this$0;
+
+        protected ImageCache()
+        {
+            this$0 = PGraphicsOpenGL.this;
+            super();
+            tindex = -1;
+        }
+    }
+
+
+    public PGraphicsOpenGL()
+    {
+        textureDeleteQueue = new int[10];
+        textureDeleteQueueCount = 0;
+        getsetBuffer = BufferUtil.newIntBuffer(1);
+        glu = new GLU();
+        tobj = glu.gluNewTess();
+        tessCallback = new TessCallback();
+        glu.gluTessCallback(tobj, 0x18704, tessCallback);
+        glu.gluTessCallback(tobj, 0x18706, tessCallback);
+        glu.gluTessCallback(tobj, 0x18705, tessCallback);
+        glu.gluTessCallback(tobj, 0x18709, tessCallback);
+        glu.gluTessCallback(tobj, 0x18707, tessCallback);
+    }
+
+    protected void allocate()
+    {
+        if(context == null)
+        {
+            GLCapabilities glcapabilities = new GLCapabilities();
+            if(!hints[1])
+            {
+                glcapabilities.setSampleBuffers(true);
+                glcapabilities.setNumSamples(2);
+            } else
+            if(hints[2])
+            {
+                glcapabilities.setSampleBuffers(true);
+                glcapabilities.setNumSamples(4);
+            }
+            GLDrawableFactory gldrawablefactory = GLDrawableFactory.getFactory();
+            drawable = gldrawablefactory.getGLDrawable(parent, glcapabilities, null);
+            context = drawable.createContext(null);
+            gl = context.getGL();
+            settingsInited = false;
+        } else
+        {
+            context.destroy();
+            context = drawable.createContext(null);
+            gl = context.getGL();
+            reapplySettings();
+        }
+    }
+
+    public GLContext getContext()
+    {
+        return context;
+    }
+
+    protected void detainContext()
+    {
+        try
+        {
+            for(; context.makeCurrent() == 0; Thread.sleep(10L));
+        }
+        catch(InterruptedException interruptedexception)
+        {
+            interruptedexception.printStackTrace();
+        }
+    }
+
+    protected void releaseContext()
+    {
+        context.release();
+    }
+
+    public boolean canDraw()
+    {
+        return parent.isDisplayable();
+    }
+
+    public void beginDraw()
+    {
+        if(drawable != null)
+        {
+            drawable.setRealized(parent.isDisplayable());
+            if(parent.isDisplayable())
+                drawable.setRealized(true);
+            else
+                return;
+            detainContext();
+        }
+        super.beginDraw();
+        report("top beginDraw()");
+        gl.glDisable(2896);
+        for(int i = 0; i < 8; i++)
+            gl.glDisable(16384 + i);
+
+        updateProjection();
+        gl.glMatrixMode(5888);
+        gl.glLoadIdentity();
+        gl.glScalef(1.0F, -1F, 1.0F);
+        gl.glEnable(3042);
+        gl.glBlendFunc(770, 771);
+        if(hints[4])
+            gl.glDisable(2929);
+        else
+            gl.glEnable(2929);
+        gl.glDepthFunc(515);
+        gl.glFrontFace(2304);
+        gl.glEnable(2903);
+        gl.glColorMaterial(1032, 5634);
+        gl.glColorMaterial(1032, 4610);
+        report("bot beginDraw()");
+    }
+
+    public void endDraw()
+    {
+        report("top endDraw()");
+        if(hints[5])
+            flush();
+        if(drawable != null)
+            drawable.swapBuffers();
+        report("bot endDraw()");
+        if(drawable != null)
+            releaseContext();
+    }
+
+    public GL beginGL()
+    {
+        gl.glPushMatrix();
+        if(ctm == null)
+            ctm = new float[16];
+        ctm[0] = modelview.m00;
+        ctm[1] = modelview.m10;
+        ctm[2] = modelview.m20;
+        ctm[3] = modelview.m30;
+        ctm[4] = modelview.m01;
+        ctm[5] = modelview.m11;
+        ctm[6] = modelview.m21;
+        ctm[7] = modelview.m31;
+        ctm[8] = modelview.m02;
+        ctm[9] = modelview.m12;
+        ctm[10] = modelview.m22;
+        ctm[11] = modelview.m32;
+        ctm[12] = modelview.m03;
+        ctm[13] = modelview.m13;
+        ctm[14] = modelview.m23;
+        ctm[15] = modelview.m33;
+        gl.glMultMatrixf(ctm, 0);
+        return gl;
+    }
+
+    public void endGL()
+    {
+        gl.glPopMatrix();
+    }
+
+    public void hint(int i)
+    {
+        boolean flag = !hints[1];
+        boolean flag1 = hints[2];
+        super.hint(i);
+        if(i == 4)
+        {
+            gl.glDisable(2929);
+            gl.glClear(256);
+        } else
+        if(i == -4)
+            gl.glEnable(2929);
+        else
+        if(i == 1)
+        {
+            if(flag)
+            {
+                releaseContext();
+                context.destroy();
+                context = null;
+                allocate();
+                throw new processing.core.PApplet.RendererChangeException();
+            }
+        } else
+        if(i != -1 && i == 2 && !flag1)
+        {
+            releaseContext();
+            context.destroy();
+            context = null;
+            allocate();
+            throw new processing.core.PApplet.RendererChangeException();
+        }
+    }
+
+    protected void endShapeLighting(boolean flag)
+    {
+        super.endShapeLighting(flag);
+        if(flag)
+        {
+            for(int i = shapeFirst; i < shapeLast; i++)
+            {
+                float af[] = vertices[i];
+                af[3] = clamp(af[3] + af[28]);
+                af[4] = clamp(af[4] + af[29]);
+                af[5] = clamp(af[5] + af[30]);
+            }
+
+        }
+    }
+
+    protected void renderPoints(int i, int j)
+    {
+        float f = vertices[lines[i][0]][17];
+        if(f > 0.0F)
+        {
+            gl.glPointSize(f);
+            gl.glBegin(0);
+            for(int k = i; k < j; k++)
+            {
+                float af[] = vertices[points[k][0]];
+                gl.glColor4f(af[13], af[14], af[15], af[16]);
+                gl.glVertex3f(af[21], af[22], af[23]);
+            }
+
+            gl.glEnd();
+        }
+    }
+
+    protected void addLine(int i, int j)
+    {
+        addLineWithoutClip(i, j);
+    }
+
+    protected void renderLines(int i, int j)
+    {
+        report("render_lines in");
+        for(int k = 0; k < pathCount; k++)
+        {
+            int l = pathOffset[k];
+            float f = vertices[lines[l][0]][17];
+            if(f <= 0.0F)
+                continue;
+            gl.glLineWidth(f);
+            gl.glBegin(3);
+            float af[] = vertices[lines[l][0]];
+            gl.glColor4f(af[13], af[14], af[15], af[16]);
+            gl.glVertex3f(af[21], af[22], af[23]);
+            for(int i1 = 0; i1 < pathLength[k]; i1++)
+            {
+                float af1[] = vertices[lines[l][1]];
+                gl.glColor4f(af1[13], af1[14], af1[15], af1[16]);
+                gl.glVertex3f(af1[21], af1[22], af1[23]);
+                l++;
+            }
+
+            gl.glEnd();
+        }
+
+        report("render_lines out");
+    }
+
+    protected void addTriangle(int i, int j, int k)
+    {
+        addTriangleWithoutClip(i, j, k);
+    }
+
+    protected void renderTriangles(int i, int j)
+    {
+        report("render_triangles in");
+        for(int k = i; k < j; k++)
+        {
+            float af[] = vertices[triangles[k][0]];
+            float af1[] = vertices[triangles[k][1]];
+            float af2[] = vertices[triangles[k][2]];
+            float f = clamp(triangleColors[k][0][0] + triangleColors[k][0][4]);
+            float f1 = clamp(triangleColors[k][0][1] + triangleColors[k][0][5]);
+            float f2 = clamp(triangleColors[k][0][2] + triangleColors[k][0][6]);
+            float f3 = clamp(triangleColors[k][1][0] + triangleColors[k][1][4]);
+            float f4 = clamp(triangleColors[k][1][1] + triangleColors[k][1][5]);
+            float f5 = clamp(triangleColors[k][1][2] + triangleColors[k][1][6]);
+            float f6 = clamp(triangleColors[k][2][0] + triangleColors[k][2][4]);
+            float f7 = clamp(triangleColors[k][2][1] + triangleColors[k][2][5]);
+            float f8 = clamp(triangleColors[k][2][2] + triangleColors[k][2][6]);
+            int l = triangles[k][3];
+            if(l != -1)
+            {
+                report("before enable");
+                gl.glEnable(3553);
+                report("after enable");
+                report("before bind");
+                PImage pimage = textures[l];
+                bindTexture(pimage);
+                report("after bind");
+                ImageCache imagecache = (ImageCache)pimage.getCache(this);
+                float f9 = (float)pimage.width / (float)imagecache.twidth;
+                float f10 = (float)pimage.height / (float)imagecache.theight;
+                gl.glBegin(4);
+                gl.glColor4f(f, f1, f2, af[6]);
+                gl.glTexCoord2f(af[7] * f9, af[8] * f10);
+                gl.glNormal3f(af[9], af[10], af[11]);
+                gl.glEdgeFlag(af[12] == 1.0F);
+                gl.glVertex3f(af[21], af[22], af[23]);
+                gl.glColor4f(f3, f4, f5, af1[6]);
+                gl.glTexCoord2f(af1[7] * f9, af1[8] * f10);
+                gl.glNormal3f(af1[9], af1[10], af1[11]);
+                gl.glEdgeFlag(af[12] == 1.0F);
+                gl.glVertex3f(af1[21], af1[22], af1[23]);
+                gl.glColor4f(f6, f7, f8, af2[6]);
+                gl.glTexCoord2f(af2[7] * f9, af2[8] * f10);
+                gl.glNormal3f(af2[9], af2[10], af2[11]);
+                gl.glEdgeFlag(af[12] == 1.0F);
+                gl.glVertex3f(af2[21], af2[22], af2[23]);
+                gl.glEnd();
+                report("non-binding 6");
+                gl.glDisable(3553);
+            } else
+            {
+                gl.glBegin(4);
+                gl.glColor4f(f, f1, f2, af[6]);
+                gl.glNormal3f(af[9], af[10], af[11]);
+                gl.glEdgeFlag(af[12] == 1.0F);
+                gl.glVertex3f(af[21], af[22], af[23]);
+                gl.glColor4f(f3, f4, f5, af1[6]);
+                gl.glNormal3f(af1[9], af1[10], af1[11]);
+                gl.glEdgeFlag(af[12] == 1.0F);
+                gl.glVertex3f(af1[21], af1[22], af1[23]);
+                gl.glColor4f(f6, f7, f8, af2[6]);
+                gl.glNormal3f(af2[9], af2[10], af2[11]);
+                gl.glEdgeFlag(af[12] == 1.0F);
+                gl.glVertex3f(af2[21], af2[22], af2[23]);
+                gl.glEnd();
+            }
+        }
+
+        report("render_triangles out");
+    }
+
+    protected void bindTexture(PImage pimage)
+    {
+        ImageCache imagecache = (ImageCache)pimage.getCache(this);
+        if(imagecache == null)
+        {
+            imagecache = new ImageCache();
+            pimage.setCache(this, imagecache);
+            pimage.setModified(true);
+        }
+        if(pimage.isModified())
+        {
+            imagecache.rebind(pimage);
+            pimage.setModified(false);
+        } else
+        {
+            gl.glBindTexture(3553, imagecache.tindex);
+        }
+    }
+
+    public void smooth()
+    {
+        smooth = true;
+        if(hints[1])
+        {
+            gl.glEnable(2832);
+            gl.glEnable(2848);
+            gl.glEnable(2881);
+        }
+    }
+
+    public void noSmooth()
+    {
+        smooth = false;
+        if(hints[1])
+        {
+            gl.glDisable(2832);
+            gl.glDisable(2848);
+            gl.glDisable(2881);
+        }
+    }
+
+    public float textAscent()
+    {
+        Font font = textFont.getFont();
+        if(textMode != 5 || font == null)
+        {
+            return super.textAscent();
+        } else
+        {
+            FontMetrics fontmetrics = parent.getFontMetrics(font);
+            return (float)fontmetrics.getAscent();
+        }
+    }
+
+    public float textDescent()
+    {
+        Font font = textFont.getFont();
+        if(textMode != 5 || font == null)
+        {
+            return super.textDescent();
+        } else
+        {
+            FontMetrics fontmetrics = parent.getFontMetrics(font);
+            return (float)fontmetrics.getDescent();
+        }
+    }
+
+    public void textFont(PFont pfont)
+    {
+        super.textFont(pfont);
+        if(textMode == 5 && textFont.findFont() == null)
+            showWarning((new StringBuilder()).append("Cannot use ").append(pfont.name).append(" as with textMode(SHAPE) ").append("because its native equivalent cannot be found.").toString());
+    }
+
+    protected boolean textModeCheck(int i)
+    {
+        return textMode == 4 || textMode == 256 || textMode == 5;
+    }
+
+    protected float textWidthImpl(char ac[], int i, int j)
+    {
+        Font font = textFont.getFont();
+        if(textMode != 5 || font == null)
+            return super.textWidthImpl(ac, i, j);
+        Graphics2D graphics2d = (Graphics2D)parent.getGraphics();
+        graphics2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        java.awt.font.FontRenderContext fontrendercontext = graphics2d.getFontRenderContext();
+        GlyphVector glyphvector = font.createGlyphVector(fontrendercontext, ac);
+        float f = 0.0F;
+        for(int k = i; k < j; k++)
+        {
+            GlyphMetrics glyphmetrics = glyphvector.getGlyphMetrics(k);
+            f += glyphmetrics.getAdvance();
+        }
+
+        return f;
+    }
+
+    protected void textCharImpl(char c, float f, float f1)
+    {
+        if(textMode == 5)
+        {
+            if(textFont.getFont() == null)
+                PGraphics.showWarning((new StringBuilder()).append("textMode(SHAPE) is disabled because the font \"").append(textFont.name).append("\" is not available.").toString());
+            else
+                textCharShapeImpl(c, f, f1);
+        } else
+        {
+            super.textCharImpl(c, f, f1);
+        }
+    }
+
+    protected void textCharShapeImpl(char c, float f, float f1)
+    {
+        boolean flag = stroke;
+        stroke = false;
+        float af[] = new float[6];
+        char ac[] = {
+            c
+        };
+        Graphics2D graphics2d = (Graphics2D)parent.getGraphics();
+        java.awt.font.FontRenderContext fontrendercontext = graphics2d.getFontRenderContext();
+        Font font = textFont.getFont();
+        GlyphVector glyphvector = font.createGlyphVector(fontrendercontext, ac);
+        Shape shape = glyphvector.getOutline();
+        PathIterator pathiterator = shape.getPathIterator(null);
+        glu.gluTessBeginPolygon(tobj, null);
+        float f2 = 0.0F;
+        float f3 = 0.0F;
+        for(; !pathiterator.isDone(); pathiterator.next())
+        {
+            int i = pathiterator.currentSegment(af);
+            switch(i)
+            {
+            default:
+                break;
+
+            case 0: // '\0'
+            case 1: // '\001'
+                if(i == 0)
+                    glu.gluTessBeginContour(tobj);
+                double ad[] = {
+                    (double)(f + af[0]), (double)(f1 + af[1]), 0.0D
+                };
+                glu.gluTessVertex(tobj, ad, 0, ad);
+                f2 = af[0];
+                f3 = af[1];
+                break;
+
+            case 2: // '\002'
+                for(int j = 1; j < bezierDetail; j++)
+                {
+                    float f4 = (float)j / (float)bezierDetail;
+                    double ad1[] = {
+                        (double)(f + bezierPoint(f2, f2 + (float)((double)((af[0] - f2) * 2.0F) / 3D), af[2] + (float)((double)((af[0] - af[2]) * 2.0F) / 3D), af[2], f4)), (double)(f1 + bezierPoint(f3, f3 + (float)((double)((af[1] - f3) * 2.0F) / 3D), af[3] + (float)((double)((af[1] - af[3]) * 2.0F) / 3D), af[3], f4)), 0.0D
+                    };
+                    glu.gluTessVertex(tobj, ad1, 0, ad1);
+                }
+
+                f2 = af[2];
+                f3 = af[3];
+                break;
+
+            case 3: // '\003'
+                for(int k = 1; k < bezierDetail; k++)
+                {
+                    float f5 = (float)k / (float)bezierDetail;
+                    double ad2[] = {
+                        (double)(f + bezierPoint(f2, af[0], af[2], af[4], f5)), (double)(f1 + bezierPoint(f3, af[1], af[3], af[5], f5)), 0.0D
+                    };
+                    glu.gluTessVertex(tobj, ad2, 0, ad2);
+                }
+
+                f2 = af[4];
+                f3 = af[5];
+                break;
+
+            case 4: // '\004'
+                glu.gluTessEndContour(tobj);
+                break;
+            }
+        }
+
+        glu.gluTessEndPolygon(tobj);
+        stroke = flag;
+    }
+
+    protected void updateProjection()
+    {
+        gl.glMatrixMode(5889);
+        if(projectionFloats == null)
+        {
+            projectionFloats = (new float[] {
+                projection.m00, projection.m10, projection.m20, projection.m30, projection.m01, projection.m11, projection.m21, projection.m31, projection.m02, projection.m12, 
+                projection.m22, projection.m32, projection.m03, projection.m13, projection.m23, projection.m33
+            });
+        } else
+        {
+            projectionFloats[0] = projection.m00;
+            projectionFloats[1] = projection.m10;
+            projectionFloats[2] = projection.m20;
+            projectionFloats[3] = projection.m30;
+            projectionFloats[4] = projection.m01;
+            projectionFloats[5] = projection.m11;
+            projectionFloats[6] = projection.m21;
+            projectionFloats[7] = projection.m31;
+            projectionFloats[8] = projection.m02;
+            projectionFloats[9] = projection.m12;
+            projectionFloats[10] = projection.m22;
+            projectionFloats[11] = projection.m32;
+            projectionFloats[12] = projection.m03;
+            projectionFloats[13] = projection.m13;
+            projectionFloats[14] = projection.m23;
+            projectionFloats[15] = projection.m33;
+        }
+        gl.glLoadMatrixf(projectionFloats, 0);
+    }
+
+    public void strokeWeight(float f)
+    {
+        strokeWeight = f;
+    }
+
+    public void strokeJoin(int i)
+    {
+        if(i != 8)
+            showMethodWarning("strokeJoin");
+    }
+
+    public void strokeCap(int i)
+    {
+        if(i != 2)
+            showMethodWarning("strokeCap");
+    }
+
+    protected void fillFromCalc()
+    {
+        super.fillFromCalc();
+        calcColorBuffer();
+        gl.glMaterialfv(1032, 5634, colorBuffer, 0);
+    }
+
+    protected void ambientFromCalc()
+    {
+        super.ambientFromCalc();
+        calcColorBuffer();
+        gl.glMaterialfv(1032, 4608, colorBuffer, 0);
+    }
+
+    protected void specularFromCalc()
+    {
+        super.specularFromCalc();
+        calcColorBuffer();
+        gl.glMaterialfv(1032, 4610, colorBuffer, 0);
+    }
+
+    public void shininess(float f)
+    {
+        super.shininess(f);
+        gl.glMaterialf(1032, 5633, f);
+    }
+
+    protected void emissiveFromCalc()
+    {
+        super.emissiveFromCalc();
+        calcColorBuffer();
+        gl.glMaterialfv(1032, 5632, colorBuffer, 0);
+    }
+
+    public void ambientLight(float f, float f1, float f2)
+    {
+        super.ambientLight(f, f1, f2);
+        glLightEnable(lightCount - 1);
+        glLightAmbient(lightCount - 1);
+        glLightPosition(lightCount - 1);
+        glLightFalloff(lightCount - 1);
+    }
+
+    public void ambientLight(float f, float f1, float f2, float f3, float f4, float f5)
+    {
+        super.ambientLight(f, f1, f2, f3, f4, f5);
+        glLightEnable(lightCount - 1);
+        glLightAmbient(lightCount - 1);
+        glLightPosition(lightCount - 1);
+        glLightFalloff(lightCount - 1);
+    }
+
+    public void directionalLight(float f, float f1, float f2, float f3, float f4, float f5)
+    {
+        super.directionalLight(f, f1, f2, f3, f4, f5);
+        glLightEnable(lightCount - 1);
+        glLightNoAmbient(lightCount - 1);
+        glLightDirection(lightCount - 1);
+        glLightDiffuse(lightCount - 1);
+        glLightSpecular(lightCount - 1);
+        glLightFalloff(lightCount - 1);
+    }
+
+    public void pointLight(float f, float f1, float f2, float f3, float f4, float f5)
+    {
+        super.pointLight(f, f1, f2, f3, f4, f5);
+        glLightEnable(lightCount - 1);
+        glLightNoAmbient(lightCount - 1);
+        glLightPosition(lightCount - 1);
+        glLightDiffuse(lightCount - 1);
+        glLightSpecular(lightCount - 1);
+        glLightFalloff(lightCount - 1);
+    }
+
+    public void spotLight(float f, float f1, float f2, float f3, float f4, float f5, float f6, 
+            float f7, float f8, float f9, float f10)
+    {
+        super.spotLight(f, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
+        glLightNoAmbient(lightCount - 1);
+        glLightPosition(lightCount - 1);
+        glLightDirection(lightCount - 1);
+        glLightDiffuse(lightCount - 1);
+        glLightSpecular(lightCount - 1);
+        glLightFalloff(lightCount - 1);
+        glLightSpotAngle(lightCount - 1);
+        glLightSpotConcentration(lightCount - 1);
+    }
+
+    public void lightFalloff(float f, float f1, float f2)
+    {
+        super.lightFalloff(f, f1, f2);
+        glLightFalloff(lightCount);
+    }
+
+    public void lightSpecular(float f, float f1, float f2)
+    {
+        super.lightSpecular(f, f1, f2);
+        glLightSpecular(lightCount);
+    }
+
+    protected void lightPosition(int i, float f, float f1, float f2)
+    {
+        super.lightPosition(i, f, f1, f2);
+        glLightPosition(i);
+    }
+
+    protected void lightDirection(int i, float f, float f1, float f2)
+    {
+        super.lightDirection(i, f, f1, f2);
+        glLightDirection(i);
+    }
+
+    private void glLightAmbient(int i)
+    {
+        gl.glLightfv(16384 + i, 4608, lightDiffuse[i], 0);
+    }
+
+    private void glLightNoAmbient(int i)
+    {
+        if(zeroBuffer == null)
+            zeroBuffer = BufferUtil.newFloatBuffer(3);
+        gl.glLightfv(16384 + i, 4608, zeroBuffer);
+    }
+
+    private void glLightDiffuse(int i)
+    {
+        gl.glLightfv(16384 + i, 4609, lightDiffuse[i], 0);
+    }
+
+    private void glLightDirection(int i)
+    {
+        if(lightType[i] == 1)
+            gl.glLightfv(16384 + i, 4611, lightNormal[i].array(), 0);
+        else
+            gl.glLightfv(16384 + i, 4612, lightNormal[i].array(), 0);
+    }
+
+    private void glLightEnable(int i)
+    {
+        gl.glEnable(16384 + i);
+    }
+
+    private void glLightFalloff(int i)
+    {
+        gl.glLightf(16384 + i, 4615, lightFalloffConstant[i]);
+        gl.glLightf(16384 + i, 4616, lightFalloffLinear[i]);
+        gl.glLightf(16384 + i, 4617, lightFalloffQuadratic[i]);
+    }
+
+    private void glLightPosition(int i)
+    {
+        gl.glLightfv(16384 + i, 4611, lightPosition[i].array(), 0);
+    }
+
+    private void glLightSpecular(int i)
+    {
+        gl.glLightfv(16384 + i, 4610, lightSpecular[i], 0);
+    }
+
+    private void glLightSpotAngle(int i)
+    {
+        gl.glLightf(16384 + i, 4614, lightSpotAngle[i]);
+    }
+
+    private void glLightSpotConcentration(int i)
+    {
+        gl.glLightf(16384 + i, 4613, lightSpotConcentration[i]);
+    }
+
+    protected void backgroundImpl(PImage pimage)
+    {
+        gl.glClearColor(backgroundR, backgroundG, backgroundB, 1.0F);
+        gl.glClear(16640);
+        set(0, 0, pimage);
+    }
+
+    protected void backgroundImpl()
+    {
+        gl.glClearColor(backgroundR, backgroundG, backgroundB, 1.0F);
+        gl.glClear(16640);
+    }
+
+    private final void calcColorBuffer()
+    {
+        if(colorBuffer == null)
+            colorBuffer = new float[4];
+        colorBuffer[0] = calcR;
+        colorBuffer[1] = calcG;
+        colorBuffer[2] = calcB;
+        colorBuffer[3] = calcA;
+    }
+
+    public void report(String s)
+    {
+        if(!hints[6])
+        {
+            int i = gl.glGetError();
+            if(i != 0)
+            {
+                String s1 = glu.gluErrorString(i);
+                String s2 = (new StringBuilder()).append("OpenGL error ").append(i).append(" at ").append(s).append(": ").append(s1).toString();
+                PGraphics.showWarning(s2);
+            }
+        }
+    }
+
+    public void loadPixels()
+    {
+        if(pixels == null || pixels.length != width * height)
+        {
+            pixels = new int[width * height];
+            pixelBuffer = BufferUtil.newIntBuffer(pixels.length);
+        }
+        gl.glReadPixels(0, 0, width, height, 6408, 5121, pixelBuffer);
+        pixelBuffer.get(pixels);
+        pixelBuffer.rewind();
+        int i = 0;
+        int k = (height - 1) * width;
+        for(int l = 0; l < height / 2; l++)
+        {
+            if(BIG_ENDIAN)
+            {
+                for(int k1 = 0; k1 < width; k1++)
+                {
+                    int i2 = pixels[i];
+                    pixels[i] = 0xff000000 | pixels[k] >> 8 & 0xffffff;
+                    pixels[k] = 0xff000000 | i2 >> 8 & 0xffffff;
+                    i++;
+                    k++;
+                }
+
+            } else
+            {
+                for(int l1 = 0; l1 < width; l1++)
+                {
+                    int j2 = pixels[i];
+                    pixels[i] = 0xff000000 | pixels[k] << 16 & 0xff0000 | pixels[k] & 0xff00 | pixels[k] >> 16 & 0xff;
+                    pixels[k] = 0xff000000 | j2 << 16 & 0xff0000 | j2 & 0xff00 | j2 >> 16 & 0xff;
+                    i++;
+                    k++;
+                }
+
+            }
+            k -= width * 2;
+        }
+
+        if(height % 2 == 1)
+        {
+            int j = (height / 2) * width;
+            if(BIG_ENDIAN)
+            {
+                for(int i1 = 0; i1 < width; i1++)
+                    pixels[j] = 0xff000000 | pixels[j] >> 8 & 0xffffff;
+
+            } else
+            {
+                for(int j1 = 0; j1 < width; j1++)
+                    pixels[j] = 0xff000000 | pixels[j] << 16 & 0xff0000 | pixels[j] & 0xff00 | pixels[j] >> 16 & 0xff;
+
+            }
+        }
+    }
+
+    static void nativeToJavaRGB(PImage pimage)
+    {
+        int i = 0;
+        int j = (pimage.height - 1) * pimage.width;
+        for(int k = 0; k < pimage.height / 2; k++)
+        {
+            if(BIG_ENDIAN)
+            {
+                for(int l = 0; l < pimage.width; l++)
+                {
+                    int j1 = pimage.pixels[i];
+                    pimage.pixels[i] = 0xff000000 | pimage.pixels[j] >> 8 & 0xffffff;
+                    pimage.pixels[j] = 0xff000000 | j1 >> 8 & 0xffffff;
+                    i++;
+                    j++;
+                }
+
+            } else
+            {
+                for(int i1 = 0; i1 < pimage.width; i1++)
+                {
+                    int k1 = pimage.pixels[i];
+                    pimage.pixels[i] = 0xff000000 | pimage.pixels[j] << 16 & 0xff0000 | pimage.pixels[j] & 0xff00 | pimage.pixels[j] >> 16 & 0xff;
+                    pimage.pixels[j] = 0xff000000 | k1 << 16 & 0xff0000 | k1 & 0xff00 | k1 >> 16 & 0xff;
+                    i++;
+                    j++;
+                }
+
+            }
+            j -= pimage.width * 2;
+        }
+
+    }
+
+    static void nativeToJavaARGB(PImage pimage)
+    {
+        int i = 0;
+        int j = (pimage.height - 1) * pimage.width;
+        for(int k = 0; k < pimage.height / 2; k++)
+        {
+            if(BIG_ENDIAN)
+            {
+                for(int l = 0; l < pimage.width; l++)
+                {
+                    int j1 = pimage.pixels[i];
+                    pimage.pixels[i] = pimage.pixels[j] & 0xff000000 | pimage.pixels[j] >> 8 & 0xffffff;
+                    pimage.pixels[j] = j1 & 0xff000000 | j1 >> 8 & 0xffffff;
+                    i++;
+                    j++;
+                }
+
+            } else
+            {
+                for(int i1 = 0; i1 < pimage.width; i1++)
+                {
+                    int k1 = pimage.pixels[i];
+                    pimage.pixels[i] = pimage.pixels[j] & 0xff000000 | pimage.pixels[j] << 16 & 0xff0000 | pimage.pixels[j] & 0xff00 | pimage.pixels[j] >> 16 & 0xff;
+                    pimage.pixels[j] = k1 & 0xff000000 | k1 << 16 & 0xff0000 | k1 & 0xff00 | k1 >> 16 & 0xff;
+                    i++;
+                    j++;
+                }
+
+            }
+            j -= pimage.width * 2;
+        }
+
+    }
+
+    static void javaToNativeRGB(PImage pimage)
+    {
+        int i = pimage.width;
+        int j = pimage.height;
+        int ai[] = pimage.pixels;
+        int k = 0;
+        int l = (j - 1) * i;
+        for(int i1 = 0; i1 < j / 2; i1++)
+        {
+            if(BIG_ENDIAN)
+            {
+                for(int j1 = 0; j1 < pimage.width; j1++)
+                {
+                    int l1 = ai[k];
+                    ai[k] = ai[l] << 8 & 0xffffff00 | 0xff;
+                    ai[l] = l1 << 8 & 0xffffff00 | 0xff;
+                    k++;
+                    l++;
+                }
+
+            } else
+            {
+                for(int k1 = 0; k1 < i; k1++)
+                {
+                    int i2 = ai[k];
+                    ai[k] = 0xff000000 | ai[l] << 16 & 0xff0000 | ai[l] & 0xff00 | ai[l] >> 16 & 0xff;
+                    ai[l] = 0xff000000 | i2 << 16 & 0xff0000 | i2 & 0xff00 | i2 >> 16 & 0xff;
+                    k++;
+                    l++;
+                }
+
+            }
+            l -= i * 2;
+        }
+
+    }
+
+    static void javaToNativeARGB(PImage pimage)
+    {
+        int i = pimage.width;
+        int j = pimage.height;
+        int ai[] = pimage.pixels;
+        int k = 0;
+        int l = (j - 1) * i;
+        for(int i1 = 0; i1 < j / 2; i1++)
+        {
+            if(BIG_ENDIAN)
+            {
+                for(int j1 = 0; j1 < pimage.width; j1++)
+                {
+                    int l1 = ai[k];
+                    ai[k] = ai[l] >> 24 & 0xff | ai[l] << 8 & 0xffffff00;
+                    ai[l] = l1 >> 24 & 0xff | l1 << 8 & 0xffffff00;
+                    k++;
+                    l++;
+                }
+
+            } else
+            {
+                for(int k1 = 0; k1 < i; k1++)
+                {
+                    int i2 = ai[k];
+                    ai[k] = ai[l] & 0xff000000 | ai[l] << 16 & 0xff0000 | ai[l] & 0xff00 | ai[l] >> 16 & 0xff;
+                    ai[l] = ai[l] & 0xff000000 | i2 << 16 & 0xff0000 | i2 & 0xff00 | i2 >> 16 & 0xff;
+                    k++;
+                    l++;
+                }
+
+            }
+            l -= i * 2;
+        }
+
+    }
+
+    public void updatePixels()
+    {
+        int i = 0;
+        int j = (height - 1) * width;
+        for(int k = 0; k < height / 2; k++)
+        {
+            if(BIG_ENDIAN)
+            {
+                for(int l = 0; l < width; l++)
+                {
+                    int j1 = pixels[i];
+                    pixels[i] = pixels[j] << 8 & 0xffffff00 | 0xff;
+                    pixels[j] = j1 << 8 & 0xffffff00 | 0xff;
+                    i++;
+                    j++;
+                }
+
+            } else
+            {
+                for(int i1 = 0; i1 < width; i1++)
+                {
+                    int k1 = pixels[i];
+                    pixels[i] = 0xff000000 | pixels[j] << 16 & 0xff0000 | pixels[j] & 0xff00 | pixels[j] >> 16 & 0xff;
+                    pixels[j] = 0xff000000 | k1 << 16 & 0xff0000 | k1 & 0xff00 | k1 >> 16 & 0xff;
+                    i++;
+                    j++;
+                }
+
+            }
+            j -= width * 2;
+        }
+
+        setRasterPos(0.0F, 0.0F);
+        pixelBuffer.put(pixels);
+        pixelBuffer.rewind();
+        gl.glDrawPixels(width, height, 6408, 5121, pixelBuffer);
+    }
+
+    public void resize(int i, int j)
+    {
+        PGraphics.showMethodWarning("resize");
+    }
+
+    public int get(int i, int j)
+    {
+        gl.glReadPixels(i, j, 1, 1, 6408, 5121, getsetBuffer);
+        int k = getsetBuffer.get(0);
+        if(BIG_ENDIAN)
+            return 0xff000000 | k >> 8 & 0xffffff;
+        else
+            return 0xff000000 | k << 16 & 0xff0000 | k & 0xff00 | k >> 16 & 0xff;
+    }
+
+    protected PImage getImpl(int i, int j, int k, int l)
+    {
+        PImage pimage = new PImage(k, l);
+        pimage.parent = parent;
+        IntBuffer intbuffer = BufferUtil.newIntBuffer(k * l);
+        gl.glReadPixels(i, j, k, l, 6408, 5121, intbuffer);
+        intbuffer.get(pimage.pixels);
+        nativeToJavaARGB(pimage);
+        return pimage;
+    }
+
+    public PImage get()
+    {
+        return get(0, 0, width, height);
+    }
+
+    public void set(int i, int j, int k)
+    {
+        int l = 0;
+        if(BIG_ENDIAN)
+            l = k << 8 | 0xff;
+        else
+            l = k & 0xff00ff00 | k << 16 & 0xff0000 | k >> 16 & 0xff;
+        getsetBuffer.put(0, l);
+        getsetBuffer.rewind();
+        setRasterPos(i, height - j - 1);
+        gl.glDrawPixels(1, 1, 6408, 5121, getsetBuffer);
+    }
+
+    public void set(int i, int j, PImage pimage)
+    {
+        int ai[] = new int[pimage.pixels.length];
+        System.arraycopy(pimage.pixels, 0, ai, 0, pimage.pixels.length);
+        javaToNativeARGB(pimage);
+        IntBuffer intbuffer = BufferUtil.newIntBuffer(pimage.pixels.length);
+        intbuffer.put(pimage.pixels);
+        intbuffer.rewind();
+        setRasterPos(i, height - j - pimage.height);
+        gl.glDrawPixels(pimage.width, pimage.height, 6408, 5121, intbuffer);
+        pimage.pixels = ai;
+    }
+
+    protected void setRasterPos(float f, float f1)
+    {
+        float f2 = 0.0F;
+        float f3 = 1.0F;
+        gl.glPushAttrib(6144);
+        gl.glMatrixMode(5889);
+        gl.glPushMatrix();
+        gl.glLoadIdentity();
+        gl.glMatrixMode(5888);
+        gl.glPushMatrix();
+        gl.glLoadIdentity();
+        gl.glDepthRange(f2, f2);
+        gl.glViewport((int)f - 1, (int)f1 - 1, 2, 2);
+        float f4 = f - (float)(int)f;
+        float f5 = f1 - (float)(int)f1;
+        gl.glRasterPos4f(f4, f5, 0.0F, f3);
+        gl.glPopMatrix();
+        gl.glMatrixMode(5889);
+        gl.glPopMatrix();
+        gl.glPopAttrib();
+    }
+
+    public void mask(int ai[])
+    {
+        PGraphics.showMethodWarning("mask");
+    }
+
+    public void mask(PImage pimage)
+    {
+        PGraphics.showMethodWarning("mask");
+    }
+
+    public void filter(int i)
+    {
+        PImage pimage = get();
+        pimage.filter(i);
+        set(0, 0, pimage);
+    }
+
+    public void filter(int i, float f)
+    {
+        PImage pimage = get();
+        pimage.filter(i, f);
+        set(0, 0, pimage);
+    }
+
+    protected final float clamp(float f)
+    {
+        return f >= 1.0F ? 1.0F : f;
+    }
+
+    protected GLDrawable drawable;
+    protected GLContext context;
+    public GL gl;
+    public GLU glu;
+    protected float projectionFloats[];
+    protected GLUtessellator tobj;
+    protected TessCallback tessCallback;
+    protected float lightArray[] = {
+        1.0F, 1.0F, 1.0F
+    };
+    static int maxTextureSize;
+    int textureDeleteQueue[];
+    int textureDeleteQueueCount;
+    protected float colorBuffer[];
+    protected FloatBuffer zeroBuffer;
+    protected IntBuffer pixelBuffer;
+    public static boolean BIG_ENDIAN;
+    private float ctm[];
+    IntBuffer getsetBuffer;
+
+    static 
+    {
+        BIG_ENDIAN = ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN;
+    }
+}
