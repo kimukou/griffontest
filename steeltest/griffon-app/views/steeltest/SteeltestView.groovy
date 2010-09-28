@@ -249,10 +249,22 @@ panel(constraints: 'page2', opaque: false) {
 		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
 	   		boxLayout()
 			label(text:'6  ')
-			radar(id:'radar',preferredSize: [300,300])
-			//poi(name:'hogehoge',lat:30,lon:70)
-			poi(id:'hogehoge',name:'hogehoge',lat:30,lon:70)
-			radar.add(hogehoge)
+			//poi test
+			poi(id:'RAITH',name:'Raith',lat:51.485605,lon:7.479544)
+			poi(id:'HOME',name:'Home',lat:51.911784,lon:7.633789)
+			poi(id:'MUENSTER',name:'Munster',lat:51.972502,lon:7.62989)
+			poi(id:'ESSEN',name:'Essen',lat:51.462721,lon:7.015057)
+			poi(id:'BOCHUM',name:'Bochum',lat:51.487526,lon:7.211781)
+			poi(id:'WUPPERTAL',name:'Wuppertal',lat:51.260783,lon:7.149982)
+			radar(id:'radar',preferredSize: [300,300],
+				range:70000,
+				myLocation:RAITH
+			)
+			radar.add HOME
+			radar.add MUENSTER
+			radar.add ESSEN
+			radar.add BOCHUM
+			radar.add WUPPERTAL
 			radar.animate() 
 
 			panel(){
