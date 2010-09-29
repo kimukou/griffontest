@@ -1,20 +1,19 @@
 eventCompileEnd = {
+  println "==compile end=="
+	dataDir  = "${basedir}/testdata"
 	destDir = "${basedir}/staging"
-	if(!new File("${destDir}").exists() || !new File("${destDir}/brimmywall.dcm").exists() ){
-		new File("${destDir}").mkdirs()
-		new File("${destDir}/brimmywall.dcm") << new File("${basedir}/testdata/brimmywall.dcm").readBytes()
+  ant.copy(todir: destDir) {
+		fileset(dir: dataDir, includes: '*.dcm')
 	}
 }
 
 
 eventPackageEnd = {
   println "==package end=="
-  destDir = "${basedir}/dist/jar"
-	if(!new File("${destDir}").exists() || !new File("${destDir}/brimmywall.dcm").exists() ){
-		new File("${destDir}").mkdirs()
-		new File("${destDir}/brimmywall.dcm") << new File("${basedir}/testdata/brimmywall.dcm").readBytes()
-		new File("${destDir}/exec.bat") << new File("${basedir}/testdata/exec.bat").readBytes()
-		new File("${destDir}/exec.sh") << new File("${basedir}/testdata/exec.sh").readBytes()
+	dataDir  = "${basedir}/testdata"
+	destDir = "${basedir}/dist/jar"
+  ant.copy(todir: destDir) {
+		fileset(dir: dataDir, includes: '*.dcm,*.bat,*.sh')
 	}
 }
 
