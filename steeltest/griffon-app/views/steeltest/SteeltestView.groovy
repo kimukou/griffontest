@@ -4,8 +4,8 @@ package steeltest
 import com.jidesoft.swing.AnimatorListener
 import static com.jidesoft.swing.MeterProgressBar.*
 
-
 import eu.hansolo.steelseries.tools.*
+import eu.hansolo.steelseries.gauges.*
 import java.awt.*
 import java.awt.event.*
 
@@ -310,16 +310,17 @@ panel(constraints: 'page3', opaque: false) {
 			) 
 
 			radial3Gauge(preferredSize: [300,300],
-						sectionsVisible :true,//★ NEED!!
-						sections:[[0, 33, java.awt.Color.GREEN],[33, 66, java.awt.Color.YELLOW],[66, 100, java.awt.Color.RED]] as Section[] 
+				sectionsVisible :true,//★ NEED!!
+				sections:[[0, 33, java.awt.Color.GREEN],[33, 66, java.awt.Color.YELLOW],[66, 100, java.awt.Color.RED]] as Section[] 
 			)
 
+			//this.registerBeanFactory("radial3LcdGauge", Radial3Lcd.class)
 			radial3LcdGauge(id:'radial3Lcd',
-						preferredSize: [300,300],
-						areaColor:java.awt.Color.CYAN,
-						areaStart:40,
-						//areaStop:70,			//■ERROR！
-						areaVisible:true	//★ NEED!!
+				preferredSize: [300,300],
+				areaColor:java.awt.Color.CYAN,
+				areaStart:40,
+				//areaStop:70,			//■ERROR！
+				areaVisible:true	//★ NEED!!
 			) 
 			//radial3Lcd.setAreaStop(Double.valueOf(70))	//■ERROR！
 
@@ -352,7 +353,7 @@ panel(constraints: 'page3', opaque: false) {
 swingRepaintTimeline(main, loop: true)
 
 	//CSSDecorator.applyStyle(style,app.appFrames[0]) //CSS適応(from griffon 0.3)
-	CSSDecorator.applyStyle(style,app.windowManager.windows[0]) //CSS適応(from griffon 0.9)
+	//CSSDecorator.applyStyle(style,app.windowManager.windows[0]) //CSS適応(from griffon 0.9)
 
 	//ダブルクリックで表示、非表示
 	systemTray {
