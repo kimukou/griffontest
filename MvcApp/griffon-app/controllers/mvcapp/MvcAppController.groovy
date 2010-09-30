@@ -10,6 +10,10 @@ class MvcAppController {
     def view
 
     void mvcGroupInit(Map args) {
+		}
+
+
+	  def onStartupEnd = {
         // this method is called after model and view are injected
 			 doOutside {
 	      def contents = new DefaultMutableTreeNode("hudson")
