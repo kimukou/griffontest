@@ -160,7 +160,7 @@ panel(constraints: 'page1', opaque: false) {
 
 			clock.CLOCK_TIMER.addActionListener([
 					actionPerformed: { source -> 
-							println "clock == ${view.clock.hour}:${view.clock.minute} <${java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)}:${view.clock.minute}>"
+						//println "clock == ${view.clock.hour}:${view.clock.minute} <${java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)}:${view.clock.minute}>"
 					}
 				] as ActionListener)
 		}
@@ -180,7 +180,7 @@ panel(constraints: 'page1', opaque: false) {
 					preferredSize: [300,300])
 			//circular.setValueAnimated model.count
 			displayCircular(id:'circular2',value:bind{model.count},lcdDecimals:0,unitString:'SEC',
-					lcdColor:LcdColor.BLUEBLUE_LCD,
+					lcdColor:LcdColor.BLUE_LCD,
 					backgroundColor:BackgroundColor.RED,
 					frameDesign:FrameDesign.BLACK_METAL,
 					digitalFont:true,preferredSize: [300,300])
@@ -319,10 +319,9 @@ panel(constraints: 'page3', opaque: false) {
 				preferredSize: [300,300],
 				areaColor:java.awt.Color.CYAN,
 				areaStart:40,
-				//areaStop:70,			//■ERROR！
+				areaStop:70,
 				areaVisible:true	//★ NEED!!
 			) 
-			//radial3Lcd.setAreaStop(Double.valueOf(70))	//■ERROR！
 
 		}
 		//8
@@ -348,6 +347,107 @@ panel(constraints: 'page3', opaque: false) {
 				labelColor:java.awt.Color.GREEN,
 				labelColorFromTheme:false				//★ NEED!!
 			) 
+			led(preferredSize: [300,300])//since 0.3
+		}
+
+		//9
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+		  	boxLayout()
+			label(text:'9  ')
+			linearBargraph (
+				preferredSize: [300,300],
+				value:50,
+				barGraphColor:ColorDef.CYAN
+			)//since 0.3
+			linearBargraphLcd (
+				preferredSize:  [150,300],
+				value:50,
+				barGraphColor:ColorDef.MAGENTA,
+				orientation:javax.swing.SwingConstants.VERTICAL
+			)//since 0.3
+		}
+
+}
+
+panel(constraints: 'page4', opaque: false) {
+	  migLayout(layoutConstraints: "gap 0,insets 0,fill")
+		//10
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+		  	boxLayout()
+			label(text:'10  ')
+			radialBargraph1(preferredSize: [300,300],
+				barGraphColor:ColorDef.RED,
+				value:50,
+				customBackground:java.awt.Color.MAGENTA,
+				backgroundColorFromTheme:false //★ NEED!!
+			) 
+			radialBargraph1Lcd(preferredSize: [300,300],
+				barGraphColor:ColorDef.ORANGE,
+				value:50
+			)
+			//■section color not action
+			radialBargraph2(preferredSize: [300,300],
+				barGraphColor:ColorDef.YELLOW,
+				value:50,
+				sectionsVisible :true,//★ NEED!!
+				sections:[[0, 33, java.awt.Color.GREEN],[33, 66, java.awt.Color.YELLOW],[66, 100, java.awt.Color.RED]] as Section[] 
+			)
+		}
+
+		//11
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+		  	boxLayout()
+			label(text:'11  ')
+
+			//■aria color not action
+			radialBargraph2Lcd(preferredSize: [300,300],
+				barGraphColor:ColorDef.GREEN,
+				value:50,
+				areaColor:java.awt.Color.CYAN,
+				areaStart:40,
+				areaStop:70,		
+				areaVisible:true	//★ NEED!!
+			) 
+			radialBargraph3(preferredSize: [300,300],
+				barGraphColor:ColorDef.BLUE,
+				value:50,
+				title:'hogehoge',unitString:'fuga',
+				frameDesign:FrameDesign.BLACK_METAL,
+				backgroundColor:BackgroundColor.BEIGE,
+				tickmarkColor:java.awt.Color.RED,
+				tickmarkColorFromTheme:false,			//★ NEED!!
+				trackStartColor:java.awt.Color.LIGHT_GRAY,
+				trackSectionColor:java.awt.Color.PINK,
+				trackStopColor:java.awt.Color.MAGENTA
+			) 
+			radialBargraph3Lcd(preferredSize: [300,300],
+				barGraphColor:ColorDef.RAITH,
+				value:50,
+				ledColor:LedColor.YELLOW_LED,
+				pointerColor:PointerColor.WHITE,
+				labelColor:java.awt.Color.GREEN,
+				labelColorFromTheme:false				//★ NEED!!
+			) 
+		}
+
+		//12
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+			boxLayout()
+			label(text:'11  ')
+
+			radialBargraph4(preferredSize: [300,300],
+				barGraphColor:ColorDef.GREEN_LCD,
+				value:50
+			)
+			radialBargraph4Lcd(preferredSize: [300,300],
+				titleAndUnitFont:new Font("ＭＳ ゴシック",Font.PLAIN,20),		//Font Change(to Verdana)
+				useTitleAndUnitFont:true,										//Font Change(to Verdana)
+				title:'ほげほげ',
+				unitString:'ふがふが',
+				lcdUnitString:'まいう',
+				barGraphColor:ColorDef.JUG_GREEN,
+				value:50
+			)
 		}
 }
 swingRepaintTimeline(main, loop: true)
@@ -368,7 +468,7 @@ swingRepaintTimeline(main, loop: true)
 	//マウスジェスチャ。マウスを押しながら右、左で画面切替
 	def page=1
 	def page_min=1
-	def page_max=3
+	def page_max=4
 	mouseGestures(start: true) {
  	   // receives gestures as they are recognized (cummulative)
        onGestureMovementRecognized { String s -> println s }
