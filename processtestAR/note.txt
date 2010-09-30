@@ -1,0 +1,15 @@
+now only window project
+
+[griffon processing plugin additional command]
+griffon create-processing-view
+
+
+[use library(Win)]
+NyARToolkit for processing
+	http://d.hatena.ne.jp/nyatla/20081225
+
+CaptureDS
+	http://digitalmuseum.jp/software/nui/processing/
+
+DirectShow Java
+	http://www.humatic.de/htools/dsj.htm

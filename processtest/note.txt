@@ -1,0 +1,3 @@
+[griffon processing plugin additional command]
+griffon create-processing-view
+
