@@ -8,6 +8,8 @@ import eu.hansolo.steelseries.tools.*
 import eu.hansolo.steelseries.gauges.*
 import java.awt.*
 import java.awt.event.*
+import javax.imageio.ImageIO
+
 
 import com.dreamarts.system.utils.*
 import net.miginfocom.swing.MigLayout
@@ -90,7 +92,7 @@ LcdColor.BLUEBLACK_LCD
 LcdColor.BLUEDARKBLUE_LCD
 LcdColor.BLUEGRAY_LCD
 LcdColor.STANDARD_LCD
-LcdColor.BLUEBLUE_LCD
+LcdColor.BLUE_LCD
 
 BackgroundColor.DARK_GRAY
 BackgroundColor.LIGHT_GRAY
@@ -144,13 +146,14 @@ panel(constraints: 'page1', opaque: false) {
 			label(text:'1  ')
 
 			altimeter(preferredSize: [300,300])
-			clock(id:'clock',preferredSize: [300,300],
+			clock(id:'clock',preferredSize: [200,200],
 						backgroundColor:BackgroundColor.WHITE,
 						frameDesign:FrameDesign.SHINY_METAL)
 
-			//g = clock.backgroundImage.getGraphics()
-			g = clock.foregroundImage.createGraphics()
+			g = clock.backgroundImage.getGraphics()
+			//g = clock.foregroundImage.createGraphics()
 			icon = imageIcon('/griffon-icon-48x48.png').image
+			//icon = ImageIO.read(new File('/griffon-icon-48x48.png'))
 			g.drawImage(icon, 0,0, null)
 			g.drawString("Sine Wave", 0, 0); // Draw some text
 			g.dispose()
@@ -433,7 +436,7 @@ panel(constraints: 'page4', opaque: false) {
 		//12
 		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
 			boxLayout()
-			label(text:'11  ')
+			label(text:'12  ')
 
 			radialBargraph4(preferredSize: [300,300],
 				barGraphColor:ColorDef.GREEN_LCD,
@@ -448,7 +451,41 @@ panel(constraints: 'page4', opaque: false) {
 				barGraphColor:ColorDef.JUG_GREEN,
 				value:50
 			)
+
+			linearBargraph(preferredSize: [100,100],value:50,
+				barGraphColor:ColorDef.CYAN
+			)
+			linearBargraphLcd(preferredSize: [100,100],value:50,
+				barGraphColor:ColorDef.MAGENTA,
+				orientation:javax.swing.SwingConstants.HORIZONTAL
+			)
+			panel(){
+				boxLayout(axis:javax.swing.BoxLayout.Y_AXIS)
+				led(preferredSize: [30,30],
+					ledColor:LedColor.RED_LED,
+					ledOn:true
+				)
+				led(preferredSize: [30,30],
+					ledColor:LedColor.GREEN_LED,
+					ledOn:false
+				)
+				led(preferredSize: [30,30],
+					ledColor:LedColor.BLUE_LED,
+					ledBlinking:true
+				)
+				led(preferredSize: [30,30],
+					ledColor:LedColor.YELLOW_LED,
+					ledBlinking:true,
+					ledOn:false
+				)
+				led(preferredSize: [30,30],
+					ledColor:LedColor.ORANGE_LED,
+					ledBlinking:false,
+					ledOn:true
+				)
+			}
 		}
+
 }
 swingRepaintTimeline(main, loop: true)
 
