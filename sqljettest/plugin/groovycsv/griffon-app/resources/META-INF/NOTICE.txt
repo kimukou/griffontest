@@ -1,0 +1,5 @@
+GroovyCsv Plugin
+Copyright 2010 kimukou_26
+
+This product includes software developed by kimukou_26
+(http://github.com/kimukou).

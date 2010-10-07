@@ -1,0 +1,9 @@
+<plugin name='groovycsv' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+  <author>kimukou.buzz@gmail.com</author>
+  <title>GroovyCsv Plugin</title>
+  <description>Brief description of the plugin.</description>
+  <documentation>http://griffon.codehaus.org/Groovycsv+Plugin</documentation>
+  <license>&lt;UNKNOWN&gt;</license>
+  <resources />
+  <dependencies />
+</plugin>
