@@ -5,10 +5,12 @@
 	
 2)Edit/Add
 	GroovycsvGriffonPlugin.groovy
-		
+		Edit Infomation
+	lib
+		Add using jar
 	scripts/_Events.groovy
-		Add
-
+		Add Script
+		(event jar copy)
 	griffon-app/resources/META-INF
 		Add using library's LICENCE,TXT
 
