@@ -1,11 +1,11 @@
-Å°How to use.
+‚ñ†How to use.
 1)run.bat
 2)application Drag & Drop to 
 	testdata/data.csv
 3)table disp
 4)application clear button doClick
 
-Å°How to SQLiteDB clear
+‚ñ†How to SQLiteDB clear
 	staging/test.db	remove
 			Or 
 	application clear button doClick
