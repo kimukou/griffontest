@@ -52,8 +52,6 @@ class SqljettestController {
 		  execAsync{
 			  model.getPageInit()
 			  model.getPageList(model.control_page)
-
-			  model.result=tblsize
 			  //経過時間
 			  if(st_time!=null){
 				  def c2 = new Date()
@@ -121,7 +119,8 @@ class SqljettestController {
   }
 	
 	def st_time
-  def csvLoad ={
+  def csvLoad ={filename->
+		model.csvf = filename
 		st_time = new Date()
 	  doOutside {
 		  def reader = null
@@ -167,8 +166,6 @@ Asynchronizer.withAsynchronizer(2){
 		  execAsync{
 			  model.getPageInit()
 			  model.getPageList(model.control_page)
-
-			  model.result=tblsize
 			  //経過時間
 			  if(st_time!=null){
 				  def c2 = new Date()
