@@ -30,6 +30,7 @@ eventCompileStart = {msg->
 
 eventCompileEnd = {msg->
   println "==compile end(${msg})=="
+  growlNotify("eventCompileEnd")
 }
 
 
