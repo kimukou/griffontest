@@ -11,8 +11,6 @@ eventStatusUpdate = { msg ->
 growlNotify = { message ->
     println "==growlNotify(${message})=="
 
-return
-
     //path="/usr/local/bin/growlnotify"
     path="c:/opt/Growl/growlnotify.exe"
     if(!new File(path).exists())return
