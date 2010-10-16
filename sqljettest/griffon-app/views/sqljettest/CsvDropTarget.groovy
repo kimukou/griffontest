@@ -6,6 +6,13 @@ import java.awt.dnd.*
 
 abstract class ConvertDropTargetCsv extends DropTarget {
 
+	def _func
+	//public ConvertDropTargetCsv(Object target,Closure func){
+	public ConvertDropTargetCsv(func){
+		super()
+		_func=func
+	}
+
 	/** その名の通りドロップされたときに呼ばれるメソッド。 */
 	public void drop(DropTargetDropEvent event) {
 		// fravorて言うのはドラッグ＆ドロップするデータ形式みたいな物。
@@ -45,8 +52,7 @@ abstract class ConvertDropTargetCsv extends DropTarget {
 			}
 		}
 		println text
-		griffon.util.ApplicationHolder.application.config.model.csvf = text
-		griffon.util.ApplicationHolder.application.config.controller.csvLoad()
+		_func.call(text)
 
 		// event.dropComplete()してから帰ります。
 		event.dropComplete(true)
@@ -57,6 +63,12 @@ abstract class ConvertDropTargetCsv extends DropTarget {
 }
 
 class CsvDropTarget extends ConvertDropTargetCsv {
+
+	public CsvDropTarget(func){
+		super(func)
+	}
+
+
 	String convertText(droped) {
 		  BufferedReader br = new BufferedReader(droped);
 		  String msg = br.readLine();

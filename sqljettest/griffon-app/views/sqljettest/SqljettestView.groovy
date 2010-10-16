@@ -77,15 +77,14 @@ frame = application(title: 'sqljettest',
 		}
 	}
 	panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)) {
-		scrollPane(constraints: "span,growx,growy,wrap",dropTarget:new CsvDropTarget()) {
-			table(id: 'dispTable',dropTarget:new CsvDropTarget() ) {
+		scrollPane(id: 'dispTableSc', constraints: "span,growx,growy,wrap",dropTarget:new CsvDropTarget(controller.csvLoad) ) {
+			table(id: 'dispTable',dropTarget:new CsvDropTarget(controller.csvLoad)) {
 					tableFormat = defaultTableFormat(columnNames: ["dispId", "path"])
 					eventTableModel(source: model.dispTableList, format: tableFormat)
 					installTableComparatorChooser(source: model.dispTableList)
 			}
 		}
 	}
-
 
 	view.dispTable.selectionModel.addListSelectionListener([
 		valueChanged: { event ->

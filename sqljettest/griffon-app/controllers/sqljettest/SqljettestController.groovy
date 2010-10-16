@@ -37,6 +37,7 @@ class SqljettestController {
 
     }
 
+<<<<<<< HEAD
   def clear ={
     st_time = new Date()
     doOutside {
@@ -70,6 +71,39 @@ class SqljettestController {
       println "${dispId}/${path}"
     }
   }
+=======
+	def clear ={
+		st_time = new Date()
+	  doOutside {
+			try{
+		  	model.sqLiteU.clearOpenTable(model.sqLiteU.tableNameC)
+			}
+		  catch(Exception e){
+			  LOG.error e
+		  }
+		  finally{
+				model.sqLiteU.closeTable()
+			}
+		  execAsync{
+			  model.getPageInit()
+			  model.getPageList(model.control_page)
+			  //経過時間
+			  if(st_time!=null){
+				  def c2 = new Date()
+				  def ps_time = (c2.getTime() - st_time.getTime())/1000.0
+				  model.time_serch = ps_time
+			  }
+		  }
+	  }
+	}
+
+	def brows ={dispId,path->
+	  doOutside {
+		  //["Explorer.exe","${path}"].execute()
+			println "${dispId}/${path}"
+	  }
+	}
+>>>>>>> origin/master
 
 
   def onStartupEnd = {
@@ -119,6 +153,7 @@ class SqljettestController {
       }
     }
   }
+<<<<<<< HEAD
   
   def st_time
   def csvLoad ={
@@ -128,6 +163,18 @@ class SqljettestController {
       
       def cnt = model.sqLiteU.getTableId("last") + 1 //次の行から開始する
       def table = model.sqLiteU.openTable(org.tmatesoft.sqljet.core.SqlJetTransactionMode.WRITE)// 書込みモード
+=======
+	
+	def st_time
+  def csvLoad ={filename->
+		model.csvf = filename
+		st_time = new Date()
+	  doOutside {
+		  def reader = null
+		  
+		  def cnt = model.sqLiteU.getTableId("last") + 1 //次の行から開始する
+		  def table = model.sqLiteU.openTable(org.tmatesoft.sqljet.core.SqlJetTransactionMode.WRITE)// 書込みモード
+>>>>>>> origin/master
 
       try{
         LOG.debug "model.csvf=${model.csvf}"
@@ -155,6 +202,7 @@ Asynchronizer.withAsynchronizer(2){
 ////  }
 //}
 
+<<<<<<< HEAD
       }
       catch(Exception e){
         LOG.error e
@@ -177,6 +225,28 @@ Asynchronizer.withAsynchronizer(2){
         }
       }
     }
+=======
+		  }
+		  catch(Exception e){
+			  LOG.error e
+		  }
+		  finally{
+			  //if(reader!=null)reader.close()
+				model.sqLiteU.closeTable()
+		  }
+		  
+		  execAsync{
+			  model.getPageInit()
+			  model.getPageList(model.control_page)
+			  //経過時間
+			  if(st_time!=null){
+				  def c2 = new Date()
+				  def ps_time = (c2.getTime() - st_time.getTime())/1000.0
+				  model.time_serch = ps_time
+			  }
+		  }
+	  }
+>>>>>>> origin/master
   }
 
 }
