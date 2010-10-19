@@ -10,6 +10,7 @@ eventStatusUpdate = { msg ->
  
 growlNotify = { message ->
     println "==growlNotify(${message})=="
+    return
 
     //path="/usr/local/bin/growlnotify"
     path="c:/opt/Growl/growlnotify.exe"
@@ -57,6 +58,12 @@ eventGenerateJNLPStart = {
 }
 
 
+
+//--------------------------------------------------------------------------------------------
+copySetting ={destDir->
+  println "destDir=${destDir}"
+}
+
 //--------------------------------------------------------------------------------------------
 //installer plugin
 
@@ -67,7 +74,28 @@ eventPreparePackageStart={ type->
 
 eventPreparePackageEnd={ type->
   println "==eventPreparePackageEnd [${type}]=="
-  growlNotify("eventPreparePackageEnd(${type})")
+  switch(type){
+    case "windows":
+      tmplfile="${basedir}/setting/${griffonAppName}.jsmooth"
+      dstfile="${basedir}/target/installer/jsmooth/${griffonAppName}.jsmooth"
+      ant.copy(tofile:dstfile,file:tmplfile, overwrite: true )
+      break
+
+    case "izpack":
+      destDir = "${basedir}/installer/izpack/resources/"
+      copySetting(destDir)
+      ant.copy( todir: "${basedir}/installer/izpack/resources", overwrite: true ) {
+        fileset( dir: "${basedir}/src/installer/izpack/resources", includes: "**" )
+      }
+      ant.replace( dir: "${basedir}/installer/izpack/resources" ) {
+        replacefilter(token: "@app.name@", value: griffonAppName)
+        replacefilter(token: "@app.version@", value: griffonAppVersion)
+      }
+      break
+  }
+
+  //growlNotify("eventPreparePackageEnd(${type})")
+
 }
 
 
@@ -77,6 +105,15 @@ eventCreatePackageStart = { type->
 
 eventCreatePackageEnd = { type->
   println "==eventCreatePackageEnd  ${type}=="
+
+  println "==eventCreatePackageEnd  ${type}=="
+  switch(type){
+    case "windows":
+    destDir = "${basedir}/dist/windows"
+    copySetting(destDir)
+    break;
+  }
+
   growlNotify("eventCreatePackageEnd(${type})")
 }
 
