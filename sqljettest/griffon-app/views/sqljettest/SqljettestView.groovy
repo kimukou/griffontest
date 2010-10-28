@@ -32,12 +32,12 @@ frame = application(title: 'sqljettest',
 			migLayout(layoutConstraints: "gap 0,insets 0,fill")
 
 			java.text.NumberFormat nf = java.text.NumberFormat.getInstance()
-			nf.setGroupingUsed(false)//カンマ消す
-			nf.setMinimumIntegerDigits(7)  //最低ケタ
+			nf.setGroupingUsed(false)//comma del
+			nf.setMinimumIntegerDigits(7)  //min figure
 			java.text.NumberFormat nf2 = java.text.NumberFormat.getInstance()
-			nf2.setGroupingUsed(false)//カンマ消す
-			nf2.setMinimumIntegerDigits(5)  //最低ケタ
-			nf2.setMaximumFractionDigits(2) //少数2ケタ
+			nf2.setGroupingUsed(false)//comma del
+			nf2.setMinimumIntegerDigits(5)  //min figure
+			nf2.setMaximumFractionDigits(2) //2 few figures
 
 			//件数
 			jxlabel(getMessage("view.count.title"),constraints: "")
@@ -66,7 +66,7 @@ frame = application(title: 'sqljettest',
 			}
 			clearB.font = clearB.font.deriveFont(Font.BOLD,16f)
 
-			//頁操作パネル
+			//page operation panel
 			this.registerBeanFactory("jPagingPanel", com.wasurenairoku.swing.JPagingPanel.class)
 			jPagingPanel(id:'controlP',currentPage:bind{model.control_page},maxPageSize:bind{model.control_page_max},constraints: "span,growx")
 			controlP.addPagingListener([

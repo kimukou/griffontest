@@ -4,6 +4,7 @@ set JAVA_HOME=c:\opt\jdk
 
 for /F "delims=" %%s in ('cd') do @set PWD=%%s
 set JAVA_OPTS=-Djava.library.path="%PWD%\lib\libraries\opengl\library"
+echo %JAVA_OPTS%
 
 set PATH=%GROOVY_HOME%/bin;%GRIFFON_HOME%/bin;%JAVA_HOME%/bin
 

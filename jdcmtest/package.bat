@@ -1,8 +1,7 @@
-::パッケージングバッチファイル
-::DTagSendor\dist\jar に作成されます
+::jdcmtest\dist\jar created
 
-set GROOVY_HOME=C:\grails\groovy-1.7.4
-set GRIFFON_HOME=C:\grails\griffon-0.9
+set GROOVY_HOME=C:\opt\groovy-1.7.5
+set GRIFFON_HOME=C:\opt\griffon-0.9.1a
 set JAVA_HOME=c:\opt\jdk
 
 set PATH=%GROOVY_HOME%/bin;%GRIFFON_HOME%/bin;%JAVA_HOME%/bin

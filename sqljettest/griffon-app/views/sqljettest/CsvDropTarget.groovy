@@ -10,6 +10,7 @@ abstract class ConvertDropTargetCsv extends DropTarget {
   public ConvertDropTargetCsv(func){
     super()
     _func=func
+		println "_func=${_func}"
   }
 
   /** Method of calling when dropped as its name suggests */
@@ -50,15 +51,16 @@ abstract class ConvertDropTargetCsv extends DropTarget {
         return
       }
     }
-    println text
+    println "text=${text}"
+		println "${_func.dump()}"
     _func.call(text)
 
-    // event.dropComplete()してから帰ります。
+    // event.dropComplete() from return
     event.dropComplete(true)
   }
 
-  /** 実際の変換処理はサブクラスで実装。 */
-  abstract String convertText(droped);
+  /** The real conversion processing implements it in a subclass. */
+  abstract String convertText(droped)
 }
 
 class CsvDropTarget extends ConvertDropTargetCsv {
@@ -74,5 +76,5 @@ class CsvDropTarget extends ConvertDropTargetCsv {
       println msg
       return msg
   }
-  public String toString() {"URL又はファイルパス取得"}
+  public String toString() {"URL or File Path Get"}
 }

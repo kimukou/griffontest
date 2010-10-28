@@ -24,5 +24,6 @@ jx {
     }
 }
 
-root.'GsqlGriffonAddon'.addon=true
 
+
+root.'GsqlGriffonAddon'.addon=true

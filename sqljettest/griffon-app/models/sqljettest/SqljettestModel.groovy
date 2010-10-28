@@ -90,12 +90,10 @@ class SqljettestModel {
 
 	def view
 	def controller
-
 	SqljettestModel(){
 		sqLiteU = new SQLJetUtil()
-		//sqLiteU.open()
-		//sqLiteU.closeTable()
-		//sqLiteU.close()
+		sqLiteU.open()
+		sqLiteU.close()
 	}
 
 	@Override

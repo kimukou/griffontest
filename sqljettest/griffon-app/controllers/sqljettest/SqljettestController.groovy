@@ -3,12 +3,12 @@ package sqljettest
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory
 
-//CSV出力
+//CSV OutPut
 //import au.com.bytecode.opencsv.*
 import com.xlson.groovycsv.*
 import java.io.*
 
-//GPars非同期
+//GPars Async
 import groovyx.gpars.*
 
 class SqljettestController {
@@ -21,21 +21,26 @@ class SqljettestController {
 
 
     void mvcGroupInit(Map args) {
+
       // this method is called after model and view are injected
       service = new SqljettestService()
       LOG.debug "service=${service}"
 
-      //model に参照を入れる
+      //model into access pointer
       model.view = args.view
       model.controller = args.controller
 
-      //遅延参照用
+      //delay access pointer
       app.config.controller = args.controller
       app.config.service = service
       app.config.view = args.view
       app.config.model = args.model
 
     }
+
+	void mvcGroupDestroy(Map args) {
+		
+	}
 
   def clear ={
     st_time = new Date()
@@ -53,8 +58,7 @@ class SqljettestController {
         model.getPageInit()
         model.getPageList(model.control_page)
 
-        model.result=tblsize
-        //経過時間
+        //An elapsed time
         if(st_time!=null){
           def c2 = new Date()
           def ps_time = (c2.getTime() - st_time.getTime())/1000.0
@@ -91,7 +95,7 @@ class SqljettestController {
          model.count=0
          model.result=model.sqLiteU.getTableSize(model.sqLiteU.tableNameC)
          model.getPageInit()
-         //経過時間
+         //An elapsed time
          if(st_time!=null){
            def c2 = new Date()
            def ps_time = (c2.getTime() - st_time.getTime())/1000.0
@@ -106,8 +110,8 @@ class SqljettestController {
     def outstr= nextLine.path
     println "outstr=${outstr}"
 
-    outstr = outstr.replaceAll("\\\\","\\\\\\\\")//SQLiteはINS時に\\を2倍増量しないとエラー
-    table.insert(cnt,dispId,outstr)// データ追加　（id,dispId,path）
+    outstr = outstr.replaceAll("\\\\","\\\\\\\\")//When SQLite case insert,nessesary [\\] twice
+    table.insert(cnt,dispId,outstr)// data add　（id,dispId,path）
     if(cnt % model.control_flash_line ==0  && view.frame.visible && view.frame.active){
       model.result=cnt//tmpList.size
       //経過時間
@@ -121,13 +125,14 @@ class SqljettestController {
 
   
   def st_time
-  def csvLoad ={
+  def csvLoad ={filename->
+		model.csvf = filename
     st_time = new Date()
     doOutside {
       def reader = null
       
-      def cnt = model.sqLiteU.getTableId("last") + 1 //次の行から開始する
-      def table = model.sqLiteU.openTable(org.tmatesoft.sqljet.core.SqlJetTransactionMode.WRITE)// 書込みモード
+      def cnt = model.sqLiteU.getTableId("last") + 1 //next line start
+      def table = model.sqLiteU.openTable(org.tmatesoft.sqljet.core.SqlJetTransactionMode.WRITE)// writing mode
 
 
       try{
@@ -169,7 +174,6 @@ Asynchronizer.withAsynchronizer(2){
         model.getPageInit()
         model.getPageList(model.control_page)
 
-        model.result=tblsize
         //経過時間
         if(st_time!=null){
           def c2 = new Date()
