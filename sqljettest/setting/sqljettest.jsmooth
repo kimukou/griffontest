@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <jsmoothproject>
+   <JVMSearchPath>registry</JVMSearchPath>
    <JVMSearchPath>javahome</JVMSearchPath>
    <JVMSearchPath>jrepath</JVMSearchPath>
    <JVMSearchPath>jdkpath</JVMSearchPath>
    <JVMSearchPath>exepath</JVMSearchPath>
    <JVMSearchPath>jview</JVMSearchPath>
-   <JVMSearchPath>registry</JVMSearchPath>
+   <bundledJVMPath>jre</bundledJVMPath>
    <arguments>
 -server -Xmn256m -XX:PermSize=256m -Xss256k -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSParallelRemarkEnabled -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=8 -XX:TargetSurvivorRatio=90 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintClassHistogram -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Dsun.lang.ClassLoader.allowArraySyntax=true
-	</arguments>
+  </arguments>
    @app.jars@
    <currentDirectory>.</currentDirectory>
    <embeddedJar>false</embeddedJar>
@@ -23,6 +24,10 @@
       <name>program.name</name>
       <value>@app.name@</value>
    </javaProperties>
+  <javaProperties>
+    <name>EXEPATH</name>
+    <value>.</value>
+  </javaProperties>
    <mainClassName>@app.main.class@</mainClassName>
    <maximumMemoryHeap>102400000</maximumMemoryHeap>
    <maximumVersion></maximumVersion>
@@ -30,8 +35,7 @@
    <skeletonName>Autodownload Wrapper</skeletonName>
    <skeletonProperties>
       <key>Message</key>
-      <value>Java has not been found on your computer.
-Do you want to download it?</value>
+      <value>Java has not been found on your computer.Do you want to download it?</value>
    </skeletonProperties>
    <skeletonProperties>
       <key>DownloadURL</key>
