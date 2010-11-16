@@ -6,4 +6,4 @@ set PATH=%GROOVY_HOME%/bin;%GRIFFON_HOME%/bin;%JAVA_HOME%/bin
 
 
 call griffon clean
-call griffon prod package
+call griffon prod package jar
