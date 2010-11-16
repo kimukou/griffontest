@@ -40,7 +40,7 @@
  )
 
 
-//起動時のログファイル削除処理
+//startup logfile delete action
 import java.io.File;
 import java.io.FilenameFilter;
 

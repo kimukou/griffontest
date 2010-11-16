@@ -2,8 +2,6 @@ package sqljettest
 
 import groovy.beans.Bindable
 
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
 import ca.odell.glazedlists.*
 
 
@@ -11,8 +9,6 @@ import ca.odell.glazedlists.*
 import griffon.util.SQLJetUtil
 
 class SqljettestModel {
-
-	private static final Log LOG = LogFactory.getLog(SqljettestModel)
 
 	//•\Ž¦ƒŠƒXƒg
 	EventList dispTableList = new SortedList(new BasicEventList(),{a, b -> a.dispId <=> b.dispId} as Comparator)
@@ -62,9 +58,9 @@ class SqljettestModel {
 		def limit_max = st_cnt + control_page_line -1 < result ? st_cnt + control_page_line -1 : result
 		//def limit_max = st_cnt + control_page_line < result ? control_page_line : (result - st_pos -1)
 
-		LOG.debug "(control_page, control_page_line,result,first,st_cnt,limit_max)=(${control_page},${control_page_line},${result},${first},${st_cnt},${limit_max})"
+		log.debug "(control_page, control_page_line,result,first,st_cnt,limit_max)=(${control_page},${control_page_line},${result},${first},${st_cnt},${limit_max})"
 		//controller.edt{
-			LOG.debug "[P]dispTableList.size=${dispTableList.size()}"
+			log.debug "[P]dispTableList.size=${dispTableList.size()}"
 			dispTableList.getReadWriteLock().writeLock().lock() //”ñ“¯ŠúLock
 			try{
 				if(dispTableList.size()>0)dispTableList.clear()
@@ -74,7 +70,7 @@ class SqljettestModel {
 					if(tmpList.size()>0)dispTableList.addAll(tmpList)
 				}
 			}catch(Exception ex){
-				LOG.error ex
+				log.error ex
 			}
 			finally{
 				dispTableList.getReadWriteLock().writeLock().unlock() //”ñ“¯ŠúunLock
@@ -83,7 +79,7 @@ class SqljettestModel {
 			if(result <= 0)	view.clearB.enabled  = false
 			else						view.clearB.enabled  = true
 
-			LOG.debug "[A]dispTableList.size=${dispTableList.size()}"
+			log.debug "[A]dispTableList.size=${dispTableList.size()}"
 		//}	
 	}
 

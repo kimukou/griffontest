@@ -6,9 +6,6 @@ import ca.odell.glazedlists.swing.*
 import net.miginfocom.swing.MigLayout
 
 import java.awt.*
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
-
 import javax.swing.*
 import java.awt.BorderLayout as BL
 
@@ -22,8 +19,6 @@ frame = application(title: 'sqljettest',
   iconImages: [imageIcon('/griffon-icon-48x48.png').image,
                imageIcon('/griffon-icon-32x32.png').image,
                imageIcon('/griffon-icon-16x16.png').image]) {
-
-  Log LOG = LogFactory.getLog(SqljettestView)
 
 	migLayout(layoutConstraints: "gap 0,insets 0,fill")
 	panel(constraints: "span,grow,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)) {
