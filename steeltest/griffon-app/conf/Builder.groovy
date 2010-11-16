@@ -38,3 +38,5 @@ root.'SteelGriffonAddon'.addon=true
 root.'MousegesturesGriffonAddon'.addon=true
 
 root.'TransitionsGriffonAddon'.addon=true
+
+root.'HarmoniccodeGriffonAddon'.addon=true
