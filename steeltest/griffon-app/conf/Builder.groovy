@@ -33,10 +33,8 @@ root.'griffon.builder.css.CSSBuilder'.controller = ['CSS']
 
 root.'griffon.builder.trident.TridentBuilder'.view = '*'
 
-root.'SteelGriffonAddon'.addon=true
-
 root.'MousegesturesGriffonAddon'.addon=true
 
 root.'TransitionsGriffonAddon'.addon=true
 
-root.'HarmoniccodeGriffonAddon'.addon=true
+root.'SteelGriffonAddon'.addon=true
