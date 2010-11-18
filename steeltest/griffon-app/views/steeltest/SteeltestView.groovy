@@ -161,7 +161,10 @@ panel(constraints: 'page1', opaque: false) {
 	   		boxLayout()
 			label(text:'1  ')
 
-			altimeter(preferredSize: [300,300])
+		//not support 0.4 add start
+			//altimeter(preferredSize: [300,300])
+		//not support 0.4 add end
+
 			clock(id:'clock',preferredSize: [200,200],
 						backgroundColor:BackgroundColor.WHITE,
 						frameDesign:FrameDesign.SHINY_METAL)
