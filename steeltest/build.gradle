@@ -1,0 +1,61 @@
+// standard configuration
+getLogging().captureStandardOutput(LogLevel.DEBUG)
+configurations { compile }
+
+// add additional repositories here if you need them
+repositories {
+    //mavenRepo(urls:'http://download.java.net/maven/2/')
+    mavenCentral()
+}
+
+// add any dependencies you want downloaded as part of the bootstrap process
+dependencies {
+    //compile 'com.google.collections:google-collections:1.0-rc2'
+}
+
+// this should be run once for the project
+task('bootstrap') << {
+    // download any dependencies and put them in lib/
+    configurations['compile']?.files?.findAll { it.absolutePath.indexOf('unspecified') < 0 }.each { dep ->
+        ant.copy(toDir: new File('lib'), file: dep)
+    }
+
+    // try to install any plugins
+    new File('application.properties').eachLine { line ->
+        if (line.startsWith("plugins")) {
+            def plugin = line[8..-1].split('=')
+            griffon "install-plugin ${plugin[0]} ${plugin[1]}"
+        }
+    }
+}
+
+// mimic the tasks provided by the Java plugin
+task('clean') << { griffon 'clean' }
+task('compile') << { griffon 'compile' }
+task('libs') << { griffon 'package' }
+task('test') << { griffon 'test-app' }
+task('dists') << { griffon 'prod package' }
+
+// additional run-related tasks
+task('run-app') << { griffon 'run-app' }
+task('debug-app') << { griffon 'run-app -debug' }
+task('run-webstart') << { griffon 'run-webstart' }
+task('run-applet') << { griffon 'run-applet' }
+
+// call out to the griffon command
+def griffon(target) {
+    if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
+        ant.exec(executable: 'griffon.bat', dir: projectDir, failonerror: true) {
+            arg(value: target)
+        }
+    } else {
+        ant.exec(executable: 'griffon', dir: projectDir, failonerror: true) {
+            arg(value: target)
+        }
+    }
+}
+
+// if you want to use the gradle wrapper
+task('wrapper', type: Wrapper).configure {
+    gradleVersion = '0.7'
+}
