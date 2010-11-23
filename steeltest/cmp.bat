@@ -4,6 +4,5 @@ set JAVA_HOME=c:\opt\jdk
 
 set PATH=%GROOVY_HOME%/bin;%GRIFFON_HOME%/bin;%JAVA_HOME%/bin
 
-
-call griffon clean
-call griffon prod package jar
+call griffon compile
+pause

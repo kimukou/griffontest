@@ -15,4 +15,12 @@ class SteeltestController {
     def action = { evt = null ->
     }
     */
+
+//2010/11/16 add look and feel change dialog add start
+		//showLaf action add
+    def showLaf = { evt = null ->
+        griffon.lookandfeel.LookAndFeelManager.instance.showLafDialog(app)
+    }
+//2010/11/16 add look and feel change dialog add end
+
 }

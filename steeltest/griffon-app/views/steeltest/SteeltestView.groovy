@@ -46,32 +46,32 @@ jbutton {
 """
 
 /*
-java.awt.Color.black 黒を表します。
-java.awt.Color.BLACK 黒を表します。
-java.awt.Color.blue  青を表します。
-java.awt.Color.BLUE  青を表します。
-java.awt.Color.cyan  シアンを表します。
-java.awt.Color.CYAN  シアンを表します。
-java.awt.Color.DARK_GRAY ダークグレイを表します。
-java.awt.Color.darkGray  ダークグレイを表します。
-java.awt.Color.gray  グレイを表します。
-java.awt.Color.GRAY  グレイを表します。
-java.awt.Color.green 緑を表します。
-java.awt.Color.GREEN 緑を表します。
-java.awt.Color.LIGHT_GRAY ライトグレイを表します。
-java.awt.Color.lightGray  ライトグレイを表します。
-java.awt.Color.magenta    マゼンタを表します。
-java.awt.Color.MAGENTA    マゼンタを表します。
-java.awt.Color.orange     オレンジを表します。
-java.awt.Color.ORANGE     オレンジを表します。
-java.awt.Color.pink       ピンクを表します。
-java.awt.Color.PINK       ピンクを表します。
-java.awt.Color.red        赤を表します。
-java.awt.Color.RED        赤を表します。
-java.awt.Color.white      白を表します。
-java.awt.Color.WHITE      白を表します。
-java.awt.Color.yellow     黄を表します。
-java.awt.Color.YELLOW     黄を表します。
+java.awt.Color.black 黒
+java.awt.Color.BLACK 黒
+java.awt.Color.blue  青
+java.awt.Color.BLUE  青
+java.awt.Color.cyan  シアン
+java.awt.Color.CYAN  シアン
+java.awt.Color.DARK_GRAY ダークグレイ
+java.awt.Color.darkGray  ダークグレイ
+java.awt.Color.gray  グレイ
+java.awt.Color.GRAY  グレイ
+java.awt.Color.green 緑
+java.awt.Color.GREEN 緑
+java.awt.Color.LIGHT_GRAY ライトグレイ
+java.awt.Color.lightGray  ライトグレイ
+java.awt.Color.magenta    マゼンタ
+java.awt.Color.MAGENTA    マゼンタ
+java.awt.Color.orange     オレンジ
+java.awt.Color.ORANGE     オレンジ
+java.awt.Color.pink       ピンク
+java.awt.Color.PINK       ピンク
+java.awt.Color.red        赤
+java.awt.Color.RED        赤
+java.awt.Color.white      白
+java.awt.Color.WHITE      白
+java.awt.Color.yellow     黄
+java.awt.Color.YELLOW     黄
 */
 
 /*
@@ -122,6 +122,15 @@ PointerColor.WHITE	//from 0.2.1
 */
 
 
+actions {
+// Look & Feel dialog disp action
+   action(id:'showLaf',
+        name: 'show Look & Feel',
+        closure: controller.showLaf,
+        mnemonic: 'L',
+        accelerator: 'ctrl L')
+}
+
 frame = application(title: app.config.application.title,
   size: [800,800],
   //pack: true,
@@ -134,9 +143,16 @@ frame = application(title: app.config.application.title,
     // add content here
     //borderLayout()
 
+    menuBar(){
+				menu(mnemonic:'L', 'Look & Feel'){
+            menuItem(action:showLaf)
+        }
+    }
+
 current.contentPane.background = Color.BLACK
 main = current.contentPane
 transitionLayout(defaultDuration: 2000, defaultTransition: new FadeTransition2D(Color.BLACK))
+
 
 panel(constraints: 'page1', opaque: false) {
 	  migLayout(layoutConstraints: "gap 0,insets 0,fill")
@@ -145,7 +161,10 @@ panel(constraints: 'page1', opaque: false) {
 	   		boxLayout()
 			label(text:'1  ')
 
-			altimeter(preferredSize: [300,300])
+		//not support 0.4 add start
+			//altimeter(preferredSize: [300,300])
+		//not support 0.4 add end
+
 			clock(id:'clock',preferredSize: [200,200],
 						backgroundColor:BackgroundColor.WHITE,
 						frameDesign:FrameDesign.SHINY_METAL)
@@ -552,6 +571,8 @@ t.start{
 		}
 }
 
+// Look & Feel add setting
+frame.defaultLookAndFeelDecorated = true
 
 /*
 frame.windowOpened={println 'Opened'}//初回起動時

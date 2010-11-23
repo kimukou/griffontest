@@ -32,6 +32,10 @@ eventCompileStart = {msg->
 eventCompileEnd = {msg->
   println "==compile end(${msg})=="
   growlNotify("eventCompileEnd")
+
+	destDir = "${basedir}/staging"
+	copySetting(destDir)
+
 }
 
 
@@ -42,6 +46,9 @@ eventPackageStart={msg->
 eventPackageEnd = {msg->
   println "==package end(${msg})=="
   growlNotify("eventPackageEnd")
+
+	destDir = "${basedir}/dist/jar"
+	copySetting(destDir)
 }
 
 
@@ -62,6 +69,54 @@ eventGenerateJNLPStart = {
 //--------------------------------------------------------------------------------------------
 copySetting ={destDir->
   println "destDir=${destDir}"
+
+ 	//ROOT
+  srcDir  = "${basedir}/setting"
+  ant.mkdir(dir:destDir)
+  ant.copy(todir: destDir, overwrite: true ) {
+    fileset(dir: srcDir, includes: '*.sh,*.txt,*.bat,*.pdf,*.inf' ,excludes:'autorun.bat,Autorun.inf')
+  }
+
+	//classes copy
+	setting_dir = "${classesDir}"
+	ant.mkdir(dir:setting_dir)
+	ant.copy(todir: setting_dir, overwrite: true ) {
+		fileset(dir: srcDir, includes: '*.sql,*.properties,*.xml')
+	}
+
+
+	//other
+	setting_dir="${destDir}/setting"
+	ant.mkdir(dir:setting_dir)
+	ant.copy(todir: setting_dir, overwrite: true ) {
+		fileset(dir: srcDir, includes: '*.properties,*.xml')
+	}
+
+}
+
+copySettingExe(destDir){
+	println "==copySettingExe(${distDir})=="
+	println "destDir=${destDir}"
+  srcDir  = "${basedir}/setting"
+  ant.mkdir(dir:destDir)
+  ant.copy(todir: destDir, overwrite: true ) {
+    fileset(dir: srcDir, includes: '*.sh,*.txt,*.bat,*.pdf,*.inf' ,excludes:'start.bat,start.sh')
+  }
+
+	//classes copy
+	setting_dir = "${classesDir}"
+	ant.mkdir(dir:setting_dir)
+	ant.copy(todir: setting_dir, overwrite: true ) {
+		fileset(dir: srcDir, includes: '*.sql,*.properties,*.xml')
+	}
+
+
+	//other
+	setting_dir="${destDir}/setting"
+	ant.mkdir(dir:setting_dir)
+	ant.copy(todir: setting_dir, overwrite: true ) {
+		fileset(dir: srcDir, includes: '*.properties,*.xml')
+	}
 }
 
 //--------------------------------------------------------------------------------------------
@@ -110,7 +165,7 @@ eventCreatePackageEnd = { type->
   switch(type){
     case "windows":
     destDir = "${basedir}/dist/windows"
-    copySetting(destDir)
+    copySettingExe(destDir)
     break;
   }
 

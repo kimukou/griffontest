@@ -1,8 +1,5 @@
 package sqljettest
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory
-
 //CSV OutPut
 //import au.com.bytecode.opencsv.*
 import com.xlson.groovycsv.*
@@ -17,14 +14,11 @@ class SqljettestController {
     def view
     def service
 
-    private static final Log LOG = LogFactory.getLog(SqljettestController)
-
-
     void mvcGroupInit(Map args) {
 
       // this method is called after model and view are injected
       service = new SqljettestService()
-      LOG.debug "service=${service}"
+      log.debug "service=${service}"
 
       //model into access pointer
       model.view = args.view
@@ -49,7 +43,7 @@ class SqljettestController {
         model.sqLiteU.clearOpenTable(model.sqLiteU.tableNameC)
       }
       catch(Exception e){
-        LOG.error e
+        log.error e
       }
       finally{
         model.sqLiteU.closeTable()
@@ -82,7 +76,7 @@ class SqljettestController {
        app -> withSql { sql ->
          def tmpList = []
          def i=0
-         LOG.debug "sql=${ddl.text}"
+         log.debug "sql=${ddl.text}"
          sql.eachRow(ddl.text) {
          if(i>=model.control_page_line)return
            tmpList << [dispId: it.dispId, path: it.path]
@@ -136,7 +130,7 @@ class SqljettestController {
 
 
       try{
-        LOG.debug "model.csvf=${model.csvf}"
+        log.debug "model.csvf=${model.csvf}"
         //reader = service.getCSVReader(model.csvf)
         def input=new FileInputStream(model.csvf)
         def is=new InputStreamReader(input, "UTF-8")
@@ -163,7 +157,7 @@ Asynchronizer.withAsynchronizer(2){
 
       }
       catch(Exception e){
-        LOG.error e
+        log.error e
       }
       finally{
         //if(reader!=null)reader.close()

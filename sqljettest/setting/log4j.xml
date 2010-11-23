@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/' debug='false'>
+
+  <appender name='async_dailyLog' class='org.apache.log4j.AsyncAppender'>
+    <param name='BufferSize' value='64' />
+    <appender-ref ref='dailyLog' />
+  </appender>
+
+  <appender name='async_stacktraceLog' class='org.apache.log4j.AsyncAppender'>
+    <param name='BufferSize' value='64' />
+    <appender-ref ref='stacktraceLog' />
+  </appender>
+
+  <appender name='async_CONSOLE' class='org.apache.log4j.AsyncAppender'>
+    <param name='BufferSize' value='64' />
+    <appender-ref ref='CONSOLE' />
+  </appender>
+
+  <appender name='dailyLog' class='org.apache.log4j.DailyRollingFileAppender'>
+    <errorHandler class='org.apache.log4j.helpers.OnlyOnceErrorHandler' />
+    <param name='File' value='logs/app.log' />
+    <param name='Append' value='false' />
+    <param name='DatePattern' value='&apos;.&apos;yyyy-MM-dd' />
+    <layout class='org.apache.log4j.PatternLayout'>
+      <param name='ConversionPattern' value='%d{yyyy/MM/dd HH:mm:ss.SSS},%p,%c{2},%M,%m%n' />
+    </layout>
+  </appender>
+
+  <appender name='stacktraceLog' class='org.apache.log4j.DailyRollingFileAppender'>
+    <errorHandler class='org.apache.log4j.helpers.OnlyOnceErrorHandler' />
+    <param name='File' value='logs/stacktrace.log' />
+    <param name='Append' value='false' />
+    <param name='DatePattern' value='&apos;.&apos;yyyy-MM-dd' />
+    <layout class='org.apache.log4j.PatternLayout'>
+      <param name='ConversionPattern' value='[%r] %c{2} %m%n' />
+    </layout>
+  </appender>
+
+  <appender name='CONSOLE' class='org.apache.log4j.ConsoleAppender'>
+    <errorHandler class='org.apache.log4j.helpers.OnlyOnceErrorHandler' />
+    <param name='Target' value='System.out' />
+    <param name='Threshold' value='TRACE' />
+    <layout class='org.apache.log4j.PatternLayout'>
+      <param name='ConversionPattern' value='[%r] %c{2} %m%n' />
+    </layout>
+  </appender>
+  <category name='org.codehaus.groovy.grails.web.servlet' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='org.codehaus.groovy.grails.web.pages' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='org.codehaus.groovy.grails.web.sitemesh' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='web.mapping.filter' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='org.codehaus.groovy.grails."web.mapping.filter' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='org.codehaus.groovy.grails."web.mapping' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='org.codehaus.groovy.grails.commons' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='org.codehaus.groovy.grails.plugins' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='org.codehaus.groovy.grails.orm.hibernate' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='org.springframework' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='org.hibernate' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='grails.app' additivity='false'>
+    <priority value='INFO' />
+    <appender-ref ref='dailyLog' />
+    <appender-ref ref='CONSOLE' />
+  </category>
+<!--
+  <category name='sqljet' additivity='false'>
+    <priority value='TRACE' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <category name='StackTrace' additivity='false'>
+    <priority value='TRACE' />
+    <appender-ref ref='async_stacktraceLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </category>
+  <root>
+    <priority value='TRACE' />
+    <appender-ref ref='async_dailyLog' />
+    <appender-ref ref='async_CONSOLE' />
+  </root>
+-->
+  <category name='sqljet' additivity='false'>
+    <priority value='DEBUG' />
+    <appender-ref ref='dailyLog' />
+    <appender-ref ref='CONSOLE' />
+  </category>
+  <category name='StackTrace' additivity='false'>
+    <priority value='DEBUG' />
+    <appender-ref ref='stacktraceLog' />
+    <appender-ref ref='CONSOLE' />
+  </category>
+  <root>
+    <priority value='DEBUG' />
+    <appender-ref ref='dailyLog' />
+    <appender-ref ref='CONSOLE' />
+  </root>
+</log4j:configuration>

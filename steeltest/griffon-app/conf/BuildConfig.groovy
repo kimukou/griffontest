@@ -133,3 +133,4 @@ griffon {
         footer = "<br/><br/>Made with Griffon (0.9)"
     }
 }
+

@@ -1,8 +1,5 @@
 package sqljettest
 
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
-
 //CSVèoóÕ
 import au.com.bytecode.opencsv.*
 
@@ -12,7 +9,6 @@ import org.tmatesoft.sqljet.core.SqlJetTransactionMode
 import org.tmatesoft.sqljet.core.table.SqlJetDb
 
 class SqljettestService {
-	private static final Log LOG = LogFactory.getLog(SqljettestService)
 
 	def model
 	def view
