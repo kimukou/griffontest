@@ -94,7 +94,7 @@ copySetting ={destDir->
 
 }
 
-copySettingExe(destDir){
+copySettingExe={destDir->
 	println "==copySettingExe(${distDir})=="
 	println "destDir=${destDir}"
   srcDir  = "${basedir}/setting"
