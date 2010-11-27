@@ -1,6 +1,6 @@
 eventCompileEnd = {
 	libDir  = "${basedir}/lib/native"
-	destDir = "${basedir}/staging/windows64/native"
+	destDir = "${basedir}/staging/windows/native"
 
   ant.copy(todir: destDir) {
 		fileset(dir: libDir, includes: '*.dll')
