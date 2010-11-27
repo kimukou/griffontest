@@ -62,7 +62,7 @@ environments {
     test {
         dataSource {
             dbCreate = "create"
-            url = "jdbc:hsqldb:mem:testDb"
+            url = "jdbc:sqlite:test.db"
         }
     }
     production {
