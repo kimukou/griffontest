@@ -11,7 +11,10 @@ onBootstrapEnd = { app ->
 		Font font = Font.createFont(Font.TRUETYPE_FONT, is)
 		GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font)
 		is.close()
-		app.font = font
+
+		//[TODO] Not Set value(Error Occuered)
+		//app.font = font
+		//griffon.util.ApplicationHolder.application.font = font
 	}catch(Exception ex){
 		ex.printStackTrace()
 	}
