@@ -13,7 +13,8 @@ onBootstrapEnd = { app ->
 		GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font)
 		is.close()
 
-		griffon.util.ApplicationHolder.application.config.font = font
+		//griffon.util.ApplicationHolder.application.config.font = font
+		app.config.font = font
 	}catch(Exception ex){
 		ex.printStackTrace()
 	}
