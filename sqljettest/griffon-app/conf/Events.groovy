@@ -6,15 +6,14 @@ onBootstrapEnd = { app ->
 
 	//Custom Font using
 	try {
-		URL url = getClass().getResource("onryou.TTF")
+		//URL url = getClass().getResource("onryou.TTF") //not good Chinese character all
+		URL url = getClass().getResource("hakidame.TTF")
 		is = url.openStream()
 		Font font = Font.createFont(Font.TRUETYPE_FONT, is)
 		GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font)
 		is.close()
 
-		//[TODO] Not Set value(Error Occuered)
-		//app.font = font
-		//griffon.util.ApplicationHolder.application.font = font
+		griffon.util.ApplicationHolder.application.config.font = font
 	}catch(Exception ex){
 		ex.printStackTrace()
 	}

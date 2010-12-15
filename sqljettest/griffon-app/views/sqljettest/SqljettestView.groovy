@@ -39,8 +39,12 @@ frame = application(title: 'sqljettest',
 			jxlabel(id: "count",text:bind {nf.format(model.count)},constraints: "")
 			jxlabel("/",constraints: "")
 			jxlabel(id: "result",text:bind {nf.format(model.result)},constraints: "")
-			jxlabel(getMessage("view.count.unit"),constraints: "wrap")
-			println "${result.font}"
+
+			jxlabel(id: 'number_case',getMessage("view.count.unit"),constraints: "wrap")
+			//[TODO]not displayed
+			jxlabel(id: 'number_case',getMessage("view.count.unit"),constraints: "wrap",font:griffon.util.ApplicationHolder.application.config.font)
+			println "${number_case.font}"
+
 			//検索(分)
 			jxlabel(getMessage("view.time_serch.title"),constraints: "")
 			jxlabel(id: "time_serch",text:bind {nf2.format(model.time_serch)},constraints: "")
