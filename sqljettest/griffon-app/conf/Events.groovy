@@ -1,7 +1,20 @@
 // No windows have been created before this step
+import java.awt.*
 onBootstrapEnd = { app ->
   println "==onBootstrapEnd=="
-    app.windowDisplayHandler = new griffon.util.Dropper()
+  app.windowDisplayHandler = new griffon.util.Dropper()
+
+	//Custom Font using
+	try {
+		URL url = getClass().getResource("onryou.TTF")
+		is = url.openStream()
+		Font font = Font.createFont(Font.TRUETYPE_FONT, is)
+		GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font)
+		is.close()
+		app.font = font
+	}catch(Exception ex){
+		ex.printStackTrace()
+	}
 }
 
 onStartupStart = { app ->

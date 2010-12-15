@@ -17,16 +17,16 @@
  import java.nio.channels.FileChannel
  import java.nio.channels.FileLock
   
- //起動チェック
+ //Start check
  final FileOutputStream fos = new FileOutputStream(new File("lock"))
  final FileChannel fc = fos.getChannel()
  final FileLock lock = fc.tryLock()
  if (lock == null) {
-	 //既に起動されているので終了する
+	 //It ends because it has already been started. 
 	 System.exit(0)
 	 return
  }
- //ロック開放処理を登録
+ //Processing of locking open is registered. 
  Runtime.getRuntime().addShutdownHook(
 	 new Thread() {
 		 public void run() {
@@ -72,7 +72,7 @@ GriffonPlatformHelper.tweakForNativePlatform(app)
 SwingBuilder.lookAndFeel((isMacOSX ? 'system' : 'nimbus'), 'gtk', ['metal', [boldFonts: false]])
 
 
-//Exceptionをロガーでキャッチできるようにする設定
+//Setting to be able to obtain Exception by logger
 import groovy.swing.SwingBuilder
 import griffon.util.GriffonPlatformHelper
 import static griffon.util.GriffonApplicationUtils.*
@@ -102,5 +102,5 @@ System.setProperty("sun.awt.exception.handler",LoggingExceptionHandler.class.get
 
 
 
-//グローバルアクセス参照用ポインタ設定
+//Pointer setting for global access reference
 griffon.util.ApplicationHolder.application = app

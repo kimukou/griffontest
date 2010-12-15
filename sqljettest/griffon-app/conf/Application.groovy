@@ -20,9 +20,9 @@ mvcGroups {
 
 
 
-//’x‰„QÆ—p•Ï”
-def controller
-def service
-def view
-def model
-
+//delay access Variable
+def controller =null
+def service = null
+def view =null
+def model = null
+def font = null

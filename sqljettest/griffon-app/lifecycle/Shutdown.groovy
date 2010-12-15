@@ -12,7 +12,7 @@
  * - execSync { // your code }
  */
 
-//終了時のログバックアップ処理
+//Log backup processing when ending
 import java.io.File;
 import java.io.FilenameFilter;
 

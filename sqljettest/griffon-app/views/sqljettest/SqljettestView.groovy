@@ -40,7 +40,7 @@ frame = application(title: 'sqljettest',
 			jxlabel("/",constraints: "")
 			jxlabel(id: "result",text:bind {nf.format(model.result)},constraints: "")
 			jxlabel(getMessage("view.count.unit"),constraints: "wrap")
-			
+			//println "${result.font}"
 			//検索(分)
 			jxlabel(getMessage("view.time_serch.title"),constraints: "")
 			jxlabel(id: "time_serch",text:bind {nf2.format(model.time_serch)},constraints: "")
@@ -102,25 +102,25 @@ frame = application(title: 'sqljettest',
 
 
 /*
-frame.windowOpened={println 'Opened'}//初回起動時
-frame.windowClosing={println 'closing'}//システムメニューでウィンドウを閉じようとしたとき
-frame.windowClosed={println 'closed'}//disposeが呼ばれた時
+frame.windowOpened={println 'Opened'}//initialize
+frame.windowClosing={println 'closing'}//menu closing
+frame.windowClosed={println 'closed'}//dispose calling
 */
-//通常＝＞最小化
+//normal＝＞min
 frame.windowIconified={
 	println 'Iconified'
 }	
-//最小化＝＞通常
+//min＝＞normal
 frame.windowDeiconified={
 	println 'Deiconified'
 }
 
-//アクティブな時
+//active
 frame.windowActivated={
 	println 'Activated'
 }
 
-//アクティブじゃない時
+//not active
 frame.windowDeactivated={
 	println 'Deactivated'
 }

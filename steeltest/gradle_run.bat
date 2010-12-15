@@ -6,4 +6,5 @@ set JAVA_HOME=c:\opt\jdk
 set PATH=%GROOVY_HOME%/bin;%GRADLE_HOME%/bin;%JAVA_HOME%/bin;%GRIFFON_HOME%/bin
 
 
-call gradle run-app
+::call gradle run-app
+call gradle clean compile
