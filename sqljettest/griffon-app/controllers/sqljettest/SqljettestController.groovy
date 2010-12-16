@@ -1,7 +1,6 @@
 package sqljettest
 
 //CSV OutPut
-//import au.com.bytecode.opencsv.*
 import com.xlson.groovycsv.*
 import java.io.*
 

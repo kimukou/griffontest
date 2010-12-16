@@ -1,13 +1,12 @@
 JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home
-GROOVY_HOME=/usr/share/groovy-1.7.5
-GRIFFON_HOME=/usr/share/griffon-0.9
-#GRIFFON_HOME=/usr/share/griffon-0.9.2-beta-1
+GROOVY_HOME=/usr/share/groovy-1.7.6
+GRIFFON_HOME=c:\opt\griffon-0.9.2-beta-2
 
 export JAVA_OPTS='-Dgroovy.source.encoding=UTF-8 -Dfile.encoding=UTF-8'
 
 export PATH=$JAVA_HOME/bin:$GROOVY_HOME/bin:$GRIFFON_HOME/bin
 
-PROJECT_HOME=`pwd`
-export JAVA_OPTS=-Djava.library.path=$PROJECT_HOME/lib/libraries/opengl/library
+#PROJECT_HOME=`pwd`
+#export JAVA_OPTS=-Djava.library.path=$PROJECT_HOME/lib/libraries/opengl/library
 
 griffon run-app

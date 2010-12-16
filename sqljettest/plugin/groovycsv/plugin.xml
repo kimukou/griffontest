@@ -3,7 +3,7 @@
   <title>GroovyCsv Plugin</title>
   <description>Brief description of the plugin.</description>
   <documentation>http://griffon.codehaus.org/Groovycsv+Plugin</documentation>
-  <license>&lt;UNKNOWN&gt;</license>
+  <license>Apache License, Version 2.0</license>
   <resources />
   <dependencies />
 </plugin>

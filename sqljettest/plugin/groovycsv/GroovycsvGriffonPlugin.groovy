@@ -25,6 +25,32 @@ class GroovycsvGriffonPlugin {
 Brief description of the plugin.
 '''
 
+/*
+	  static GroovyShell SHELL = null
+    Script functionScript
+		GroovycsvGriffonPlugin(String function){
+        def expr = """
+import static com.xlson.groovycsv.*
+$function
+"""
+				ClassLoader parent = ClassLoader.getSystemClassLoader()
+				GroovyClassLoader loader = new GroovyClassLoader(parent)
+				new File("lib").eachFileRecurse{ 
+				    if(it.name.endsWith('.jar')){
+				        loader.addURL it.toURL()
+				        println it
+				    }
+				}
+				new File("C:/opt/groovy-1.7.6/lib").eachFileRecurse{ 
+				    if(it.name.endsWith('.jar')){
+				        loader.addURL it.toURL()
+				        println it
+				    }
+				}
+				SHELL = new GroovyShell(loader)
+        this.functionScript = SHELL.parse(expr)
+		}
+*/
     // URL to the plugin's documentation
     def documentation = 'http://griffon.codehaus.org/Groovycsv+Plugin'
 }
