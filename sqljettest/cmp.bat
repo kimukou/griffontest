@@ -1,3 +1,4 @@
+::set GROOVY_HOME=C:\opt\groovypp-0.4.101
 set GROOVY_HOME=C:\opt\groovy-1.7.6
 set GRIFFON_HOME=C:\opt\griffon-0.9.2-beta-2
 set JAVA_HOME=c:\opt\jdk
