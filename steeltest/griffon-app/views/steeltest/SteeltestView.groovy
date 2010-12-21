@@ -1,5 +1,8 @@
 package steeltest
 
+import eu.hansolo.signaltower.*
+import eu.hansolo.custom.mbutton.*
+import eu.hansolo.custom.*
 
 import com.jidesoft.swing.AnimatorListener
 import static com.jidesoft.swing.MeterProgressBar.*
@@ -506,6 +509,117 @@ panel(constraints: 'page4', opaque: false) {
 		}
 
 }
+panel(constraints: 'page5', opaque: false) {
+	  migLayout(layoutConstraints: "gap 0,insets 0,fill")
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+			boxLayout(axis:javax.swing.BoxLayout.X_AXIS)
+			label(text:'13  ')
+			//using SignalTower.jar
+			signalTower(preferredSize: [100,200],
+						redOn:true
+			)
+			signalTower(preferredSize: [100,200],
+						yellowOn:true
+			)
+			signalTower(preferredSize: [100,200],
+						greenOn:true
+			)
+		}
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+			boxLayout(axis:javax.swing.BoxLayout.Y_AXIS)
+			label(text:'14  ')
+			mbutton(text:"homepage"
+				,preferredSize: [100,20]
+				,alpha:0.0f
+				,effectColor:Color.RED
+				,effectColorPressed:Color.RED
+			)
+			mbutton(text:"about me"
+				,preferredSize: [100,20]
+				,alpha:0.0f
+				,effectColor:Color.BLUE
+				,effectColorPressed:Color.BLUE
+			)
+			mbutton(text:"services"
+				,preferredSize: [100,20]
+				,alpha:0.0f
+				,effectColor:Color.GREEN
+				,effectColorPressed:Color.GREEN
+			)
+			mbutton(text:"portfolio"
+				,preferredSize: [100,20]
+				,alpha:0.0f
+				,effectColor:Color.ORANGE 
+				,effectColorPressed:Color.ORANGE 
+			)
+			mbutton(text:"contact"
+				,preferredSize: [100,20]
+				,alpha:0.0f
+				,effectColor:Color.CYAN 
+				,effectColorPressed:Color.CYAN 
+			)
+		}
+
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+			boxLayout(axis:javax.swing.BoxLayout.Y_AXIS)
+			label(text:'15  ')
+			steelCheckBox(
+				text:"standard",
+				preferredSize: [100,20]
+				//ui
+			)
+			steelCheckBox(
+				text:"green",
+				preferredSize: [100,20],
+				colored:true,
+				rised:true,
+				selectedColor:eu.hansolo.tools.ColorDef.GREEN
+			)
+			steelCheckBox(
+				text:"red",
+				preferredSize: [100,20],
+				colored:true,
+				rised:true,
+				selectedColor:eu.hansolo.tools.ColorDef.RED
+			)
+			steelCheckBox(
+				text:"disable",
+				preferredSize: [100,20],
+				enabled :false
+			)
+		}
+
+
+    //BRIGHT,
+    //DARK,
+    //CUSTOM
+		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
+			boxLayout(axis:javax.swing.BoxLayout.X_AXIS)
+			label(text:'16  ')
+			rollingCounter(
+				id:"rollingCounter1",
+				preferredSize: [20,100],
+				theme:Theme.BRIGHT,
+				maxValue:3,
+				switchTime:10,
+				offsetIncrement:2,
+				offsetDecrement:3
+			)
+			rollingCounter1.increment()
+			rollingCounter(
+				id:"rollingCounter2",
+				preferredSize: [20,100],
+				theme:Theme.DARK
+			)
+			rollingCounter2.decrement()
+			rollingCounter(
+				id:"rollingCounter3",
+				preferredSize: [20,100],
+				theme:Theme.CUSTOM,
+				backgroundColor:new java.awt.Color(107, 105, 99, 255)
+			)
+		}
+}
 swingRepaintTimeline(main, loop: true)
 
 	//CSSDecorator.applyStyle(style,app.appFrames[0]) //CSS適応(from griffon 0.3)
@@ -524,7 +638,7 @@ swingRepaintTimeline(main, loop: true)
 	//マウスジェスチャ。マウスを押しながら右、左で画面切替
 	def page=1
 	def page_min=1
-	def page_max=4
+	def page_max=5
 	mouseGestures(start: true) {
  	   // receives gestures as they are recognized (cummulative)
        onGestureMovementRecognized { String s -> println s }
