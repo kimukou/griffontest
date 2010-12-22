@@ -8,5 +8,4 @@ root {
     }
 }
 root.'ProcessingGriffonAddon'.addon=true
-
-root.'JoglGriffonAddon'.addon=true
+root.'JoglCompatGriffonAddon'.addon=true
