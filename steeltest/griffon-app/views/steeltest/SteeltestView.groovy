@@ -7,6 +7,7 @@ import eu.hansolo.custom.*
 import com.jidesoft.swing.AnimatorListener
 import static com.jidesoft.swing.MeterProgressBar.*
 
+import eu.hansolo.steelseries.extras.* //since 2.1
 import eu.hansolo.steelseries.tools.*
 import eu.hansolo.steelseries.gauges.*
 import java.awt.*
@@ -245,7 +246,7 @@ panel(constraints: 'page2', opaque: false) {
 				minValue:0,maxValue:100,title:'cpu meter',unitString:'%') 
 
 			radial1VerticalGauge(id:'radial1Vertical',preferredSize: [300,300],
-				backgroundColorFromTheme:false	//★ NEED!!
+				customBackgroundVisible:true	//★ NEED!!
 			) 
 			radial1Vertical.setCustomBackground(
 				new java.awt.LinearGradientPaint(
@@ -257,7 +258,7 @@ panel(constraints: 'page2', opaque: false) {
 			)
 
 			radial2Gauge(id:'radial2',preferredSize: [300,300],
-				backgroundColorFromTheme:false	//★ NEED!!
+				customBackgroundVisible:true	//★ NEED!!
 			) 
 			radial2.setCustomBackground(
 					new java.awt.RadialGradientPaint(
@@ -331,7 +332,7 @@ panel(constraints: 'page3', opaque: false) {
 			label(text:'7  ')
 			radial2LcdGauge(preferredSize: [300,300],
 				customBackground:java.awt.Color.MAGENTA,
-				,backgroundColorFromTheme:false //★ NEED!!
+				,customBackgroundVisible:true //★ NEED!!
 			) 
 
 			radial3Gauge(preferredSize: [300,300],
@@ -360,7 +361,7 @@ panel(constraints: 'page3', opaque: false) {
 				pointerColor:PointerColor.BLUE,
 				backgroundColor:BackgroundColor.BEIGE,
 				tickmarkColor:java.awt.Color.RED,
-				tickmarkColorFromTheme:false,			//★ NEED!!
+				usingTickmarkColorFromTheme:false,			//★ NEED!!
 				trackStartColor:java.awt.Color.LIGHT_GRAY,
 				trackSectionColor:java.awt.Color.PINK,
 				trackStopColor:java.awt.Color.MAGENTA
@@ -370,7 +371,7 @@ panel(constraints: 'page3', opaque: false) {
 				ledColor:LedColor.YELLOW_LED,
 				pointerColor:PointerColor.WHITE,
 				labelColor:java.awt.Color.GREEN,
-				labelColorFromTheme:false				//★ NEED!!
+				usingLabelColorFromTheme:false				//★ NEED!!
 			) 
 			led(preferredSize: [300,300])//since 0.3
 		}
@@ -404,7 +405,7 @@ panel(constraints: 'page4', opaque: false) {
 				barGraphColor:ColorDef.RED,
 				value:50,
 				customBackground:java.awt.Color.MAGENTA,
-				backgroundColorFromTheme:false //★ NEED!!
+				customBackgroundVisible:true //★ NEED!!
 			) 
 			radialBargraph1Lcd(preferredSize: [300,300],
 				barGraphColor:ColorDef.ORANGE,
@@ -440,7 +441,7 @@ panel(constraints: 'page4', opaque: false) {
 				frameDesign:FrameDesign.BLACK_METAL,
 				backgroundColor:BackgroundColor.BEIGE,
 				tickmarkColor:java.awt.Color.RED,
-				tickmarkColorFromTheme:false,			//★ NEED!!
+				usingTickmarkColorFromTheme:false,			//★ NEED!!
 				trackStartColor:java.awt.Color.LIGHT_GRAY,
 				trackSectionColor:java.awt.Color.PINK,
 				trackStopColor:java.awt.Color.MAGENTA
@@ -451,7 +452,7 @@ panel(constraints: 'page4', opaque: false) {
 				ledColor:LedColor.YELLOW_LED,
 				pointerColor:PointerColor.WHITE,
 				labelColor:java.awt.Color.GREEN,
-				labelColorFromTheme:false				//★ NEED!!
+				usingLabelColorFromTheme:false				//★ NEED!!
 			) 
 		}
 
@@ -466,7 +467,7 @@ panel(constraints: 'page4', opaque: false) {
 			)
 			radialBargraph4Lcd(preferredSize: [300,300],
 				titleAndUnitFont:new Font("ＭＳ ゴシック",Font.PLAIN,20),		//Font Change(to Verdana)
-				useTitleAndUnitFont:true,										//Font Change(to Verdana)
+				usingTitleAndUnitFont:true,										//Font Change(to Verdana)
 				title:'ほげほげ',
 				unitString:'ふがふが',
 				lcdUnitString:'まいう',

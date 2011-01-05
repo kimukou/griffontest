@@ -1,3 +1,5 @@
+package fxtest;
+
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.CustomNode;

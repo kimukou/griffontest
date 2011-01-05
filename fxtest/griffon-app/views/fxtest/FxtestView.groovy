@@ -22,7 +22,6 @@ application(title: 'fxtest',
                imageIcon('/griffon-icon-16x16.png').image]) {
     // add content here
 
-
 	tabbedPane(){
 		panel(title:"normal",border: emptyBorder(0)) {
     	label('Content Goes Here') // deleteme
@@ -68,8 +67,35 @@ application(title: 'fxtest',
 		}
 */
 	}
-
 	// src/javafx/*.fx
-	new FxBuilder().build(MouseEventSample)
+	//new FxBuilder().build(MouseEventSample)
+	//new FxBuilder().edt(HelloWorldNode)
+	MouseEventSample mm = new MouseEventSample()
 }
 
+/*
+import java.beans.*  
+import griffon.builder.fx.Fx  
+  
+class MyPropertyChangeListener implements PropertyChangeListener {  
+  void propertyChange(PropertyChangeEvent e) {  
+    println "PROPERTY ${e.propertyName} '${e.oldValue}' '${e.newValue}'"  
+  }  
+}  
+
+java.beans.PropertyChangeListener mpc = new MyPropertyChangeListener()
+
+Fx.enhanceFxClasses() // automatically called by FxBuilder  
+HelloWorldNode hw = new HelloWorldNode()  
+//hw.addPropertyChangelistener("str" ,mpc )  
+hw.addChangeListener("str",{ source, propertyName, oldValue, newValue ->  
+  println "CLOSURE ${e.propertyName} '${e.oldValue}' '${e.newValue}'"  
+})  
+  
+hw.str = "Groovy!"  
+// prints "PROPERTY str '' 'Groovy!'"  
+// prints "CLOSURE str '' 'Groovy!'"  
+hw.str = "Fx!"  
+// prints "PROPERTY str 'Groovy!' 'Fx!'"  
+// prints "CLOSURE str 'Groovy!' 'Fx!'"  
+*/
