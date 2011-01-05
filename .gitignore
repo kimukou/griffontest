@@ -2,5 +2,10 @@
 */bin/*
 */dist/*
 */target/*
-*/CHANGE ME/*
+*/CHANGE ME
 */.gradle/*
+*/lock
+*/log
+*/logs/*.log
+*/*.log
+*/*.db
