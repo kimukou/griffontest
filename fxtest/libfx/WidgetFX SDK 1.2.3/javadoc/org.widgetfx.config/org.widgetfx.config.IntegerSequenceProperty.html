@@ -1,0 +1,246 @@
+
+            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="../general.css" rel="stylesheet">
+<style type="text/css"></style>
+<link href="../sdk.css" rel="stylesheet">
+<script type="text/javascript" src="../mootools-1.2.1-yui.js"></script><script type="text/javascript" src="../sessvars.js"></script><script type="text/javascript" src="../sdk.js"></script>
+<meta name="collection" content="api">
+<meta name="keywords" content="JavaFX, Java FX">
+<title>JavaFX 1.2 API | org.widgetfx.config.IntegerSequenceProperty | Java FX</title>
+</head>
+<body>
+<div id="top-header">
+<h1>
+<a href="../index.html">Java<b>FX</b>: <i>Bringing Rich Experiences To All the Screens Of Your Life</i></a>
+</h1>
+<h3 id="master-index-link">
+<a href="../master-index.html">master index</a>
+</h3>
+<h3 id="profile-switcher">Profile: <a href="#" id="select-desktop-profile">desktop</a>, <a href="#" id="select-common-profile">common</a>
+</h3>
+</div>
+<ul id="classes-toc">
+<li>
+<h4 class="header">
+<a href="#">org.widgetfx</a>
+</h4>
+<ul class="content">
+<li class="">
+<a href="../org.widgetfx/org.widgetfx.Widget.html">Widget</a>
+</li>
+</ul>
+</li>
+<li>
+<h4 class="header">
+<a href="#">org.widgetfx.config</a>
+</h4>
+<ul class="content">
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.BooleanProperty.html">BooleanProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.BooleanSequenceProperty.html">BooleanSequenceProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.Configuration.html">Configuration</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.IntegerProperty.html">IntegerProperty</a>
+</li>
+<li class=" selected-class">
+<a href="../org.widgetfx.config/org.widgetfx.config.IntegerSequenceProperty.html">IntegerSequenceProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.LongProperty.html">LongProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.LongSequenceProperty.html">LongSequenceProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.NumberProperty.html">NumberProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.NumberSequenceProperty.html">NumberSequenceProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.Property.html">Property</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.StringProperty.html">StringProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.StringSequenceProperty.html">StringSequenceProperty</a>
+</li>
+</ul>
+</li>
+<li>
+<h4 class="header">
+<a href="#">org.widgetfx.ui</a>
+</h4>
+<ul class="content">
+<li class="">
+<a href="../org.widgetfx.ui/org.widgetfx.ui.WidgetSkin.html">WidgetSkin</a>
+</li>
+</ul>
+</li>
+<li id="copyright">
+<i>Copyright 2008-2009</i>
+<br>
+<i>Sun Microsystems, Inc.</i>
+<br>
+<i>Use is subject to <a href="http://java.sun.com/javafx/1.2/docs/api/license.html">license terms</a>.</i>
+<br>
+</li>
+</ul>
+<div id="content">
+<div id="nav">
+<h1 class="classname">
+<i class="modifiers">public</i>
+                class
+                <a class="classname"><strong>org.widgetfx.config.</strong><b>IntegerSequenceProperty</b></a>
+</h1>
+<h2>
+<span class="descriptive">Inherits from: </span><a title="com.sun.javafx.runtime.FXBase"><strong>com.sun.javafx.runtime.</strong><b>FXBase</b></a>
+            &gt;
+            <a title="org.widgetfx.config.Property" href="../org.widgetfx.config/org.widgetfx.config.Property.html"><strong>org.widgetfx.config.</strong><b>Property</b></a> 
+            &gt;
+            <a title="org.widgetfx.config.IntegerSequenceProperty" href="../org.widgetfx.config/org.widgetfx.config.IntegerSequenceProperty.html"><strong>org.widgetfx.config.</strong><b>IntegerSequenceProperty</b></a> <a title="org.widgetfx.config.Property" href="../org.widgetfx.config/org.widgetfx.config.Property.html"><strong>org.widgetfx.config.</strong><b>Property</b></a>, </h2>
+<h2>
+<span class="descriptive">Known subclasses: </span>
+</h2>
+<ul id="tabs">
+<li>Jump to Section:</li>
+<li>
+<a href="#overview">overview</a>
+</li>
+<li>
+<a href="#fields-summary">variables</a>
+</li>
+<li>
+<a href="#methods-summary">functions</a>
+</li>
+</ul>
+</div>
+<a id="overview">
+<h3>Overview</h3>
+</a>
+<div class="overview">
+<p class="comment">Property subclass to persist Integer sequences.</p>
+</div>
+<div id="toc">
+<a id="fields-summary">
+<h3>Variable Summary</h3>
+</a>
+<table class="fields-summary fields">
+<tr>
+<th class="access">access</th><th class="name">name</th><th class="type">type</th><th><a class="tooltip" title="Indicates the variable can be read">Can Read</a></th><th><a title="Indicates the variable can only be set in the Object initializer. Any further changes will be ignored." class="tooltip">Can Init</a></th><th><a title="Indicates the varible can set at any time." class="tooltip">Can Write</a></th><th><a title="Indicates the default value of this variable" class="tooltip">Default Value</a></th><th class="description">description</th>
+</tr>
+<tr class="var ">
+<td class="access">public</td><td class="name"><a name="value"></a><b class="name">value</b></td><td class="type"><a><i class="type">Integer[]</i></a></td><td class="canread"><img src="..//images/JFX_highlight_dot.png"></td><td class="caninit"><img src="..//images/JFX_highlight_dot.png"></td><td class="canwrite"><img src="..//images/JFX_highlight_dot.png"></td><td class="defaultvalue"></td><td class="description">
+<p class="comment">Integer sequence to be persisted.</p>
+<a href="#" class="long-desc-open"><img src="../images/JFX_arrow_right.png"></a>
+<div class="long-desc">
+<p class="comment">Integer sequence to be persisted.  To allow bijection of this property
+ bind it as follows:<blockquote><pre>
+ value: bind someVar with inverse
+ </blockquote></pre></p>
+                                &amp;nbsp;
+                            </div>
+</td>
+</tr>
+</table>
+<h3>Inherited Variables</h3>
+<h4>org.widgetfx.config.Property</h4>
+<table class="inherited-field fields">
+<tr>
+<th class="access">access</th><th class="name">name</th><th class="type">type</th><th><a class="tooltip" title="Indicates the variable can be read">Can Read</a></th><th><a title="Indicates the variable can only be set in the Object initializer. Any further changes will be ignored." class="tooltip">Can Init</a></th><th><a title="Indicates the varible can set at any time." class="tooltip">Can Write</a></th><th><a title="Indicates the default value of this variable" class="tooltip">Default Value</a></th><th class="description">description</th>
+</tr>
+<tr class="var ">
+<td class="access">public-init</td><td class="name"><a name="autoSave"></a><b class="name">autoSave</b></td><td class="type"><a><i class="type">Boolean</i></a></td><td class="canread"><img src="..//images/JFX_highlight_dot.png"></td><td class="caninit"><img src="..//images/JFX_highlight_dot.png"></td><td class="canwrite"></td><td class="defaultvalue"></td><td class="description">
+<p class="comment">If set to true, the state of this propery will be persisted whenever the
+ value changes.</p>
+<a href="#" class="long-desc-open"><img src="../images/JFX_arrow_right.png"></a>
+<div class="long-desc">
+<p class="comment">If set to true, the state of this propery will be persisted whenever the
+ value changes.  The default is false so that unnecessary state persistence
+ is not performed.</p>
+                                &amp;nbsp;
+                            </div>
+</td>
+</tr>
+<tr class="var ">
+<td class="access">public-init</td><td class="name"><a name="name"></a><b class="name">name</b></td><td class="type"><a><i class="type">String</i></a></td><td class="canread"><img src="..//images/JFX_highlight_dot.png"></td><td class="caninit"><img src="..//images/JFX_highlight_dot.png"></td><td class="canwrite"></td><td class="defaultvalue"></td><td class="description">
+<p class="comment">Name of the property as it will be saved to the configuration file.</p>
+<a href="#" class="long-desc-open"><img src="../images/JFX_arrow_right.png"></a>
+<div class="long-desc">
+<p class="comment">Name of the property as it will be saved to the configuration file.  This
+ must be given a unique value.</p>
+                                &amp;nbsp;
+                            </div>
+</td>
+</tr>
+<tr class="var ">
+<td class="access">protected</td><td class="name"><a name="onChange"></a><b class="name">onChange</b></td><td class="type"><a><i class="type">function(:Property):Void</i></a></td><td class="canread">subclass</td><td class="caninit">subclass</td><td class="canwrite">subclass</td><td class="defaultvalue"></td><td class="description"></td>
+</tr>
+</table>
+<h3>Inherited Functions</h3>
+<h4>org.widgetfx.config.Property</h4>
+<dl class="inherited-method">
+<a id="getStringValue()"></a>
+<dt class="method ">
+<i class="modifiers">public abstract</i> <b>getStringValue</b>(<i class="parameters"></i>)
+            :
+            
+            <a><i>java.lang.String</i></a>
+</dt>
+<dd class="method ">
+<div>
+<p class="comment">Implemented by subclasses to provide conversion of values to a common
+ String representation.</p>
+<a href="#" class="long-desc-open"><img src="../images/JFX_arrow_right.png"></a>
+<div class="long-desc">
+<p class="comment">Implemented by subclasses to provide conversion of values to a common
+ String representation.</p>
+<dl class="returns">
+                    Returns
+                    <dt>String</dt>
+<dd></dd>
+</dl>
+                            &amp;nbsp;
+                        </div>
+</div>
+</dd>
+<a id="setStringValue(java.lang.String)"></a>
+<dt class="method ">
+<i class="modifiers">public abstract</i> <b>setStringValue</b>(<i class="parameters"><b>value</b>:
+                    
+                    <a><i>java.lang.String</i></a></i>)
+            :
+            
+            <i>Void</i>
+</dt>
+<dd class="method ">
+<div>
+<p class="comment">Implemented by subclasses to provide conversion of values from a common
+ String representation.</p>
+<a href="#" class="long-desc-open"><img src="../images/JFX_arrow_right.png"></a>
+<div class="long-desc">
+<p class="comment">Implemented by subclasses to provide conversion of values from a common
+ String representation.</p>
+<dl class="parameters">
+                    Parameters
+                    <dt>value</dt>
+<dd></dd>
+</dl>
+                            &amp;nbsp;
+                        </div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</body>
+</html>

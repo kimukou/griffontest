@@ -1,0 +1,226 @@
+
+            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="../general.css" rel="stylesheet">
+<style type="text/css"></style>
+<link href="../sdk.css" rel="stylesheet">
+<script type="text/javascript" src="../mootools-1.2.1-yui.js"></script><script type="text/javascript" src="../sessvars.js"></script><script type="text/javascript" src="../sdk.js"></script>
+<meta name="collection" content="api">
+<meta name="keywords" content="JavaFX, Java FX">
+<title>JavaFX 1.2 API | org.widgetfx.config.Configuration | Java FX</title>
+</head>
+<body>
+<div id="top-header">
+<h1>
+<a href="../index.html">Java<b>FX</b>: <i>Bringing Rich Experiences To All the Screens Of Your Life</i></a>
+</h1>
+<h3 id="master-index-link">
+<a href="../master-index.html">master index</a>
+</h3>
+<h3 id="profile-switcher">Profile: <a href="#" id="select-desktop-profile">desktop</a>, <a href="#" id="select-common-profile">common</a>
+</h3>
+</div>
+<ul id="classes-toc">
+<li>
+<h4 class="header">
+<a href="#">org.widgetfx</a>
+</h4>
+<ul class="content">
+<li class="">
+<a href="../org.widgetfx/org.widgetfx.Widget.html">Widget</a>
+</li>
+</ul>
+</li>
+<li>
+<h4 class="header">
+<a href="#">org.widgetfx.config</a>
+</h4>
+<ul class="content">
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.BooleanProperty.html">BooleanProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.BooleanSequenceProperty.html">BooleanSequenceProperty</a>
+</li>
+<li class=" selected-class">
+<a href="../org.widgetfx.config/org.widgetfx.config.Configuration.html">Configuration</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.IntegerProperty.html">IntegerProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.IntegerSequenceProperty.html">IntegerSequenceProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.LongProperty.html">LongProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.LongSequenceProperty.html">LongSequenceProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.NumberProperty.html">NumberProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.NumberSequenceProperty.html">NumberSequenceProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.Property.html">Property</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.StringProperty.html">StringProperty</a>
+</li>
+<li class="">
+<a href="../org.widgetfx.config/org.widgetfx.config.StringSequenceProperty.html">StringSequenceProperty</a>
+</li>
+</ul>
+</li>
+<li>
+<h4 class="header">
+<a href="#">org.widgetfx.ui</a>
+</h4>
+<ul class="content">
+<li class="">
+<a href="../org.widgetfx.ui/org.widgetfx.ui.WidgetSkin.html">WidgetSkin</a>
+</li>
+</ul>
+</li>
+<li id="copyright">
+<i>Copyright 2008-2009</i>
+<br>
+<i>Sun Microsystems, Inc.</i>
+<br>
+<i>Use is subject to <a href="http://java.sun.com/javafx/1.2/docs/api/license.html">license terms</a>.</i>
+<br>
+</li>
+</ul>
+<div id="content">
+<div id="nav">
+<h1 class="classname">
+<i class="modifiers">public</i>
+                class
+                <a class="classname"><strong>org.widgetfx.config.</strong><b>Configuration</b></a>
+</h1>
+<h2>
+<span class="descriptive">Inherits from: </span><a title="com.sun.javafx.runtime.FXBase"><strong>com.sun.javafx.runtime.</strong><b>FXBase</b></a>
+            &gt;
+            <a title="org.widgetfx.config.Configuration" href="../org.widgetfx.config/org.widgetfx.config.Configuration.html"><strong>org.widgetfx.config.</strong><b>Configuration</b></a> 
+</h2>
+<h2>
+<span class="descriptive">Known subclasses: </span>
+</h2>
+<ul id="tabs">
+<li>Jump to Section:</li>
+<li>
+<a href="#overview">overview</a>
+</li>
+<li>
+<a href="#fields-summary">variables</a>
+</li>
+<li>
+<a href="#methods-summary">functions</a>
+</li>
+</ul>
+</div>
+<a id="overview">
+<h3>Overview</h3>
+</a>
+<div class="overview">
+<p class="comment">This class provides an entry point for configuration capabilities of widgets.
+ It provides capabilities to show a configuration dialog, save properties
+ to disk, and load properties on startup.
+ <p>
+ Here is a simple example that persists a String property:<blockquote><pre>
+ var directoryName;
+ Configuration {
+     properties: [
+         StringProperty {
+             name: "directoryName"
+             value: bind directoryName with inverse
+         }
+     ]
+     component: TextField {text: bind directoryName with inverse}
+     onLoad: function() {
+         loadDirectory(directoryName);
+     }
+     onSave: function() {
+         loadDirectory(directoryName);
+     }
+ }
+ </pre></blockquote>
+ <p>
+ Notice that a variable is used to bind the String Property with a bi-directional
+ bind.  This allows seamless bijection of the loaded value into and saved value
+ from the class and is a recommended practice.</p>
+</div>
+<div id="toc">
+<a id="fields-summary">
+<h3>Variable Summary</h3>
+</a>
+<table class="fields-summary fields">
+<tr>
+<th class="access">access</th><th class="name">name</th><th class="type">type</th><th><a class="tooltip" title="Indicates the variable can be read">Can Read</a></th><th><a title="Indicates the variable can only be set in the Object initializer. Any further changes will be ignored." class="tooltip">Can Init</a></th><th><a title="Indicates the varible can set at any time." class="tooltip">Can Write</a></th><th><a title="Indicates the default value of this variable" class="tooltip">Default Value</a></th><th class="description">description</th>
+</tr>
+<tr class="var ">
+<td class="access">public-init</td><td class="name"><a name="onLoad"></a><b class="name">onLoad</b></td><td class="type"><a><i class="type">function():Void</i></a></td><td class="canread"><img src="..//images/JFX_highlight_dot.png"></td><td class="caninit"><img src="..//images/JFX_highlight_dot.png"></td><td class="canwrite"></td><td class="defaultvalue"></td><td class="description">
+<p class="comment">If set, this provides a load handler that will be called precisely once
+ after the widget configuration is loaded.</p>
+</td>
+</tr>
+<tr class="var ">
+<td class="access">public-init</td><td class="name"><a name="onSave"></a><b class="name">onSave</b></td><td class="type"><a><i class="type">function():Void</i></a></td><td class="canread"><img src="..//images/JFX_highlight_dot.png"></td><td class="caninit"><img src="..//images/JFX_highlight_dot.png"></td><td class="canwrite"></td><td class="defaultvalue"></td><td class="description">
+<p class="comment">If set, this provides a save handler that will be called when the user
+ explicitly saves configuration by clicking on the "Save" button in the
+ configuration dialog, but before the properties are written to disk.</p>
+<a href="#" class="long-desc-open"><img src="../images/JFX_arrow_right.png"></a>
+<div class="long-desc">
+<p class="comment">If set, this provides a save handler that will be called when the user
+ explicitly saves configuration by clicking on the "Save" button in the
+ configuration dialog, but before the properties are written to disk.
+ This will not be called for auto-save operations which can be enabled
+ per (@see Property}.</p>
+                                &amp;nbsp;
+                            </div>
+</td>
+</tr>
+<tr class="var ">
+<td class="access">public</td><td class="name"><a name="properties"></a><b class="name">properties</b></td><td class="type"><a href="../org.widgetfx.config/org.widgetfx.config.Property.html"><i class="type">Property[]</i></a></td><td class="canread"><img src="..//images/JFX_highlight_dot.png"></td><td class="caninit"><img src="..//images/JFX_highlight_dot.png"></td><td class="canwrite"><img src="..//images/JFX_highlight_dot.png"></td><td class="defaultvalue"></td><td class="description">
+<p class="comment">A list of properties that will be read and written for persistence.</p>
+<a href="#" class="long-desc-open"><img src="../images/JFX_arrow_right.png"></a>
+<div class="long-desc">
+<p class="comment">A list of properties that will be read and written for persistence.  This
+ array must be populated prior to load, because only existing properties
+ will have their values set.  Likewise, on save all the values in this
+ array will have their current values persisted.  For an example of how
+ to use this var, see the class documentation above.
+ <p>
+ In order to remain backwards compatible with older versions of persisted
+ configuration, it is recommended that property names are not reused for
+ different purposes.  This way the old property can be read in (or simply
+ ignored) for backwards compatibility, while new properties can be added
+ to handle additional requirements.</p>
+                                &amp;nbsp;
+                            </div>
+</td>
+</tr>
+<tr class="var ">
+<td class="access">public</td><td class="name"><a name="scene"></a><b class="name">scene</b></td><td class="type"><a><i class="type">Scene</i></a></td><td class="canread"><img src="..//images/JFX_highlight_dot.png"></td><td class="caninit"><img src="..//images/JFX_highlight_dot.png"></td><td class="canwrite"><img src="..//images/JFX_highlight_dot.png"></td><td class="defaultvalue"></td><td class="description">
+<p class="comment">The scene that will be displayed in a configuration dialog for editing
+ properties of this widget.</p>
+<a href="#" class="long-desc-open"><img src="../images/JFX_arrow_right.png"></a>
+<div class="long-desc">
+<p class="comment">The scene that will be displayed in a configuration dialog for editing
+ properties of this widget.  If this is set to null configuration of the
+ associated widget will be disabled.</p>
+                                &amp;nbsp;
+                            </div>
+</td>
+</tr>
+</table>
+<h3>Inherited Variables</h3>
+<h3>Inherited Functions</h3>
+</div>
+</div>
+</body>
+</html>
