@@ -71,10 +71,10 @@ application(title: 'fxtest',
 	// src/javafx/*.fx
 	//new FxBuilder().build(MouseEventSample)
 	//new FxBuilder().edt(HelloWorldNode)
-	//MouseEventSample mm = new MouseEventSample()
+	MouseEventSample mm = new MouseEventSample()
 }
 
-
+/*
 import java.beans.*  
 import griffon.builder.fx.Fx  
   
@@ -99,4 +99,4 @@ hw.str = "Groovy!"
 hw.str = "Fx!"  
 // prints "PROPERTY str 'Groovy!' 'Fx!'"  
 // prints "CLOSURE str 'Groovy!' 'Fx!'"  
-
+*/

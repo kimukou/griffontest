@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<project name="fxbuilder" default="package" basedir=".">
+   <property file="build.properties" />
+
+   <path id="javafx.classpath">
+      <fileset dir="${javafx.home}/lib/shared">
+         <include name="*.jar"/>
+      </fileset>
+      <fileset dir="${javafx.home}/lib/desktop">
+         <include name="*.jar"/>
+         <exclude name="rt15.jar"/>
+      </fileset>
+   </path>
+   <property name="javafx.compiler.classpath" refid="javafx.classpath" />
+   <path id="build.classpath">
+      <fileset dir="${project.lib.dir}">
+         <include name="**/*.jar"/>
+      </fileset>
+      <path refid="javafx.classpath"/>
+   </path>
+
+   <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="build.classpath" />
+   <taskdef resource="javafxc-ant-task.properties" classpathref="javafx.classpath" />
+
+   <target name="clean"
+          description="Clean the output directory">
+      <delete dir="${project.build.dir}" />
+   </target>
+
+   <target name="compile"
+           description="Compile the code">
+     <mkdir dir="${project.build.output}" />
+     <groovyc srcdir="${project.src.dir}"
+              destdir="${project.build.output}"
+              includes="${project.src.includes}">
+       <classpath>
+         <path refid="build.classpath"/>
+         <path path="${project.build.output}" />
+       </classpath>
+     </groovyc>
+   </target>
+
+   <target name="package"
+           depends="clean, compile, test"
+           description="Binary jar">
+      <jar jarfile="${project.build.dir}/${project.final.name}.jar"
+           basedir="${project.build.output}"
+           excludes="**/package.html" >
+         <manifest>
+            <attribute name="Built-By" value="${user.name}"/>
+            <attribute name="Extension-Name" value="FxBuilder"/>
+            <attribute name='Specification-Title' value='FxBuilder: building UIs with Groovy/JavaFX'/>
+            <attribute name='Specification-Vendor' value='The Codehaus'/>
+         </manifest>
+         <zipfileset fullpath="META-INF/LICENSE.txt" file="LICENSE.txt"/>
+      </jar>
+   </target>
+
+   <target name="dist"
+           depends="package"
+           description="Binary distribution">
+      <mkdir dir="${project.build.dir}/dist" />
+      <copy todir="${project.build.dir}/dist">
+         <fileset dir="${project.lib.dir}">
+            <include name="**/*.jar" />
+            <exclude name="**/groovy*.jar" />
+         </fileset>
+      </copy>
+      <copy todir="${project.build.dir}/dist"
+            file="${project.build.dir}/${project.final.name}.jar" />
+      <zip destfile="${project.build.dir}/${project.final.name}-binary.zip" 
+           basedir="${project.build.dir}/dist" />
+   </target>
+
+   <target name="sources"
+           depends="clean"
+           description="Source jar">
+      <mkdir dir="${project.build.dir}/source" />
+      <copy todir="${project.build.dir}/source">
+         <fileset dir="${project.src.dir}">
+            <include name="${project.src.includes}" />
+         </fileset>
+      </copy>
+      <jar jarfile="${project.build.dir}/${project.final.name}-sources.jar"
+           basedir="${project.build.dir}/source" />
+   </target>
+
+   <target name="compile-tests"
+           depends="compile"
+           description="Compile the test code">
+     <mkdir dir="${project.test.output}" />
+     <javafxc srcdir="${project.test.dir}"
+              destdir="${project.test.output}"
+              includes="**/*.fx"
+              compilerclasspath="${javafx.compiler.classpath}">
+        <classpath>
+           <path refid="javafx.classpath"/>
+        </classpath>
+     </javafxc>
+     <groovyc srcdir="${project.test.dir}"
+              destdir="${project.test.output}">
+       <classpath>
+          <path refid="build.classpath" />
+          <pathelement location="${project.build.output}" />
+          <pathelement location="${project.test.output}" />
+       </classpath>
+     </groovyc>
+   </target>
+
+   <target name="test"
+           depends="-junit-present, compile-tests" 
+           if="junit.present"
+           description="Run the test cases">
+     <mkdir dir="${project.test.reports}" />
+     <junit printSummary="yes"
+            haltonerror="true"
+            haltonfailure="true"
+            fork="true"
+            dir=".">
+       <sysproperty key="basedir" value="." />
+       <formatter type="xml" />
+       <formatter type="plain" usefile="true" />
+       <classpath>
+          <path refid="build.classpath" />
+          <pathelement location="${project.build.output}" />
+          <pathelement location="${project.test.output}" />
+       </classpath>
+       <batchtest todir="${project.test.reports}">
+          <fileset dir="${project.test.output}">
+             <include name="griffon/builder/fx/*Tests.class" />
+          </fileset>
+       </batchtest>
+     </junit>
+   </target>
+
+   <target name="-test-junit-present">
+     <available classname="junit.framework.Test" property="junit.present" />
+   </target>
+   <target name="-junit-present" depends="-test-junit-present" unless="junit.present">
+     <echo>================================= WARNING ================================</echo>
+     <echo> Junit isn&apos;t present in your $ANT_HOME/lib directory. Tests not executed. </echo>
+     <echo>==========================================================================</echo>
+   </target>
+
+</project>
