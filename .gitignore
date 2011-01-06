@@ -4,5 +4,7 @@
 */target/*
 */CHANGE ME
 */.gradle/*
+*/lock
+*/logs/*.log
 */*.log
-
+*/*.db

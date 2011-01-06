@@ -22,7 +22,6 @@ application(title: 'fxtest',
                imageIcon('/griffon-icon-16x16.png').image]) {
     // add content here
 
-
 	tabbedPane(){
 		panel(title:"normal",border: emptyBorder(0)) {
     	label('Content Goes Here') // deleteme
