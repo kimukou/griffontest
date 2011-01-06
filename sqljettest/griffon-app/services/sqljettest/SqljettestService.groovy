@@ -1,6 +1,6 @@
 package sqljettest
 
-//CSVo—Í
+//CSV output
 import au.com.bytecode.opencsv.*
 
 //sqlJet
@@ -28,7 +28,7 @@ class SqljettestService {
 	}
 
 //========================================================================
-//CSVŒn‚Ìˆ—
+//CSV action
 	def getCSVReader={filename->
 		def input=new FileInputStream(filename)
 		def is=new InputStreamReader(input, "UTF-8")

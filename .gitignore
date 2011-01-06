@@ -2,5 +2,7 @@
 */bin/*
 */dist/*
 */target/*
-*/CHANGE ME/*
+*/CHANGE ME
 */.gradle/*
+*/*.log
+
