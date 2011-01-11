@@ -10,10 +10,10 @@ import griffon.util.SQLJetUtil
 
 class SqljettestModel {
 
-	//表示リスト
+	//Display list
 	EventList dispTableList = new SortedList(new BasicEventList(),{a, b -> a.dispId <=> b.dispId} as Comparator)
 
-	//SQLJet対応
+	//For SQLJet
 	SQLJetUtil sqLiteU = null
 
 	//CSV読込

@@ -1,0 +1,9 @@
+package sqljettest;
+
+import org.codehaus.griffon.runtime.core.AbstractGriffonService;
+
+public class SqljettestService extends AbstractGriffonService {
+    public void serviceMethod() {
+
+    }
+}

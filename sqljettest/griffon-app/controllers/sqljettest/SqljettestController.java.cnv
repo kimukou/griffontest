@@ -1,0 +1,17 @@
+package sqljettest;
+
+import java.awt.event.ActionEvent;
+import org.codehaus.griffon.runtime.core.AbstractGriffonController;
+
+public class SqljettestController extends AbstractGriffonController {
+    private SqljettestModel model;
+
+    public void setModel(SqljettestModel model) {
+        this.model = model;
+    }
+
+    /*
+    public void action(ActionEvent e) {
+    }
+    */
+}
