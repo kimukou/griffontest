@@ -16,7 +16,7 @@ class SqljettestController {
     void mvcGroupInit(Map args) {
 
       // this method is called after model and view are injected
-      service = new SqljettestService()
+      //service = new SqljettestService()
       log.debug "service=${service}"
 
       //model into access pointer

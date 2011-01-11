@@ -14,6 +14,7 @@ mvcGroups {
         model = 'sqljettest.SqljettestModel'
         controller = 'sqljettest.SqljettestController'
         view = 'sqljettest.SqljettestView'
+        service = 'sqljettest.SqljettestService'
     }
 
 }
