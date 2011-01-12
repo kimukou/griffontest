@@ -24,12 +24,12 @@ class SqljettestController {
       app.config.model = model//args.model
     }
 
-	void mvcGroupDestroy(Map args) {
-		
-	}
+  void mvcGroupDestroy(Map args) {
+    
+  }
 
   def clear ={
-		service.clear()
+    service.clear()
   }
 
   def brows ={dispId,path->
@@ -39,12 +39,12 @@ class SqljettestController {
     }
   }
 
-	def st_time
+  def st_time
   def onStartupEnd = {
      st_time = new Date()
      URL ddl = getClass().classLoader.getResource('select.ddl')
      doOutside {
-			 //[TODO]gsql plugin injecttion controller only
+       //[TODO]gsql plugin injecttion controller only
        app -> withSql { sql ->
          def tmpList = []
          def i=0
@@ -72,11 +72,11 @@ class SqljettestController {
   }
   
   def csvLoadA ={nextLine,table,cnt->
-		service.csvLoadA(nextLine,table,cnt)
+    service.csvLoadA(nextLine,table,cnt)
   }
 
   
   def csvLoad ={filename->
-		service.csvLoad(filename)
-	}
+    service.csvLoad(filename)
+  }
 }

@@ -19,35 +19,35 @@ import groovyx.gpars.*
 
 class SqljettestService {
 
-	def model
-	def view
-	def controller
+  def model
+  def view
+  def controller
 
-	void mvcGroupDestroy(Map args) {
+  void mvcGroupDestroy(Map args) {
 
-	}
+  }
 
-	void mvcGroupInit(Map args) {
-		//app.config.splash_screen.showStatus(app.getMessage('splash.initialize.service'))
-		
-		//The reference initialization is done instead of DI.
-		//model = args.model
-		//view = args.view
-		//controller = args.controller
-	}
+  void mvcGroupInit(Map args) {
+    //app.config.splash_screen.showStatus(app.getMessage('splash.initialize.service'))
+    
+    //The reference initialization is done instead of DI.
+    //model = args.model
+    //view = args.view
+    //controller = args.controller
+  }
 
 //========================================================================
 //CSV action
-	def getCSVReader={filename->
-		def input=new FileInputStream(filename)
-		def is=new InputStreamReader(input, "UTF-8")
-		def reader = new CSVReader(is,',' as Character)
-		return reader
-	}
+  def getCSVReader={filename->
+    def input=new FileInputStream(filename)
+    def is=new InputStreamReader(input, "UTF-8")
+    def reader = new CSVReader(is,',' as Character)
+    return reader
+  }
 
 
   def st_time
-	def clear ={
+  def clear ={
     st_time = new Date()
     controller.doOutside {
       try{
@@ -73,7 +73,7 @@ class SqljettestService {
     }
   }
 
-	def csvLoadA ={nextLine,table,cnt->
+  def csvLoadA ={nextLine,table,cnt->
     def dispId  = Long.valueOf(nextLine.dispId)
     def outstr= nextLine.path
     println "outstr=${outstr}"
@@ -93,7 +93,7 @@ class SqljettestService {
 
 
   def csvLoad ={filename->
-		model.csvf = filename
+    model.csvf = filename
     st_time = new Date()
     controller.doOutside {
       def reader = null

@@ -31,9 +31,9 @@ class SqljettestController {
 
     }
 
-	void mvcGroupDestroy(Map args) {
-		
-	}
+  void mvcGroupDestroy(Map args) {
+    
+  }
 
   def clear ={
     st_time = new Date()
@@ -119,7 +119,7 @@ class SqljettestController {
   
   def st_time
   def csvLoad ={filename->
-		model.csvf = filename
+    model.csvf = filename
     st_time = new Date()
     doOutside {
       def reader = null
