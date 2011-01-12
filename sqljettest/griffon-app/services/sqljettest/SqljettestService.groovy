@@ -79,10 +79,10 @@ class SqljettestService {
     println "outstr=${outstr}"
 
     outstr = outstr.replaceAll("\\\\","\\\\\\\\")//When SQLite case insert,nessesary [\\] twice
-    table.insert(cnt,dispId,outstr)// data add@iid,dispId,pathj
+    table.insert(cnt,dispId,outstr)// data add (id,dispId,pathï¼‰
     if(cnt % model.control_flash_line ==0  && view.frame.visible && view.frame.active){
       model.result=cnt//tmpList.size
-      //Œo‰ßŠÔ
+      //passing time
       if(st_time!=null){
         def c2 = new Date()
         def ps_time = (c2.getTime() - st_time.getTime())/1000.0

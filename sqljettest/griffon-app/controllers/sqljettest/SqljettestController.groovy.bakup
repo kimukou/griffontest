@@ -104,10 +104,10 @@ class SqljettestController {
     println "outstr=${outstr}"
 
     outstr = outstr.replaceAll("\\\\","\\\\\\\\")//When SQLite case insert,nessesary [\\] twice
-    table.insert(cnt,dispId,outstr)// data add　（id,dispId,path）
+    table.insert(cnt,dispId,outstr)// data add （id,dispId,path）
     if(cnt % model.control_flash_line ==0  && view.frame.visible && view.frame.active){
       model.result=cnt//tmpList.size
-      //経過時間
+      //pasiing time
       if(st_time!=null){
         def c2 = new Date()
         def ps_time = (c2.getTime() - st_time.getTime())/1000.0
@@ -167,7 +167,7 @@ Asynchronizer.withAsynchronizer(2){
         model.getPageInit()
         model.getPageList(model.control_page)
 
-        //経過時間
+        //An elapsed time
         if(st_time!=null){
           def c2 = new Date()
           def ps_time = (c2.getTime() - st_time.getTime())/1000.0
