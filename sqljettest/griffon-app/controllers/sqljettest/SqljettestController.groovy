@@ -1,11 +1,5 @@
 package sqljettest
 
-//CSV OutPut
-import com.xlson.groovycsv.*
-import java.io.*
-
-//GPars Async
-import groovyx.gpars.*
 
 class SqljettestController {
    // these will be injected by Griffon
@@ -20,15 +14,14 @@ class SqljettestController {
       log.debug "service=${service}"
 
       //model into access pointer
-      model.view = args.view
-      model.controller = args.controller
+      model.view = view//args.view
+      model.controller = this//args.controller
 
       //delay access pointer
-      app.config.controller = args.controller
+      app.config.controller = this//args.controller
       app.config.service = service
-      app.config.view = args.view
-      app.config.model = args.model
-
+      app.config.view = view//args.view
+      app.config.model = model//args.model
     }
 
 	void mvcGroupDestroy(Map args) {
@@ -36,29 +29,7 @@ class SqljettestController {
 	}
 
   def clear ={
-    st_time = new Date()
-    doOutside {
-      try{
-        model.sqLiteU.clearOpenTable(model.sqLiteU.tableNameC)
-      }
-      catch(Exception e){
-        log.error e
-      }
-      finally{
-        model.sqLiteU.closeTable()
-      }
-      execAsync{
-        model.getPageInit()
-        model.getPageList(model.control_page)
-
-        //An elapsed time
-        if(st_time!=null){
-          def c2 = new Date()
-          def ps_time = (c2.getTime() - st_time.getTime())/1000.0
-          model.time_serch = ps_time
-        }
-      }
-    }
+		service.clear()
   }
 
   def brows ={dispId,path->
@@ -68,10 +39,12 @@ class SqljettestController {
     }
   }
 
+	def st_time
   def onStartupEnd = {
      st_time = new Date()
      URL ddl = getClass().classLoader.getResource('select.ddl')
      doOutside {
+			 //[TODO]gsql plugin injecttion controller only
        app -> withSql { sql ->
          def tmpList = []
          def i=0
@@ -99,82 +72,11 @@ class SqljettestController {
   }
   
   def csvLoadA ={nextLine,table,cnt->
-    def dispId  = Long.valueOf(nextLine.dispId)
-    def outstr= nextLine.path
-    println "outstr=${outstr}"
-
-    outstr = outstr.replaceAll("\\\\","\\\\\\\\")//When SQLite case insert,nessesary [\\] twice
-    table.insert(cnt,dispId,outstr)// data add　（id,dispId,path）
-    if(cnt % model.control_flash_line ==0  && view.frame.visible && view.frame.active){
-      model.result=cnt//tmpList.size
-      //経過時間
-      if(st_time!=null){
-        def c2 = new Date()
-        def ps_time = (c2.getTime() - st_time.getTime())/1000.0
-        model.time_serch = ps_time
-      }
-    }
+		service.csvLoadA(nextLine,table,cnt)
   }
 
   
-  def st_time
   def csvLoad ={filename->
-		model.csvf = filename
-    st_time = new Date()
-    doOutside {
-      def reader = null
-      
-      def cnt = model.sqLiteU.getTableId("last") + 1 //next line start
-      def table = model.sqLiteU.openTable(org.tmatesoft.sqljet.core.SqlJetTransactionMode.WRITE)// writing mode
-
-
-      try{
-        log.debug "model.csvf=${model.csvf}"
-        //reader = service.getCSVReader(model.csvf)
-        def input=new FileInputStream(model.csvf)
-        def is=new InputStreamReader(input, "UTF-8")
-        reader = new CsvParser().parse([separator:',',quoteChar:'"'],is)
-
-
-
-//def thSet = new HashSet()       
-//def exs = java.util.concurrent.Executors.newFixedThreadPool(2)
-//Asynchronizer.withExistingAsynchronizer(exs){
-Asynchronizer.withAsynchronizer(2){
-        reader.each{nextLine->
-          csvLoadA.callAsync(nextLine,table,cnt)
-          cnt++
-        }
-}
-//thSet.each{
-//  if(!it.isDone())it.get()
-////  if(model.stop_f || griffon.util.ApplicationHolder.application.config.shutdown_hook_f){
-////    exs.shutdownNow()
-////    return
-////  }
-//}
-
-      }
-      catch(Exception e){
-        log.error e
-      }
-      finally{
-        //if(reader!=null)reader.close()
-        model.sqLiteU.closeTable()
-      }
-      
-      execAsync{
-        model.getPageInit()
-        model.getPageList(model.control_page)
-
-        //経過時間
-        if(st_time!=null){
-          def c2 = new Date()
-          def ps_time = (c2.getTime() - st_time.getTime())/1000.0
-          model.time_serch = ps_time
-        }
-      }
-    }
-  }
-
+		service.csvLoad(filename)
+	}
 }
