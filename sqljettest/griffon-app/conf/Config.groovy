@@ -18,4 +18,4 @@ log4j {
     additivity.StackTrace=false
 }
 
-griffon.gsql.injectInto = ['controller']
+griffon.gsql.injectInto = ['controller', 'service'] //edit add 'service'

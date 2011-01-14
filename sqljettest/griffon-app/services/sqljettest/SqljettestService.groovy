@@ -34,6 +34,7 @@ class SqljettestService {
     //model = args.model
     //view = args.view
     //controller = args.controller
+		//println app.griffon.dump()
   }
 
 //========================================================================
@@ -147,6 +148,37 @@ Asynchronizer.withAsynchronizer(2){
           def ps_time = (c2.getTime() - st_time.getTime())/1000.0
           model.time_serch = ps_time
         }
+      }
+    }
+  }
+
+  def onStartupEnd = {
+     st_time = new Date()
+     URL ddl = getClass().classLoader.getResource('select.ddl')
+     controller.doOutside {
+       //[TODO]gsql plugin injecttion controller only
+       app -> withSql { sql ->
+         def tmpList = []
+         def i=0
+         log.debug "sql=${ddl.text}"
+         sql.eachRow(ddl.text) {
+         if(i>=model.control_page_line)return
+           tmpList << [dispId: it.dispId, path: it.path]
+           i++
+         }
+         edt { 
+           model.dispTableList.addAll(tmpList) 
+         }
+         model.sqLiteU.open()
+         model.count=0
+         model.result=model.sqLiteU.getTableSize(model.sqLiteU.tableNameC)
+         model.getPageInit()
+         //An elapsed time
+         if(st_time!=null){
+           def c2 = new Date()
+           def ps_time = (c2.getTime() - st_time.getTime())/1000.0
+           model.time_serch = ps_time
+         }
       }
     }
   }

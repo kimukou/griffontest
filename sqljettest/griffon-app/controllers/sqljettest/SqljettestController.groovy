@@ -38,7 +38,10 @@ class SqljettestController {
       println "${dispId}/${path}"
     }
   }
-
+  def onStartupEnd = {
+		service.onStartupEnd()
+	}
+/*
   def st_time
   def onStartupEnd = {
      st_time = new Date()
@@ -70,7 +73,7 @@ class SqljettestController {
       }
     }
   }
-  
+*/
   def csvLoadA ={nextLine,table,cnt->
     service.csvLoadA(nextLine,table,cnt)
   }
