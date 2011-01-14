@@ -34,7 +34,7 @@ class SqljettestService {
     //model = args.model
     //view = args.view
     //controller = args.controller
-		//println app.griffon.dump()
+    //println app.griffon.dump()
   }
 
 //========================================================================
@@ -50,8 +50,8 @@ class SqljettestService {
   def st_time
   def clear ={
     st_time = new Date()
-		//[NOTE] service injection execSync/execAsync/execOutside automatically (from 0.9.1)
-		execOutside{
+    //[NOTE] service injection execSync/execAsync/execOutside automatically (from 0.9.1)
+    execOutside{
     //controller.doOutside {
       try{
         model.sqLiteU.clearOpenTable(model.sqLiteU.tableNameC)
@@ -98,7 +98,7 @@ class SqljettestService {
   def csvLoad ={filename->
     model.csvf = filename
     st_time = new Date()
-		execOutside{
+    execOutside{
     //controller.doOutside {
       def reader = null
       
@@ -158,7 +158,7 @@ Asynchronizer.withAsynchronizer(2){
   def onStartupEnd = {
      st_time = new Date()
      URL ddl = getClass().classLoader.getResource('select.ddl')
- 		 //execOutside{
+     //execOutside{
      controller.doOutside {
        app -> withSql { sql ->
          def tmpList = []
