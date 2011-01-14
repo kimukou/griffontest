@@ -38,8 +38,8 @@ class SqljettestController {
       println "${dispId}/${path}"
     }
   }
-  def onStartupEnd = {
-		service.onStartupEnd()
+  def onStartupEnd = {app -> 
+		service.onStartupEnd(app)
 	}
 /*
   def st_time

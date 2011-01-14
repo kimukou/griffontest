@@ -155,12 +155,12 @@ Asynchronizer.withAsynchronizer(2){
     }
   }
 
-  def onStartupEnd = {
+  def onStartupEnd = {app -> 
      st_time = new Date()
      URL ddl = getClass().classLoader.getResource('select.ddl')
-     //execOutside{
-     controller.doOutside {
-       app -> withSql { sql ->
+     execSync{
+     //controller.doOutside {
+       withSql { sql ->
          def tmpList = []
          def i=0
          log.debug "sql=${ddl.text}"
