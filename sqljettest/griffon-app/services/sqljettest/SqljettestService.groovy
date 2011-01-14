@@ -50,7 +50,9 @@ class SqljettestService {
   def st_time
   def clear ={
     st_time = new Date()
-    controller.doOutside {
+		//[NOTE] service injection execSync/execAsync/execOutside automatically (from 0.9.1)
+		execOutside{
+    //controller.doOutside {
       try{
         model.sqLiteU.clearOpenTable(model.sqLiteU.tableNameC)
       }
@@ -96,7 +98,8 @@ class SqljettestService {
   def csvLoad ={filename->
     model.csvf = filename
     st_time = new Date()
-    controller.doOutside {
+		execOutside{
+    //controller.doOutside {
       def reader = null
       
       def cnt = model.sqLiteU.getTableId("last") + 1 //next line start
@@ -155,8 +158,8 @@ Asynchronizer.withAsynchronizer(2){
   def onStartupEnd = {
      st_time = new Date()
      URL ddl = getClass().classLoader.getResource('select.ddl')
+ 		 //execOutside{
      controller.doOutside {
-       //[TODO]gsql plugin injecttion controller only
        app -> withSql { sql ->
          def tmpList = []
          def i=0
