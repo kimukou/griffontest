@@ -49,7 +49,7 @@ reference
 
 capture
 
-* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page1.png" width="400" height="500">
-* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page2.png" width="400" height="500">
-* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page3.png" width="400" height="500">
-* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page4.png" width="400" height="500">
+* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page1.png" width="400" height="450">
+* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page2.png" width="400" height="450">
+* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page3.png" width="400" height="450">
+* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page4.png" width="400" height="450">
