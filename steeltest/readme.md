@@ -47,3 +47,9 @@ version 2.2
 reference
   http://harmoniccode.blogspot.com/
 
+capture
+
+* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page1.png" width="400" height="300">
+* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page2.png" width="400" height="300">
+* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page3.png" width="400" height="300">
+* <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page4.png" width="400" height="300">
