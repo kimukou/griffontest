@@ -1,6 +1,6 @@
 class GroovycsvGriffonPlugin {
     // the plugin version
-    def version = "0.1"
+    def version = "0.2"
     // the version or versions of Griffon the plugin is designed for
     def griffonVersion = '0.9 > *' 
     // the other plugins this plugin depends on
@@ -41,7 +41,7 @@ $function
 				        println it
 				    }
 				}
-				new File("C:/opt/groovy-1.7.6/lib").eachFileRecurse{ 
+				new File("C:/opt/groovy-1.7.7/lib").eachFileRecurse{ 
 				    if(it.name.endsWith('.jar')){
 				        loader.addURL it.toURL()
 				        println it

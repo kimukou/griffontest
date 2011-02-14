@@ -1,4 +1,4 @@
-<plugin name='groovycsv' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='groovycsv' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>kimukou.buzz@gmail.com</author>
   <title>GroovyCsv Plugin</title>
   <description>Brief description of the plugin.</description>

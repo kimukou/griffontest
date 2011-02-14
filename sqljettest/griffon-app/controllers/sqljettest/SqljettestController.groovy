@@ -74,6 +74,7 @@ class SqljettestController {
     }
   }
 */
+	//@Threading(Threading.Policy.SKIP)
   def csvLoadA ={nextLine,table,cnt->
     service.csvLoadA(nextLine,table,cnt)
   }
