@@ -20,6 +20,7 @@ class SQLJetUtil {
 	}
 	
 	def open = {
+		LOG.debug "=== open start ==="
 		def create_f =false
 		File dbFile = new File(DB_name)
 		if(!dbFile.exists()){
@@ -28,25 +29,37 @@ class SQLJetUtil {
 		println "[${create_f}]:dbFile=${dbFile}"
 		//dbFile.delete()
 		try{
+			println "===AA==="
 			// DBオブジェクト生成
 			sqlF = SqlJetDb.open(dbFile, true)
+			println "===BB==="
 			// Autovacuum有効
-			sqlF.getOptions().setAutovacuum(true)
+			//sqlF.getOptions().setAutovacuum(true)
+			println "===CC==="
 			//sqlF.getOptions().setIncrementalVacuum(true)
 			
 			if(create_f){//ファイルが存在しないときのみDB,テーブルを作成する
 				createDB()
 				createTable()
 			}
+			println "===DD==="
 		}catch(SqlJetException e){
+			println "===EE==="
 			LOG.error e
+			sqlF = null
 			return null
 		}
 		return sqlF
 	}
 
 	def close = {
-      if(sqlF!=null)sqlF.close()
+	  if(sqlF==null)return
+	  try{
+		  sqlF.close()
+	  }catch(SqlJetException e){
+	  	LOG.error e
+	  }
+		sqlF = null
 	}
 
 	def createDB ={
@@ -57,10 +70,10 @@ class SQLJetUtil {
 			sqlF.getOptions().setUserVersion(1)
 			//sqlF.getOptions().setEncoding(SqlJetEncoding.UTF8)  //NG。DBが作れません！！
 			sqlF.getOptions().setLegacyFileFormat(true)//レガシーモード
-	    }catch(SqlJetException e){
+	  }catch(SqlJetException e){
 			LOG.error e
 			throw e
-	    }
+	  }
 		finally{
 			closeTable()
 		}
@@ -112,9 +125,14 @@ class SQLJetUtil {
 	def closeTable = {
 		LOG.debug "=== closeTable start ==="
 		try{
-			if(!sqlF.isInTransaction())return
+			if(sqlF == null || sqlF.isInTransaction()==false || sqlF.isOpen()==false){
+				println "===A=== $sqlF "
+				if(sqlF==null)open()
+				return
+			}
 			sqlF.commit()
 		}catch(SqlJetException e){
+			println "===B==="
 			LOG.error e
 			switch(e.getErrorCode()){
 				case SqlJetErrorCode.NOTADB:
@@ -125,17 +143,24 @@ class SQLJetUtil {
 					close()
 					File dbFile = new File(DB_name)
 					dbFile.delete()
-					open()
+					//open()
 					break
 				case SqlJetErrorCode.MISUSE://トランザクションの不一致
 				case SqlJetErrorCode.ERROR://DB接続が切れた
 				case SqlJetErrorCode.BUSY:
 				case SqlJetErrorCode.IOERR:
 					close()
-					open()
+					//open()
 					break
 			}
 		}
+		catch(Exception ex){
+			println "===C==="
+			LOG.error ex
+		}
+		println "===D==="
+		if(sqlF==null)open()
+		println "===E==="
 	}
 	
 	def clearOpenTable = {tableC->
@@ -255,9 +280,6 @@ class SQLJetUtil {
 		ISqlJetCursor cur = null
 		try{
 			closeTable()
-			
-
-			
 			// 読み取りモード
 			sqlF.beginTransaction(SqlJetTransactionMode.READ_ONLY)
 			//テーブル選択

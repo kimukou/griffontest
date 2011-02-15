@@ -100,6 +100,7 @@ class SqljettestService {
     st_time = new Date()
     execOutside{
     //controller.doOutside {
+			println "==>csvLoad $filename ==>"
       def reader = null
       
       def cnt = model.sqLiteU.getTableId("last") + 1 //next line start

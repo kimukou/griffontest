@@ -24,7 +24,7 @@ class SqljettestController {
       app.config.model = model//args.model
     }
 
-  void mvcGroupDestroy(Map args) {
+  void mvcGroupDestroy(){//Map args) {
     
   }
 
