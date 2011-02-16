@@ -30,8 +30,8 @@ task('bootstrap') << {
 }
 
 //ant.echo "projectDir $projectDir"
-ant.echo "GRIFFON_HOME ${System.getenv()['GRIFFON_HOME']}"
-run_line="${System.getenv()['GRIFFON_HOME']}/bin/griffon.bat"
+//ant.echo "GRIFFON_HOME ${System.getenv()['GRIFFON_HOME']}"
+//run_line="${System.getenv()['GRIFFON_HOME']}/bin/griffon.bat"
 
 // mimic the tasks provided by the Java plugin
 task('clean') << { griffon 'clean' }
@@ -49,10 +49,11 @@ task('run-applet') << { griffon 'run-applet' }
 // call out to the griffon command
 def griffon(target) {
     if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
-        ant.echo "run_line $run_line"
-        //ant.exec(executable: 'griffon.bat', dir: projectDir, failonerror: true) {
-        ant.exec(executable: run_line, dir: projectDir, failonerror: true) {
+        //ant.echo "run_line $run_line"
+        ant.exec(executable: 'griffon.bat', dir: projectDir, failonerror: true, logError:true ) {
+        //ant.exec(executable: run_line, dir: projectDir, failonerror: true) {
             arg(value: target)
+            //arg(line: target)
         }
     } else {
         ant.exec(executable: 'griffon', dir: projectDir, failonerror: true) {

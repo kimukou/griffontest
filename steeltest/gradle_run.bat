@@ -4,6 +4,7 @@ set GRADLE_HOME=D:\Tooldev\gradle-0.9.2
 set JAVA_HOME=c:\opt\jdk
 
 set PATH=%GROOVY_HOME%/bin;%GRADLE_HOME%/bin;%JAVA_HOME%/bin;%GRIFFON_HOME%/bin
+::set PATH=%PATH%;%GROOVY_HOME%/bin;%GRADLE_HOME%/bin;%JAVA_HOME%/bin;%GRIFFON_HOME%/bin
 
 
 ::call gradle run-app
