@@ -25,8 +25,10 @@ environments {
         signingkey {
             params {
                 sigfile = 'GRIFFON'
-                keystore = 'CHANGE ME'
-                alias = 'CHANGE ME'
+                keystore = "$basedir/debug.keystore"
+                alias = 'androiddebugkey'
+                storepass = 'android'
+                keypass   = 'android'
                 // NOTE: for production keys it is more secure to rely on key prompting
                 // no value means we will prompt //storepass = 'BadStorePassword'
                 // no value means we will prompt //keypass   = 'BadKeyPassword'
@@ -54,8 +56,8 @@ griffon {
         //maxPermSize = '64m'
     }
     jars {
-        sign = false
-        pack = false
+        sign = true//false
+        pack = true//false
         destDir = "${basedir}/staging"
         jarName = "${appName}.jar"
     }
@@ -85,6 +87,14 @@ griffon {
         jnlp = 'applet.jnlp'
         html = 'applet.html'
     }
+
+    //add setting start
+    dist{
+        jar.nozip = true
+        webstart.nozip = true
+        applet.nozip = true
+    }
+    //add setting end
 }
 
 // required for custom environments
