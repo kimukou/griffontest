@@ -41,6 +41,7 @@ onShutdownStart = { app ->
 
 onNewInstance = { klass, type, instance ->
     def mc = instance.app.artifactManager.findGriffonClass(klass).metaClass
+		//println instance.app.artifactManager.findGriffonClass(klass).metaClass.dump()
     //mc.log = java.util.logging.Logger.getLogger(klass.name)
     mc.log = org.apache.commons.logging.LogFactory.getLog(klass.name)
 }

@@ -56,8 +56,8 @@ griffon {
         //maxPermSize = '64m'
     }
     jars {
-        sign = true//false
-        pack = true//false
+        sign = false
+        pack = false
         destDir = "${basedir}/staging"
         jarName = "${appName}.jar"
     }
