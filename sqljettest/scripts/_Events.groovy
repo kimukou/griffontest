@@ -36,6 +36,12 @@ eventCompileEnd = {msg->
 	destDir = "${basedir}/staging"
 	copySetting(destDir)
 
+	//need TTF & ddl Copy (defaul griffon-app/resources only image file)
+	srcDir ="${basedir}/griffon-app/resources"
+	destDir = "${classesDir}"
+	ant.copy(todir: destDir, overwrite: true ) {
+		fileset(dir: srcDir, includes: '*.ddl,*.TTF')
+	}
 }
 
 

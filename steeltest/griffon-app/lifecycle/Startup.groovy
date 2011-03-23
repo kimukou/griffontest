@@ -12,8 +12,11 @@
  * - execSync { // your code }
  */
 
- //スプラッシュスクリーンの設定
- def splashScreen = SplashScreen.getInstance()
- splashScreen.showStatus(app.getMessage("splash.initialize.onstartupend.start") )//'開始処理中')
+//スプラッシュスクリーンの設定
+def splashScreen = SplashScreen.getInstance()
+splashScreen.showStatus(app.getMessage("splash.initialize.onstartupend.start") )//'開始処理中')
 
 
+//CSS
+import griffon.builder.css.CSSDecorator
+CSSDecorator.decorate("style", app.builders.'steeltest'.mainFrame)
