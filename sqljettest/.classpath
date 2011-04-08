@@ -72,9 +72,7 @@
     <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\org.springframework\org.springframework.aspects\jars\org.springframework.aspects-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\org.springframework\org.springframework.asm\jars\org.springframework.asm-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\org.springframework\org.springframework.context.support\jars\org.springframework.context.support-3.0.5.RELEASE.jar" />
-    <classpathentry kind="var" path="C:\Documents and Sett
-    <!-- platform specific -->
-</classpath>k\org.springframework.expression\jars\org.springframework.expression-3.0.5.RELEASE.jar" />
+    <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\org.springframework.expression\jars\org.springframework.expression-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\org.springframework\org.springframework.instrument\jars\org.springframework.instrument-3.0.5.RELEASE.jar" />
     <!-- platform specific -->
 </classpath>
