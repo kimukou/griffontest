@@ -58,6 +58,6 @@
     <classpathentry kind="var" path="C:\Documents and Settings\kimura\.ivy2\cache\org.springframework\org.springframework.asm\jars\org.springframework.asm-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\kimura\.ivy2\cache\org.springframework\org.springframework.beans\jars\org.springframework.beans-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\kimura\.ivy2\cache\org.springframework\org.springframework.context\jars\org.springframework.context-3.0.5.RELEASE.jar" />
-    <classpathentry kind="var" path="C:\Documents and Settings\kimura\.ivy2\cache\org.springframework\org.springframework.context.support\jars\org.springframework.context.support-3.0.5.RELEASE.jar" />
-    <classpathentry kind="var" path="C:\Documents and Settings\kimura\.ivy2\cache\org.springframework\org.springframework.expression\jars\org.springframework.expression-3.0.5.RELEASE.jar" />
+    <classpathentry kind="var" path="C:\Documents and Settings\kimura\.ivy2\cache\org.springframework\org.springframework.context.support\jars\org.springframework.context.support-3.0.5.RELEASE.jar" />    <classpathentry kind="var" path="C:\Documents and Settings\kimura\.ivy2\cache\org.springframework\org.springframework.expression\jars\org.springframework.expression-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\kimura\.ivy2\cache\org.springframework\org.springframework.instrument\jars\org.springframework.instrument-3.0.5.RELEASE.jar" />
+</classpath>

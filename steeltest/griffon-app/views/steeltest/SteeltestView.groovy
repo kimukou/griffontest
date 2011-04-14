@@ -22,15 +22,10 @@ import net.miginfocom.swing.MigLayout
 import griffon.transitions.FadeTransition2D
 
 
+/*
 import griffon.builder.css.CSSDecorator
-
 // make all components have a white background
 def style = """
-/*
-* {
-  background-color: red;
-}
-*/
 
 jbutton {
   background-color: blue;
@@ -48,6 +43,8 @@ jbutton {
 }
 
 """
+*/
+
 
 /*
 java.awt.Color.black 黒
@@ -135,7 +132,7 @@ actions {
         accelerator: 'ctrl L')
 }
 
-frame = application(title: app.config.application.title,
+frame = application(id:"mainFrame",title: app.config.application.title,
   size: [800,800],
   //pack: true,
   //location: [300,300],
@@ -172,7 +169,14 @@ panel(constraints: 'page1', opaque: false) {
 			clock(id:'clock',preferredSize: [200,200],
 						backgroundColor:BackgroundColor.WHITE,
 						frameDesign:FrameDesign.SHINY_METAL)
+			clock.CLOCK_TIMER.addActionListener([
+				actionPerformed: { source -> 
+					//println "clock == ${view.clock.hour}:${view.clock.minute} <${java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)}:${view.clock.minute}>"
+				}
+			] as ActionListener)
 
+//2011/03/23 view initialzed Clock move start
+/*
 			g = clock.backgroundImage.getGraphics()
 			//g = clock.foregroundImage.createGraphics()
 			icon = imageIcon('/griffon-icon-48x48.png').image
@@ -180,15 +184,11 @@ panel(constraints: 'page1', opaque: false) {
 			g.drawImage(icon, 0,0, null)
 			g.drawString("Sine Wave", 0, 0); // Draw some text
 			g.dispose()
+*/
+//2011/03/23 view initialzed Clock move end
 
 			compass (id:'compass',preferredSize: [300,300])
 			compass.setValueAnimated 90
-
-			clock.CLOCK_TIMER.addActionListener([
-					actionPerformed: { source -> 
-						//println "clock == ${view.clock.hour}:${view.clock.minute} <${java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)}:${view.clock.minute}>"
-					}
-				] as ActionListener)
 		}
 		//2
 		panel(constraints: "span,wrap, gapbottom 0,gaptop 0",border: emptyBorder(0)){
@@ -623,10 +623,10 @@ panel(constraints: 'page5', opaque: false) {
 }
 swingRepaintTimeline(main, loop: true)
 
-	//CSSDecorator.applyStyle(style,app.appFrames[0]) //CSS適応(from griffon 0.3)
-	//CSSDecorator.applyStyle(style,app.windowManager.windows[0]) //CSS適応(from griffon 0.9)
+	//CSSDecorator.applyStyle(style,app.appFrames[0]) //CSS adapt (from griffon 0.3)
+	//CSSDecorator.applyStyle(style,app.windowManager.windows[0]) //CSS adapt(from griffon 0.9)
 
-	//ダブルクリックで表示、非表示
+	//It displays and it non-displays it by double-clicking. 
 	systemTray {
 		trayIcon(id: "trayIcon",
 				resource: "/griffon-icon-48x48.png",
@@ -636,7 +636,7 @@ swingRepaintTimeline(main, loop: true)
 		}
 	}
 
-	//マウスジェスチャ。マウスを押しながら右、左で画面切替
+	//Mouse gesture. It is a screen switch in the right and the left.  push the mouse
 	def page=1
 	def page_min=1
 	def page_max=5
@@ -690,18 +690,18 @@ t.start{
 frame.defaultLookAndFeelDecorated = true
 
 /*
-frame.windowOpened={println 'Opened'}//初回起動時
-frame.windowClosing={println 'closing'}//システムメニューでウィンドウを閉じようとしたとき
-frame.windowClosed={println 'closed'}//disposeが呼ばれた時
+frame.windowOpened={println 'Opened'}		//When it starts first time
+frame.windowClosing={println 'closing'}	//closing frame by the system menu
+frame.windowClosed={println 'closed'}		//dispose called
 */
-//通常＝＞最小化
+//Normal＝＞Minimization
 frame.windowIconified={
 	println 'Iconified'
 	view.anim.stop()
 	//t.yield()
 	pausef=true
 }	
-//最小化＝＞通常
+//Minimization＝＞Normal
 frame.windowDeiconified={
 	println 'Deiconified'
 	view.anim.start()
@@ -709,7 +709,7 @@ frame.windowDeiconified={
 	pausef=false
 }
 
-//アクティブな時
+//actived
 frame.windowActivated={
 	println 'Activated'
 	if(!frame.visible)return
@@ -718,7 +718,7 @@ frame.windowActivated={
 	pausef=false
 }
 
-//アクティブじゃない時
+//unactived
 frame.windowDeactivated={
 	println 'Deactivated'
 	if(frame.visible)return

@@ -36,6 +36,12 @@ eventCompileEnd = {msg->
 	destDir = "${basedir}/staging"
 	copySetting(destDir)
 
+	//need TTF & ddl Copy (defaul griffon-app/resources only image file)
+	srcDir ="${basedir}/griffon-app/resources"
+	destDir = "${classesDir}"
+	ant.copy(todir: destDir, overwrite: true ) {
+		fileset(dir: srcDir, includes: '*.ddl,*.TTF')
+	}
 }
 
 
@@ -129,11 +135,19 @@ eventPreparePackageStart={ type->
 
 eventPreparePackageEnd={ type->
   println "==eventPreparePackageEnd [${type}]=="
+	println "sign=${buildConfig.griffon.jars.sign}"
+	println "pack=${buildConfig.griffon.jars.pack}"
+
   switch(type){
     case "windows":
       tmplfile="${basedir}/setting/${griffonAppName}.jsmooth"
       dstfile="${basedir}/target/installer/jsmooth/${griffonAppName}.jsmooth"
       ant.copy(tofile:dstfile,file:tmplfile, overwrite: true )
+
+			//2011/04/08 kimukou_26 skip jar signature add start
+			buildConfig.griffon.jars.sign = false
+			buildConfig.griffon.jars.pack  = false
+			//2011/04/08 kimukou_26 skip jar signature add end
       break
 
     case "izpack":
@@ -159,8 +173,6 @@ eventCreatePackageStart = { type->
 }
 
 eventCreatePackageEnd = { type->
-  println "==eventCreatePackageEnd  ${type}=="
-
   println "==eventCreatePackageEnd  ${type}=="
   switch(type){
     case "windows":

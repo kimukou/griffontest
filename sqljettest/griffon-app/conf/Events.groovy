@@ -5,10 +5,13 @@ onBootstrapEnd = { app ->
   app.windowDisplayHandler = new griffon.util.Dropper()
 
 	//Custom Font using
+
+	//def fontname="onryou.TTF"
+	def fontname="hakidame.TTF"
+	InputStream is = null
+
 	try {
-		//URL url = getClass().getResource("onryou.TTF") //not good Chinese character all
-		URL url = getClass().getResource("hakidame.TTF")
-		is = url.openStream()
+		is=getClass().classLoader.getResourceAsStream(fontname)
 		Font font = Font.createFont(Font.TRUETYPE_FONT, is)
 		GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font)
 		is.close()
@@ -17,6 +20,9 @@ onBootstrapEnd = { app ->
 		app.config.font = font
 	}catch(Exception ex){
 		ex.printStackTrace()
+	}
+	finally{
+		if(is!=null)is.close()
 	}
 }
 
@@ -40,9 +46,13 @@ onShutdownStart = { app ->
 }
 
 onNewInstance = { klass, type, instance ->
+
     def mc = instance.app.artifactManager.findGriffonClass(klass).metaClass
 		//println instance.app.artifactManager.findGriffonClass(klass).metaClass.dump()
     //mc.log = java.util.logging.Logger.getLogger(klass.name)
     mc.log = org.apache.commons.logging.LogFactory.getLog(klass.name)
+
+		//if(instance==null || instance?.metaClass==null || instance?.metaClass?.log==null)return
+		//instance.metaClass.log = org.apache.commons.logging.LogFactory.getLog(klass.name)
 }
 
