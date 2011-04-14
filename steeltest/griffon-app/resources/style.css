@@ -1,0 +1,20 @@
+/*
+* {
+  background-color: red;
+}
+*/
+
+jbutton {
+  background-color: blue;
+  font-size: 120%;
+}
+
+#button1 {
+  background-color: green;
+  font-style: italic;
+}
+
+.active {
+  background-color: yellow;
+  font-weight: bold;
+}

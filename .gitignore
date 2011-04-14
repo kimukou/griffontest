@@ -8,3 +8,7 @@
 */logs/*.log
 */*.log
 */*.db
+*/*.iml
+*/*.ipr
+*/*.iws
+
