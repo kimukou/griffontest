@@ -15,3 +15,8 @@ Grails Jalarms
 
 	access check is 'tail -f /var/log/message'
 
+	opsview setup see
+		http://tnk77.blogspot.com/2010/09/opsview.html
+
+
+
