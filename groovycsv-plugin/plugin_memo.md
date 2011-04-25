@@ -1,7 +1,7 @@
 <<Plugin memo>>
 
 ■Create Plugin
-1)griffon create-plugin groovycsv
+1)griffon create-plugin griffon-groovycsv
 	
 2)Edit/Add
 	GroovycsvGriffonPlugin.groovy
@@ -19,5 +19,5 @@
 
 ■Using griffon
 	griffon-app/conf/BuildConfig.groovy
-		griffon.plugin.location.groovycsv="${basedir}/plugin/groovycsv"
+		griffon.plugin.location.griffon-groovycsv="../groovycsv-plugin"
 

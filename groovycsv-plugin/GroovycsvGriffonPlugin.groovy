@@ -28,7 +28,7 @@ Brief description of the plugin.
 /*
 	  static GroovyShell SHELL = null
     Script functionScript
-		GroovycsvGriffonPlugin(String function){
+		GroovyCsvGriffonPlugin(String function){
         def expr = """
 import static com.xlson.groovycsv.*
 $function
@@ -41,7 +41,7 @@ $function
 				        println it
 				    }
 				}
-				new File("C:/opt/groovy-1.7.7/lib").eachFileRecurse{ 
+				new File("C:/opt/groovy-1.7.10/lib").eachFileRecurse{ 
 				    if(it.name.endsWith('.jar')){
 				        loader.addURL it.toURL()
 				        println it
@@ -52,5 +52,5 @@ $function
 		}
 */
     // URL to the plugin's documentation
-    def documentation = 'http://griffon.codehaus.org/Groovycsv+Plugin'
+    def documentation = 'http://griffon.codehaus.org/GroovyCsv+Plugin'
 }
