@@ -4,6 +4,8 @@
   <description>Brief description of the plugin.</description>
   <documentation>http://griffon.codehaus.org/GroovyCsv+Plugin</documentation>
   <license>Apache License, Version 2.0</license>
-  <resources />
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>

@@ -160,8 +160,8 @@ griffon {
 }
 //println "==> ${basedir}/plugin/groovycsv"
 //griffon.plugin.location.groovycsv="${basedir}/plugin/groovycsv"
-
 griffon.plugin.location.groovycsv="../groovycsv-plugin"
+//griffon.plugin.location.groovycsv="../groovycsv-plugin/griffon-groovycsv-0.2.zip"
 
 //griffon.disable.threading.injection = true
 

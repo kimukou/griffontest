@@ -8,10 +8,10 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        //compile('com.xlson.groovycsv:groovycsv:0.2') { transitive = false }
-        //compile('net.sf.opencsv:opencsv:2.2') { transitive = false }
+        compile('com.xlson.groovycsv:groovycsv:0.2') { transitive = false }
+        compile('net.sf.opencsv:opencsv:2.1') { transitive = false }
         runtime('com.xlson.groovycsv:groovycsv:0.2') { transitive = false }
-        runtime('net.sf.opencsv:opencsv:2.2') { transitive = false }
+        runtime('net.sf.opencsv:opencsv:2.1') { transitive = false }
     }
 }
 
@@ -22,5 +22,3 @@ griffon {
         footer = "<br/><br/>Made with Griffon (@griffon.version@)"
     }
 }
-
-griffon.jars.destDir='target/addon'
