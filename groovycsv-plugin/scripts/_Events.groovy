@@ -1,6 +1,9 @@
 eventCopyLibsEnd = { jardir ->
 		println "==eventCopyLibsEnd(groovycsv)=="
-    ant.fileset(dir:"${getPluginDirForName('groovycsv').file}/lib/", includes:"*.jar").each {
+		def libPath="${getPluginDirForName('groovycsv').file}/lib_/"
+		if(new File(libPath).exists()==false)return
+
+    ant.fileset(dir:libPath, includes:"*.jar").each {
         griffonCopyDist(it.toString(), jardir)
     }
 }
