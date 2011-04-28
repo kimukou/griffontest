@@ -34,6 +34,8 @@ frame = application(title: 'sqljettest',
 			nf2.setMinimumIntegerDigits(5)  //min figure
 			nf2.setMaximumFractionDigits(2) //2 few figures
 
+			println griffon.util.ApplicationHolder.application.config.font.name
+
 			//件数
 			jxlabel(getMessage("view.count.title"),constraints: "")
 			jxlabel(id: "count",text:bind {nf.format(model.count)},constraints: "")
@@ -42,7 +44,7 @@ frame = application(title: 'sqljettest',
 
 			jxlabel(id: 'number_case',getMessage("view.count.unit"),constraints: "wrap")
 			//[TODO]not displayed
-			jxlabel(id: 'number_case',getMessage("view.count.unit"),constraints: "wrap",font:griffon.util.ApplicationHolder.application.config.font)
+			jxlabel(id: 'number_case',getMessage("view.count.unit"),constraints: "wrap")
 			println "${number_case.font}"
 
 			//検索(分)

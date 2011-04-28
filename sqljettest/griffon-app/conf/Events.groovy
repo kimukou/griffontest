@@ -7,12 +7,13 @@ onBootstrapEnd = { app ->
 	//Custom Font using
 
 	//def fontname="onryou.TTF"
-	def fontname="hakidame.TTF"
+	//def fontname="hakidame.TTF"
+	def fontname="MadokaMusical.TTF"
 	InputStream is = null
 
 	try {
 		is=getClass().classLoader.getResourceAsStream(fontname)
-		Font font = Font.createFont(Font.TRUETYPE_FONT, is)
+		Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(24.0f)
 		GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font)
 		is.close()
 
