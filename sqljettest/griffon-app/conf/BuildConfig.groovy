@@ -159,6 +159,11 @@ griffon {
     }
 }
 
-griffon.plugin.location.groovycsv="../groovycsv-plugin"
+
+//includeTargets << new File("$griffonHome/scripts/_GriffonSettings.groovy")
+//if(compilingPlugin('groovycsv')==false){
+	griffon.plugin.location.groovycsv="../groovycsv-plugin"
+//}
+
 //griffon.disable.threading.injection = true
 
