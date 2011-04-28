@@ -3,6 +3,12 @@ eventSetClasspath = { cl ->
     eventClosure1(cl)
     if(compilingPlugin('groovycsv')) return
 
+		//def libPath="${groovycsvPluginDir}/lib_/"
+		//ant.echo "libPath=$libPath"
+		//if(new File(libPath).exists()==false)return
+		//ant.echo "aaa"
+
+    //griffonSettings.dependencyManager.flatDirResolver name: 'griffon-groovycsv-plugin', dirs: libPath
     griffonSettings.dependencyManager.addPluginDependency('groovycsv', [
         conf: 'compile',
         group: 'com.xlson.groovycsv',
@@ -17,3 +23,14 @@ eventSetClasspath = { cl ->
     ])
 }
 
+/*
+eventCopyLibsEnd = { jardir ->
+		println "==eventCopyLibsEnd(groovycsv)=="
+		def libPath="${groovycsvPluginDir}/lib_/"
+		if(new File(libPath).exists()==false)return
+
+    ant.fileset(dir:libPath, includes:"*.jar").each {
+        griffonCopyDist(it.toString(), jardir)
+    }
+}
+*/
