@@ -13,7 +13,9 @@ Grails Jalarms
 
 	not check working opsview on wab
 
-	access check is 'tail -f /var/log/message'
+	access check is 
+					'tail -f /var/log/message'
+					tcpdump src host CLIENT_IP and port 5667 is OK
 
 	opsview setup see
 		http://tnk77.blogspot.com/2010/09/opsview.html
