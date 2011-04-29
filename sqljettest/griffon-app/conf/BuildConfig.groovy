@@ -158,10 +158,12 @@ griffon {
         footer = "<br/><br/>Made with Griffon (0.9)"
     }
 }
-//println "==> ${basedir}/plugin/groovycsv"
-//griffon.plugin.location.groovycsv="${basedir}/plugin/groovycsv"
-griffon.plugin.location.groovycsv="../groovycsv-plugin"
-//griffon.plugin.location.groovycsv="../groovycsv-plugin/griffon-groovycsv-0.2.zip"
+
+
+//includeTargets << new File("$griffonHome/scripts/_GriffonSettings.groovy")
+//if(compilingPlugin('groovycsv')==false){
+	griffon.plugin.location.groovycsv="../groovycsv-plugin"
+//}
 
 //griffon.disable.threading.injection = true
 

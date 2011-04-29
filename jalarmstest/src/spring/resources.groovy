@@ -19,6 +19,7 @@ beans = {
 
   nagiosSettings(NagiosSettings) {
     nagiosHost = config.nagiosSettings.nagiosHost
+		port=5667
     password = config.nagiosSettings.password
     encryptionMethod = NagiosSettings.TRIPLE_DES_ENCRYPTION
     timeout =5000
