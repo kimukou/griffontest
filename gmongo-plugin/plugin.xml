@@ -1,0 +1,11 @@
+<plugin name='gmongo' version='0.1' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
+  <author>kimukou.buzz@gmail.com</author>
+  <title>GMongo Plugin</title>
+  <description>Brief description of the plugin.</description>
+  <documentation>http://griffon.codehaus.org/GMongo+Plugin</documentation>
+  <license>Apache License, Version 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
