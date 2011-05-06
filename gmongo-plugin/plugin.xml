@@ -4,8 +4,6 @@
   <description>Brief description of the plugin.</description>
   <documentation>http://griffon.codehaus.org/GMongo+Plugin</documentation>
   <license>Apache License, Version 2.0</license>
-  <resources>
-    <resource>BuildConfig</resource>
-  </resources>
+  <resources />
   <dependencies />
 </plugin>

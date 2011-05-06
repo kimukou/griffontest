@@ -16,6 +16,7 @@ class GmongotestController {
     //    // this method is called when the group is destroyed
     // }
 
+		def mongo
     def conAction = {
         mongo = new GMongo("192.168.10.106", 27017)
         println mongo.dump()

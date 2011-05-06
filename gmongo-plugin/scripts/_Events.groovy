@@ -1,6 +1,6 @@
 def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
 eventSetClasspath = { cl ->
-		println cl.dump()
+		//println cl.dump()
     eventClosure1(cl)
     if(compilingPlugin('gmongo')) return
 
@@ -11,7 +11,7 @@ eventSetClasspath = { cl ->
             inherits "test"
             resolvers {
                 griffonHome()
-                mavenRepo "http://repo1.maven.org/maven2/com/gmongo/gmongo/"
+                mavenRepo "http://repo1.maven.org/maven2/"
             }
             //runtime( [group:"opensymphony", name:"oscache", version:"2.4.1", transitive:false],
             //         [group:"junit", name:"junit", version:"4.8.1", transitive:true] )
@@ -19,8 +19,8 @@ eventSetClasspath = { cl ->
             //runtime("opensymphony:foocache:2.4.1") {
             //         excludes 'jms'
             //}
+						//compile 'com.gmongo:gmongo:0.8'
     }
-
     manager.addPluginDependency('gmongo', [
         conf: 'compile',
         group: 'com.gmongo',
