@@ -44,6 +44,47 @@ version 2.2
     labelColorFromTheme => usingLabelColorFromTheme
 
 
+
+SteelSeries upgrade memo(2.2=>3.9) 
+	usingTitleAndUnitFont => titleAndUnitFontEnabled
+	usingCustomTickmarkLabels => customTickmarkLabelsEnabled
+
+	backgroundImage =>bImage
+	foregroundImage =>fImage
+	customBackgroundVisible -> backgroundVisible
+
+	radar.animate() =>radar.animate(true) 
+
+	remove component
+		digitalRadialLcdGauge 
+		linearLcdGauge 
+		linearBargraphLcd 
+		radial1Gauge 
+		radial1LcdGauge 
+		radial2Gauge 
+		radial2LcdGauge 
+		radial3Gauge 
+		radial3LcdGauge 
+		radial4Gauge 
+		radial4LcdGauge 
+		radialBargraph 
+		radialBargraph1Lcd 
+		radialBargraph2 
+		radialBargraph2Lcd 
+		radialBargraph3 
+		radialBargraph3Lcd 
+		radialBargraph4 
+		radialBargraph4Lcd 
+		radialSquareVertical 
+
+	add component
+		AirCompass 
+		Horizon
+		radialSquareSmall
+		sparkLine
+
+
+
 reference
   http://harmoniccode.blogspot.com/
 
@@ -53,3 +94,4 @@ capture
 * <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page2.png" width="400" height="450">
 * <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page3.png" width="400" height="450">
 * <img src="https://github.com/kimukou/griffontest/raw/master/steeltest/screen_capture_page4.png" width="400" height="450">
+
