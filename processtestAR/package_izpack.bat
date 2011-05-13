@@ -6,5 +6,8 @@ set JAVA_HOME=c:\opt\jdk
 set PATH=%GROOVY_HOME%/bin;%GRIFFON_HOME%/bin;%JAVA_HOME%/bin
 
 
-call griffon clean
-griffon package izpack
+::call griffon clean
+::griffon package izpack
+call griffon prepare-izpack
+call griffon create-izpack
+
