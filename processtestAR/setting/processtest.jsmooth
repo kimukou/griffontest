@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<jsmoothproject>
+   <JVMSearchPath>registry</JVMSearchPath>
+   <JVMSearchPath>javahome</JVMSearchPath>
+   <JVMSearchPath>jrepath</JVMSearchPath>
+   <JVMSearchPath>jdkpath</JVMSearchPath>
+   <JVMSearchPath>exepath</JVMSearchPath>
+   <JVMSearchPath>jview</JVMSearchPath>
+   <bundledJVMPath>jre</bundledJVMPath>
+   <arguments>
+-server -Xmn256m -XX:PermSize=256m -Xss256k -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSParallelRemarkEnabled -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=8 -XX:TargetSurvivorRatio=90 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintClassHistogram -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Dsun.lang.ClassLoader.allowArraySyntax=true
+  </arguments>
+   @app.jars@
+   <currentDirectory>.</currentDirectory>
+   <embeddedJar>false</embeddedJar>
+   <executableName>@app.name@.exe</executableName>
+   <iconLocation>@app.name@-icon.png</iconLocation>
+   <initialMemoryHeap>102400000</initialMemoryHeap>
+   <javaProperties>
+      <name>griffon.start.dir</name>
+      <value>.</value>
+   </javaProperties>
+   <javaProperties>
+      <name>program.name</name>
+      <value>@app.name@</value>
+   </javaProperties>
+  <javaProperties>
+    <name>EXEPATH</name>
+    <value>.</value>
+  </javaProperties>
+   <mainClassName>@app.main.class@</mainClassName>
+   <maximumMemoryHeap>102400000</maximumMemoryHeap>
+   <maximumVersion></maximumVersion>
+   <minimumVersion>1.5</minimumVersion>
+   <skeletonName>Autodownload Wrapper</skeletonName>
+   <skeletonProperties>
+      <key>Message</key>
+      <value>Java has not been found on your computer.Do you want to download it?</value>
+   </skeletonProperties>
+   <skeletonProperties>
+      <key>DownloadURL</key>
+      <value>http://java.sun.com/update/1.6.0/jinstall-6-windows-i586.cab</value>
+   </skeletonProperties>
+   <skeletonProperties>
+      <key>SingleProcess</key>
+      <value>1</value>
+   </skeletonProperties>
+   <skeletonProperties>
+      <key>SingleInstance</key>
+      <value>0</value>
+   </skeletonProperties>
+   <skeletonProperties>
+      <key>JniSmooth</key>
+      <value>0</value>
+   </skeletonProperties>
+   <skeletonProperties>
+      <key>Debug</key>
+      <value>0</value>
+   </skeletonProperties>
+</jsmoothproject>

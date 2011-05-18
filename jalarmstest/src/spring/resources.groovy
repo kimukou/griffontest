@@ -11,14 +11,15 @@ import com.googlecode.jsendnsca.core.*  //sinse 1.3.1
 
 
 beans = {
-	//println griffon.util.ApplicationHolder.application.config.props.dump()
-	def config = new ConfigSlurper().parse(griffon.util.ApplicationHolder.application.config.props)
+  //println griffon.util.ApplicationHolder.application.config.props.dump()
+  def config = new ConfigSlurper().parse(griffon.util.ApplicationHolder.application.config.props)
 
 
   consoleChannel(TestChannel)
 
   nagiosSettings(NagiosSettings) {
     nagiosHost = config.nagiosSettings.nagiosHost
+    port=5667
     password = config.nagiosSettings.password
     encryptionMethod = NagiosSettings.TRIPLE_DES_ENCRYPTION
     timeout =5000
@@ -33,9 +34,9 @@ beans = {
 
   //https://dev.twitter.com/apps/
   twitterChannel(TwitterChannel){
-		accessToken=config.twitterChannel.accessToken
-		tokenSecret=config.twitterChannel.tokenSecret
-	}
+    accessToken=config.twitterChannel.accessToken
+    tokenSecret=config.twitterChannel.tokenSecret
+  }
 
   mailTemplate(SimpleMailMessage){
     subject = "My server application ALARM"
@@ -69,7 +70,7 @@ beans = {
   }
 
   alarmSender(com.solab.alarms.AlarmSender){
-		alarmChannels=[consoleChannel,mailChannel]
+    alarmChannels=[consoleChannel,mailChannel]
   }
 
   //AOP test

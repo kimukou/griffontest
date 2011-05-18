@@ -101,7 +101,7 @@ copySetting ={destDir->
 }
 
 copySettingExe={destDir->
-	println "==copySettingExe(${distDir})=="
+	println "==copySettingExe(${destDir})=="
 	println "destDir=${destDir}"
   srcDir  = "${basedir}/setting"
   ant.mkdir(dir:destDir)
@@ -151,12 +151,20 @@ eventPreparePackageEnd={ type->
       break
 
     case "izpack":
-      destDir = "${basedir}/installer/izpack/resources/"
-      copySetting(destDir)
-      ant.copy( todir: "${basedir}/installer/izpack/resources", overwrite: true ) {
+			//2011/04/08 kimukou_26 skip jar signature add start
+			buildConfig.griffon.jars.sign = false
+			buildConfig.griffon.jars.pack  = false
+			//2011/04/08 kimukou_26 skip jar signature add end
+
+	    installerWorkDir = "${projectWorkDir}/installer/izpack"
+  	  binaryDir = installerWorkDir + '/binary'
+  	  installerResourcesDir = installerWorkDir + '/resources'
+
+      copySetting("$binaryDir/lib/windows/native")
+      ant.copy( todir: installerResourcesDir, overwrite: true ) {
         fileset( dir: "${basedir}/src/installer/izpack/resources", includes: "**" )
       }
-      ant.replace( dir: "${basedir}/installer/izpack/resources" ) {
+      ant.replace( dir: installerResourcesDir ) {
         replacefilter(token: "@app.name@", value: griffonAppName)
         replacefilter(token: "@app.version@", value: griffonAppVersion)
       }
