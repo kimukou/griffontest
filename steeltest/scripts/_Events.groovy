@@ -43,12 +43,22 @@ eventCompileEnd = {msg->
 }
 
 
-eventPackageStart={msg->
-  println "==package start(${msg})=="
+eventPackageStart={type->
+  println "==package start($type)=="
+
+  switch(type){
+    case "jar":
+      //2011/04/08 kimukou_26 skip jar signature add start
+      buildConfig.griffon.jars.sign = false
+      buildConfig.griffon.jars.pack  = false
+      //2011/04/08 kimukou_26 skip jar signature add end
+      break
+  }
+
 }
 
-eventPackageEnd = {msg->
-  println "==package end(${msg})=="
+eventPackageEnd = {type->
+  println "==package end($type)=="
   growlNotify("eventPackageEnd")
 }
 
@@ -79,11 +89,7 @@ eventPreparePackageEnd={ type->
   println "pack=${buildConfig.griffon.jars.pack}"
 
   switch(type){
-    case "windows":
-      tmplfile="${basedir}/setting/${griffonAppName}.jsmooth"
-      dstfile="${basedir}/target/installer/jsmooth/${griffonAppName}.jsmooth"
-      ant.copy(tofile:dstfile,file:tmplfile, overwrite: true )
-
+    case "jar":
       //2011/04/08 kimukou_26 skip jar signature add start
       buildConfig.griffon.jars.sign = false
       buildConfig.griffon.jars.pack  = false
@@ -103,7 +109,7 @@ eventCreatePackageStart = { type->
 eventCreatePackageEnd = { type->
   println "==eventCreatePackageEnd  ${type}=="
   switch(type){
-    case "windows":
+    case "jar":
     break;
   }
 
