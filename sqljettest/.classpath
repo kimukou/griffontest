@@ -16,3 +16,4 @@
     <classpathentry kind="src" path="test/unit" />
     <!-- output paths -->
     <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" />
+</classpath>
