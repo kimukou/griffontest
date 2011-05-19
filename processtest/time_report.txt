@@ -1,6 +1,6 @@
 OS: WinXPSP3 32bit
 
-::oracle jdk6 u24
+::oracle jdk6 u25
 Version Number:   Windows NT 5.1 (Build 2600)
 Exit Time:        1:04 pm, Thursday, May 19 2011
 Elapsed Time:     0:00:14.265
