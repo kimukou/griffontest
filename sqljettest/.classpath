@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Auto generated on Wed May 18 18:54:20 JST 2011 -->
+<!-- Auto generated on Thu May 19 09:27:53 JST 2011 -->
 <classpath>
     <!-- source paths -->
     <classpathentry kind="src" path="griffon-app/conf" />
@@ -43,7 +43,7 @@
     <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\net.sf.opencsv\opencsv\jars\opencsv-2.1.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\net.sf.opencsv\opencsv\sources\opencsv-2.1-sources.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\net.sf.opencsv\opencsv\javadocs\opencsv-2.1-javadoc.jar" />
-    <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\org.codehaus.griffon\swingxbuilder\jars\swingxbuilder-0.1.8.jar" />
+    <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\org.codehaus.griffon\swingxbuilder\jars\swingxbuilder-0.1.8.1.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\org.swinglabs\swingx-core\jars\swingx-core-1.6.2-2.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\org.swinglabs\swingx-beaninfo\jars\swingx-beaninfo-1.6.2-2.jar" />
     <classpathentry kind="var" path="C:\Documents and Settings\k-kimura\.ivy2\cache\org.swinglabs\multiplegradientpaint\jars\multiplegradientpaint-1.0.jar" />

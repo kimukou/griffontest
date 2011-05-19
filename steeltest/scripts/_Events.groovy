@@ -33,8 +33,6 @@ eventCompileEnd = {msg->
   println "==compile end(${msg})=="
   growlNotify("eventCompileEnd")
 
-  destDir = "${basedir}/staging"
-  copySetting(destDir)
 
   //need TTF & ddl Copy (defaul griffon-app/resources only image file)
   srcDir ="${basedir}/griffon-app/resources"
@@ -52,9 +50,6 @@ eventPackageStart={msg->
 eventPackageEnd = {msg->
   println "==package end(${msg})=="
   growlNotify("eventPackageEnd")
-
-  destDir = "${basedir}/dist/jar"
-  copySetting(destDir)
 }
 
 
@@ -67,61 +62,6 @@ eventGenerateJNLPStart = {
   } else if(packageType == 'webstart') {
     destDir="${basedir}/dist/webstart"
     buildConfig.griffon.webstart.codebase = "${new File(destDir).toURI().toASCIIString()}"
-  }
-}
-
-
-
-//--------------------------------------------------------------------------------------------
-copySetting ={destDir->
-  println "destDir=${destDir}"
-
-  //ROOT
-  srcDir  = "${basedir}/setting"
-  ant.mkdir(dir:destDir)
-  ant.copy(todir: destDir, overwrite: true ) {
-    fileset(dir: srcDir, includes: '*.sh,*.txt,*.bat,*.pdf,*.inf' ,excludes:'autorun.bat,Autorun.inf')
-  }
-
-  //classes copy
-  setting_dir = "${classesDir}"
-  ant.mkdir(dir:setting_dir)
-  ant.copy(todir: setting_dir, overwrite: true ) {
-    fileset(dir: srcDir, includes: '*.sql,*.properties,*.xml')
-  }
-
-
-  //other
-  setting_dir="${destDir}/setting"
-  ant.mkdir(dir:setting_dir)
-  ant.copy(todir: setting_dir, overwrite: true ) {
-    fileset(dir: srcDir, includes: '*.properties,*.xml')
-  }
-
-}
-
-copySettingExe={destDir->
-  println "==copySettingExe(${destDir})=="
-  println "destDir=${destDir}"
-  srcDir  = "${basedir}/setting"
-  ant.mkdir(dir:destDir)
-  ant.copy(todir: destDir, overwrite: true ) {
-    fileset(dir: srcDir, includes: '*.sh,*.txt,*.bat,*.pdf,*.inf' ,excludes:'start.bat,start.sh')
-  }
-
-  //classes copy
-  setting_dir = "${classesDir}"
-  ant.mkdir(dir:setting_dir)
-  ant.copy(todir: setting_dir, overwrite: true ) {
-    fileset(dir: srcDir, includes: '*.sql,*.properties,*.xml')
-  }
-
-
-  //other
-  setting_dir="${destDir}/setting"
-  ant.mkdir(dir:setting_dir)
-  ant.copy(todir: setting_dir, overwrite: true ) {
-    fileset(dir: srcDir, includes: '*.properties,*.xml')
   }
 }
 
@@ -149,26 +89,6 @@ eventPreparePackageEnd={ type->
       buildConfig.griffon.jars.pack  = false
       //2011/04/08 kimukou_26 skip jar signature add end
       break
-
-    case "izpack":
-      //2011/04/08 kimukou_26 skip jar signature add start
-      buildConfig.griffon.jars.sign = false
-      buildConfig.griffon.jars.pack  = false
-      //2011/04/08 kimukou_26 skip jar signature add end
-
-      installerWorkDir = "${projectWorkDir}/installer/izpack"
-      binaryDir = installerWorkDir + '/binary'
-      installerResourcesDir = installerWorkDir + '/resources'
-
-      copySetting("$binaryDir/lib/windows/native")
-      ant.copy( todir: installerResourcesDir, overwrite: true ) {
-        fileset( dir: "${basedir}/src/installer/izpack/resources", includes: "**" )
-      }
-      ant.replace( dir: installerResourcesDir ) {
-        replacefilter(token: "@app.name@", value: griffonAppName)
-        replacefilter(token: "@app.version@", value: griffonAppVersion)
-      }
-      break
   }
 
   //growlNotify("eventPreparePackageEnd(${type})")
@@ -184,8 +104,6 @@ eventCreatePackageEnd = { type->
   println "==eventCreatePackageEnd  ${type}=="
   switch(type){
     case "windows":
-    destDir = "${basedir}/dist/windows"
-    copySettingExe(destDir)
     break;
   }
 

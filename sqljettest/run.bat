@@ -4,5 +4,5 @@ set JAVA_HOME=c:\opt\jdk
 
 set PATH=%GROOVY_HOME%/bin;%GRIFFON_HOME%/bin;%JAVA_HOME%/bin
 
-griffon run-app > hogehoge.txt 2>&1
-::griffon run-app
+::griffon run-app > hogehoge.txt 2>&1
+griffon run-app
