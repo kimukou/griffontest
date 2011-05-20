@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Auto generated on Fri May 20 10:16:53 JST 2011 -->
+<!-- Auto generated on Fri May 20 16:12:46 JST 2011 -->
 <classpath>
     <!-- source paths -->
     <classpathentry kind="src" path="griffon-app/conf" />
@@ -14,5 +14,4 @@
     <classpathentry kind="src" path="test/unit" />
     <!-- output paths -->
     <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" />
-    <classpathentry kind="output" path="USER_HOME/.griffon/0.9.3-beta-1/projects/jdcmtest/classes" />
-</classpath>
+    <classpathentry kind="output" path="USER_HOME\.griffon\0.9.3-beta-1\projects\jdcmtest\classes" />
