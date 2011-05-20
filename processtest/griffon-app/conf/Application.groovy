@@ -15,5 +15,4 @@ mvcGroups {
         controller = 'processtest.ProcesstestController'
         view = 'processtest.ProcesstestView'
     }
-
 }
