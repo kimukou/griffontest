@@ -143,3 +143,6 @@ griffon {
         footer = "<br/><br/>Made with Griffon (0.9)"
     }
 }
+
+griffon.plugin.location.'eclipse-support'="../griffon-eclipse-support"
+

@@ -1,0 +1,12 @@
+<plugin name='eclipse-support' version='0.4.7' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Keeps Eclipse files up to date</title>
+  <description>Keeps Eclipse files up to date.</description>
+  <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
