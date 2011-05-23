@@ -70,34 +70,34 @@ updateEclipseClasspathFile = { newPlugin = null ->
 
         mkp.yieldUnescaped("\n${indent}<!-- output paths -->")
         classpathentry(kind: 'con', path: 'org.eclipse.jdt.launching.JRE_CONTAINER')
-				if(isWindows){
-					classesDirPath = classesDirPath.replace('\\', '/')
-				}
+        if(isWindows){
+          classesDirPath = classesDirPath.replace('\\', '/')
+        }
         classpathentry(kind: 'output', path: classesDirPath.replaceFirst(~/$userHomeRegex/, 'USER_HOME'))
         
         def normalizeFilePath = { file ->
             String path = file.absolutePath
-						if(isWindows){
-							path = path.replace('\\', '/')
-						}
+            if(isWindows){
+              path = path.replace('\\', '/')
+            }
             String originalPath = path
             path = path.replaceFirst(~/$griffonHomeRegex/, 'GRIFFON_HOME')
             path = path.replaceFirst(~/$userHomeRegex/, 'USER_HOME')
             boolean var = path != originalPath
             originalPath = path
-						if(isWindows){
-							basedirPath = griffonSettings.baseDir.path.replace('\\', '/')
+            if(isWindows){
+              basedirPath = griffonSettings.baseDir.path.replace('\\', '/')
 //println "basedirPath=$basedirPath"
-							path = path.replaceFirst(~/${basedirPath}(\/)/, '')
+              path = path.replaceFirst(~/${basedirPath}(\/)/, '')
 //println "originalPath=$originalPath"
 //println "path=$path"
-						}
-						else{
-            	path = path.replaceFirst(~/${griffonSettings.baseDir.path}(\\|\/)/, '')
-						}
+            }
+            else{
+              path = path.replaceFirst(~/${griffonSettings.baseDir.path}(\\|\/)/, '')
+            }
             var = path == originalPath && !path.startsWith(File.separator)
-//println "[Åõ]var=$var"
-//println "[Åõ]path=$path"
+//println "[‚óã]var=$var"
+//println "[‚óã]path=$path"
 //println ""
             [kind: var? 'var' : 'lib', path: path]
         }
