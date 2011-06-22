@@ -29,7 +29,7 @@ class JdcmtestController {
     }
     */
 
-		def browse ={
+	def browse ={
 
 		  def path = "brimmywall.dcm"
 		  println path
