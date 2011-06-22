@@ -5,7 +5,7 @@ set JAVA_HOME=c:\opt\jdk
 
 set PATH=%GROOVY_HOME%/bin;%GRIFFON_HOME%/bin;%JAVA_HOME%/bin
 
-::call griffon compile
-call griffon -Dgriffon.disable.threading.injection=true compile 
+call griffon compile
+::call griffon -Dgriffon.disable.threading.injection=true compile 
 
 pause

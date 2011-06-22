@@ -165,5 +165,7 @@ griffon {
 	griffon.plugin.location.groovycsv="../groovycsv-plugin"
 //}
 
-//griffon.disable.threading.injection = true
+
+//[TODO]need setting
+griffon.disable.threading.injection = true
 
