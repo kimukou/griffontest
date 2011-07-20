@@ -137,5 +137,6 @@ griffon {
 app.archetype = 'default'
 app.fileType = '.groovy'
 
-griffon.plugin.location.gmongo="../gmongo-plugin"
+griffon.plugin.location.gmongo="../griffon-gmongo"
+griffon.plugin.location.gremlin="../griffon-gremlin"
 

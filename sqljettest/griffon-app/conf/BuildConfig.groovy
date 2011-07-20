@@ -162,7 +162,7 @@ griffon {
 
 //includeTargets << new File("$griffonHome/scripts/_GriffonSettings.groovy")
 //if(compilingPlugin('groovycsv')==false){
-	griffon.plugin.location.groovycsv="../groovycsv-plugin"
+	griffon.plugin.location.groovycsv="../griffon-groovycsv"
 //}
 
 
