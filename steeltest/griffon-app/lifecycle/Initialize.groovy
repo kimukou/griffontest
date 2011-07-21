@@ -99,3 +99,4 @@ splashScreen.showStatus('Initialize ZZZZ')
 splashScreen.splash()
 splashScreen.waitForSplash()
 
+SplashGriffonAddon.display(app)
