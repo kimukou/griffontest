@@ -35,7 +35,7 @@ eventCompileEnd = {msg->
   growlNotify("eventCompileEnd")
 
   libDir  = "${basedir}/lib/native"
-  destDir = "${basedir}/staging/windows/native"
+  destDir = "${basedir}/staging/${griffon.util.PlatformUtils.platform}/native"
 
   ant.copy(todir: destDir) {
     fileset(dir: libDir, includes: '*.dll')

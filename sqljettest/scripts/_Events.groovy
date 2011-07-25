@@ -160,7 +160,7 @@ eventPreparePackageEnd={ type->
       binaryDir = installerWorkDir + '/binary'
       installerResourcesDir = installerWorkDir + '/resources'
 
-      copySetting("$binaryDir/lib/windows/native")
+      copySetting("$binaryDir/lib/${griffon.util.PlatformUtils.platform}/native")
       ant.copy( todir: installerResourcesDir, overwrite: true ) {
         fileset( dir: "${basedir}/src/installer/izpack/resources", includes: "**" )
       }
