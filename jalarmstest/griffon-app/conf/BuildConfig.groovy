@@ -118,18 +118,19 @@ griffon.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-		mavenRepo "http://java-jml.sourceforge.net/maven"
+        mavenRepo "http://java-jml.sourceforge.net/maven"
+        mavenRepo "http://files.couchbase.com/maven2/"
 
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         // runtime 'mysql:mysql-connector-java:5.1.5'
 //edit kimukou.buzz edit start  but NG!
-		//compile 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.jsendnsca-core:1.3.1_2'
-		//runtime 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.jsendnsca-core:1.3.1_2'
+    //compile 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.jsendnsca-core:1.3.1_2'
+    //runtime 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.jsendnsca-core:1.3.1_2'
 //edit kimukou.buzz edit end  but NG!
-		 compile 'net.sf.jalarms:jalarms-aop:1.5.2'
-		 compile 'net.sf.jalarms:jalarms-channels:1.5.2'
+     compile 'net.sf.jalarms:jalarms-aop:1.5.2'
+     compile 'net.sf.jalarms:jalarms-channels:1.5.2'
     }
 }
 

@@ -161,7 +161,7 @@ Asynchronizer.withAsynchronizer(2){
      URL ddl = getClass().classLoader.getResource('select.ddl')
      execSync{
      //controller.doOutside {
-       withSql { sql ->
+       withSql{ sql ->
          def tmpList = []
          def i=0
          log.debug "sql=${ddl.text}"

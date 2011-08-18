@@ -20,3 +20,5 @@ griffon.basic_injection.disable = true
 // see http://griffon.codehaus.org/JAlarms+Plugin
 //
 griffon.jalarms.injectInto = ["controller", "service", "route"]
+
+griffon.memcached.injectInto = ['controller']

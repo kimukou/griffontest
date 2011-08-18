@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+<script src="http://java.com/js/deployJava.js"></script>
+<script>
+    var attributes = {id: 'Jdcmtest',
+                      codebase:'file:./',
+                      code:'griffon.swing.SwingApplet',
+                      archive:'griffon-rt-0.9.3-beta-2.jar,groovy-all-1.8.0.jar,imageio.jar,jai_imageio.jar,jcl-over-slf4j-1.6.1.jar,jdcm.jar,jdcmtest.jar,jul-to-slf4j-1.6.1.jar,log4j-1.2.16.jar,slf4j-api-1.6.1.jar,slf4j-log4j12-1.6.1.jar',
+                      width:'240', height:'320'} ;
+    var parameters = {fontSize:16,
+                      java_arguments: "-Djnlp.packEnabled=true",
+                      jnlp_href:'file:.//applet.jnlp',
+                      draggable:'true',
+                      image:'griffon.png',
+                      boxmessage:'Loading Jdcmtest',
+                      boxbgcolor:'#FFFFFF', boxfgcolor:'#000000',
+                      codebase_lookup: 'false'} ;
+    var version = '1.5.0' ;
+    deployJava.runApplet(attributes, parameters, version);
+</script>
+<!--
+<APPLET CODEBASE='file:./'
+        CODE='griffon.swing.SwingApplet'
+        ARCHIVE='griffon-rt-0.9.3-beta-2.jar,groovy-all-1.8.0.jar,imageio.jar,jai_imageio.jar,jcl-over-slf4j-1.6.1.jar,jdcm.jar,jdcmtest.jar,jul-to-slf4j-1.6.1.jar,log4j-1.2.16.jar,slf4j-api-1.6.1.jar,slf4j-log4j12-1.6.1.jar'
+        WIDTH='240' HEIGHT='320'>
+    <PARAM NAME="java_arguments" VALUE="-Djnlp.packEnabled=true">
+    <PARAM NAME='jnlp_href' VALUE='file:.//applet.jnlp'>
+    <PARAM NAME='dragggable' VALUE='true'>
+    <PARAM NAME='image' VALUE='griffon.png'>
+    <PARAM NAME='boxmessage' VALUE='Loading Jdcmtest'>
+    <PARAM NAME='boxbgcolor' VALUE='#FFFFFF'>
+    <PARAM NAME='boxfgcolor' VALUE='#000000'>
+    <PARAM NAME='codebase_lookup' VALUE='false'>
+
+</APPLET>
+-->
+</body>
+</html>
