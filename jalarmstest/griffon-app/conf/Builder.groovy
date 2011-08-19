@@ -13,4 +13,3 @@ root.'JalarmsGriffonAddon'.addon=true
 
 root.'MailGriffonAddon'.addon=true
 
-root.'MemcachedGriffonAddon'.addon=true

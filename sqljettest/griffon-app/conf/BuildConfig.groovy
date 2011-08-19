@@ -169,3 +169,4 @@ griffon {
 //[TODO]need setting
 griffon.disable.threading.injection = true
 
+griffon.plugin.location.'eclipse-support'="../griffon-eclipse-support"

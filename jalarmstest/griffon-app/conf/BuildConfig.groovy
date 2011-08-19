@@ -118,9 +118,8 @@ griffon.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-        mavenRepo "http://java-jml.sourceforge.net/maven"
-        mavenRepo "http://files.couchbase.com/maven2/"
-
+        //mavenRepo "http://java-jml.sourceforge.net/maven"
+				mavenRepo "http://bleu.west.spy.net/~dustin/m2repo/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -131,6 +130,7 @@ griffon.project.dependency.resolution = {
 //edit kimukou.buzz edit end  but NG!
      compile 'net.sf.jalarms:jalarms-aop:1.5.2'
      compile 'net.sf.jalarms:jalarms-channels:1.5.2'
+     //compile 'spy:memcached:2.5'
     }
 }
 
