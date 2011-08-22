@@ -162,12 +162,12 @@ updateEclipseClasspathFile = { newPlugin = null ->
 
 
         //link src
-        mkp.yieldUnescaped("\n${indent}<!-- link Entry -->")
+        //mkp.yieldUnescaped("\n${indent}<!-- link Entry -->")
                 //.project update
                 List linkEntry = updateEclipseProjectFile(newPlugin)
-                linkEntry.each(){
-                    classpathentry(kind: 'src', path: it)
-                }
+                //linkEntry.each(){
+                //    classpathentry(kind: 'src', path: it)
+                //}
 
     }
 }
