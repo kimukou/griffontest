@@ -1,18 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <projectDescription>
     <name>sqljettest</name>
-    <comment/>
-    <projects>
-    </projects>
+    <comment />
+    <projects />
+
+    <!-- buildSpec -->
     <buildSpec>
-        <buildCommand>
-            <name>org.eclipse.jdt.core.javabuilder</name>
-            <arguments>
-            </arguments>
-        </buildCommand>
+    <buildCommand>
+    <name>org.eclipse.jdt.core.javabuilder</name>
+        <arguments />
+    </buildCommand>
     </buildSpec>
+
+    <!-- natures -->
     <natures>
         <nature>org.eclipse.jdt.groovy.core.groovyNature</nature>
         <nature>org.eclipse.jdt.core.javanature</nature>
     </natures>
+
+    <!-- linkedResources -->
+    <linkedResources>
+        <link>
+            <name>groovycsv-0.2-griffon-app-controllers</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-groovycsv/griffon-app/controllers</location>
+        </link>
+        <link>
+            <name>groovycsv-0.2-griffon-app-lifecycle</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-groovycsv/griffon-app/lifecycle</location>
+        </link>
+        <link>
+            <name>groovycsv-0.2-griffon-app-models</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-groovycsv/griffon-app/models</location>
+        </link>
+        <link>
+            <name>groovycsv-0.2-griffon-app-resources</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-groovycsv/griffon-app/resources</location>
+        </link>
+        <link>
+            <name>groovycsv-0.2-src-main</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-groovycsv/src/main</location>
+        </link>
+        <link>
+            <name>groovycsv-0.2-test-integration</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-groovycsv/test/integration</location>
+        </link>
+        <link>
+            <name>groovycsv-0.2-test-unit</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-groovycsv/test/unit</location>
+        </link>
+        <link>
+            <name>eclipse-support-0.4.7a-griffon-app-controllers</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-eclipse-support/griffon-app/controllers</location>
+        </link>
+        <link>
+            <name>eclipse-support-0.4.7a-griffon-app-lifecycle</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-eclipse-support/griffon-app/lifecycle</location>
+        </link>
+        <link>
+            <name>eclipse-support-0.4.7a-griffon-app-models</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-eclipse-support/griffon-app/models</location>
+        </link>
+        <link>
+            <name>eclipse-support-0.4.7a-griffon-app-resources</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-eclipse-support/griffon-app/resources</location>
+        </link>
+        <link>
+            <name>eclipse-support-0.4.7a-src-main</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-eclipse-support/src/main</location>
+        </link>
+        <link>
+            <name>eclipse-support-0.4.7a-test-integration</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-eclipse-support/test/integration</location>
+        </link>
+        <link>
+            <name>eclipse-support-0.4.7a-test-unit</name>
+            <type>2</type>
+            <location>D:/workspace36/_github/griffontest/sqljettest/../griffon-eclipse-support/test/unit</location>
+        </link>
+    </linkedResources>
+    <variableList>
+        <variable>
+            <name>USER_HOME</name>
+            <value>file:/C:/Users/ksc</value>
+        </variable>
+    </variableList>
 </projectDescription>

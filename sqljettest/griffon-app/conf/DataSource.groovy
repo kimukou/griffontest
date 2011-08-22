@@ -36,7 +36,9 @@ xml.bean.property.each{
 
 dataSource {
 
-'default'{
+		//driverClassName = "org.sqlite.JDBC"
+		//username = "sa"
+		//password = ""
 		driverClassName = xml_driver//"org.sqlite.JDBC"
 		username = xml_user//"sa"
 		password = xml_pass//""
@@ -53,9 +55,7 @@ dataSource {
 		}
 }
 
-}
-
-println dataSources.dump()
+println dataSource.dump()
 
 //===================================================================
 
