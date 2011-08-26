@@ -113,7 +113,7 @@ griffon.project.dependency.resolution = {
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
-        //mavenCentral()
+        mavenCentral()
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -121,7 +121,6 @@ griffon.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
         // runtime 'mysql:mysql-connector-java:5.1.5'
     }
 }
@@ -137,5 +136,6 @@ griffon {
 app.archetype = 'default'
 app.fileType = '.groovy'
 
-griffon.plugin.location.gmongo="../gmongo-plugin"
+griffon.plugin.location.gmongo="../griffon-gmongo"
+griffon.plugin.location.gremlin="../griffon-gremlin"
 

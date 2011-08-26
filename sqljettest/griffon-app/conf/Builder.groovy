@@ -27,3 +27,5 @@ jx {
 
 
 root.'GsqlGriffonAddon'.addon=true
+
+root.'DatasourceGriffonAddon'.addon=true

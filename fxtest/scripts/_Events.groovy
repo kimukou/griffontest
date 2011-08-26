@@ -89,7 +89,7 @@ eventCompileEnd = {
 		}
 
 	//native-dll
-		destDir = "$basedir/staging/windows/native"
+		destDir = "$basedir/staging/${griffon.util.PlatformUtils.platform}/native"
 		ant.mkdir(dir:destDir)
 		libDir  = "$javafxHome/lib/desktop/"
 	  ant.copy(todir: destDir) {

@@ -113,7 +113,7 @@ griffon.project.dependency.resolution = {
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
-        //mavenCentral()
+        mavenCentral()
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -133,3 +133,6 @@ griffon {
         footer = "<br/><br/>Made with Griffon (0.9)"
     }
 }
+
+griffon.plugin.location."eclipse-support"="../griffon-eclipse-support"
+

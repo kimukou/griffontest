@@ -41,3 +41,5 @@ root.'SteelGriffonAddon'.addon=true
 
 
 root.'HarmoniccodeGriffonAddon'.addon=true
+
+root.'SplashGriffonAddon'.addon=true
