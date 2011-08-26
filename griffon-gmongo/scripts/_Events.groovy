@@ -11,6 +11,7 @@ eventSetClasspath = { cl ->
             inherits "test"
             resolvers {
                 griffonHome()
+ 			          mavenCentral()
                 mavenRepo "http://repo1.maven.org/maven2/"
             }
             //runtime( [group:"opensymphony", name:"oscache", version:"2.4.1", transitive:false],
@@ -19,13 +20,13 @@ eventSetClasspath = { cl ->
             //runtime("opensymphony:foocache:2.4.1") {
             //         excludes 'jms'
             //}
-						//compile 'com.gmongo:gmongo:0.8'
+						//compile 'com.gmongo:gmongo:0.9'
     }
     manager.addPluginDependency('gmongo', [
         conf: 'compile',
         group: 'com.gmongo',
         name: 'gmongo',
-        version: '0.8'
+        version: '0.9'
     ])
 }
 
