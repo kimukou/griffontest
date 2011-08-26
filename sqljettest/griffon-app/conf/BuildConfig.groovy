@@ -143,11 +143,15 @@ griffon.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+				mavenRepo "http://maven.tmatesoft.com/content/repositories/releases"
+				mavenRepo "http://www.xerial.org/maven/repository/artifact/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.5'
+				compile 'org.tmatesoft.sqljet:sqljet:1.0.7'
+				runtime 'org.xerial:sqlite-jdbc:3.7.2'
     }
 }
 
