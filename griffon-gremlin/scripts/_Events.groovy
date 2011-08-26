@@ -23,21 +23,26 @@ println "----a"
 
 println "----b"
     manager.parseDependencies {
-          inherits "test"
+          inherits "global"
           resolvers {
+							mavenRepo "http://repo1.maven.org/maven2/"
 			        griffonCentral()
 			        mavenCentral()
               mavenRepo "http://tinkerpop.com/maven2"
+							mavenRepo "http://fortytwo.net/maven2"
+							mavenRepo "http://www.orientechnologies.com/listing/m2/"
           }
-					//compile 'com.tinkerpop:gremlin:1.2' 
+					compile 'com.tinkerpop:gremlin:1.2' 
      }
 println "----c"
+/*
     manager.addPluginDependency('gremlin', [
         conf: 'compile',
         group: 'com.tinkerpop',
         name: 'gremlin',
         version: '1.2'
     ])
+*/
 println "----d"
 
 }
