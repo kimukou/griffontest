@@ -65,16 +65,13 @@ files.each{
 
 
 import groovy.swing.SwingBuilder
-import griffon.util.GriffonPlatformHelper
 import static griffon.util.GriffonApplicationUtils.*
 
-GriffonPlatformHelper.tweakForNativePlatform(app)
 SwingBuilder.lookAndFeel((isMacOSX ? 'system' : 'nimbus'), 'gtk', ['metal', [boldFonts: false]])
 
 
 //Setting to be able to obtain Exception by logger
 import groovy.swing.SwingBuilder
-import griffon.util.GriffonPlatformHelper
 import static griffon.util.GriffonApplicationUtils.*
 
 if(griffon.util.RunMode.current==griffon.util.RunMode.STANDALONE && new File('setting/log4j.xml').exists()){

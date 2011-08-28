@@ -1,5 +1,4 @@
 import groovy.swing.SwingBuilder
-import griffon.util.GriffonPlatformHelper
 import org.codehaus.griffon.mercurial.service.MercurialService
 
 /*
@@ -22,7 +21,6 @@ import org.codehaus.griffon.mercurial.service.MercurialService
  */
 
 
-GriffonPlatformHelper.tweakForNativePlatform(app)
 SwingBuilder.lookAndFeel(org.jvnet.substance.skin.SubstanceSaharaLookAndFeel.class.name)
 
 println "INITIALIZE ${app.dump()}"

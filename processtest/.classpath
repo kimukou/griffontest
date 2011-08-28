@@ -15,10 +15,10 @@
     <classpathentry kind="src" path="test/unit" />
     <!-- output paths -->
     <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" />
-    <classpathentry kind="output" path="USER_HOME/.griffon/0.9.3-beta-2/projects/processtest/classes" />
+    <classpathentry kind="output" path="USER_HOME/.griffon/0.9.3/projects/processtest/classes" />
     <!-- runtime -->
-    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.groovy/groovy-all/jars/groovy-all-1.8.0.jar" />
-    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.griffon/griffon-rt/jars/griffon-rt-0.9.3-beta-2.jar" />
+    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.groovy/groovy-all/jars/groovy-all-1.8.1.jar" />
+    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.griffon/griffon-rt/jars/griffon-rt-0.9.3.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.6.1.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.processing/processing-core/jars/processing-core-1.2.1.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.griffon.plugins/griffon-processing-addon/jars/griffon-processing-addon-0.3.jar" />
@@ -37,7 +37,7 @@
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.processing/processing-video/jars/processing-video-1.2.1.jar" />
     <!-- test -->
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/junit/junit/jars/junit-4.8.1.jar" />
-    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.griffon/griffon-cli/jars/griffon-cli-0.9.3-beta-2.jar" />
+    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.griffon/griffon-cli/jars/griffon-cli-0.9.3.jar" />
     <!-- compile -->
     <!-- build -->
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.gpars/gpars/jars/gpars-0.9.jar" />

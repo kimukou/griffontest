@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE jnlp SYSTEM "http://java.sun.com/dtd/JNLP-1.5.dtd">
+<jnlp
+    version="0.1"
+    codebase="file:./"
+    href="applet.jnlp"
+>
+    <information>
+        <title>Jdcmtest</title>
+        <vendor>Jdcmtest</vendor>
+        <!--<homepage href="http://app.example.com/"/>-->
+        <!--fallback description-->
+        <description>Jdcmtest</description>
+        <description kind="one-line">Jdcmtest</description>
+        <description kind="short">Jdcmtest</description>
+        <description kind="tooltip">Jdcmtest</description>
+        <!-- fallback icon -->
+        <icon href="griffon-icon-48x48.png" kind="default" width="48" height="48"/>
+        <!-- icon used for splash screen -->
+        <icon href="griffon.png" kind="splash" width="381" height="123"/>
+        <!-- icon used in menu -->
+        <icon href="griffon-icon-16x16.png" kind="shortcut" width="16" height="16"/>
+        <!-- icon used on desktop -->
+        <icon href="griffon-icon-32x32.png" kind="shortcut" width="32" height="32"/>
+<!-- to create shortcuts, uncomment this
+        <shortcut online="true">
+            <desktop/>
+            <menu submenu="Jdcmtest"/>
+        </shortcut>
+-->
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+        <!--<j2ee-application-client-permissions/>-->
+    </security>
+    <resources>
+        <property name="griffon.runmode" value="applet"/>
+        <property name="jnlp.packEnabled" value="true"/>
+        <j2se version="1.5+" />
+        <!-- auto-added jars follow, griffon-rt, app, and groovy -->
+        <jar href='griffon-rt-0.9.3-beta-2.jar' main='true'/>
+        <jar href='groovy-all-1.8.0.jar'/>
+        <jar href='imageio.jar'/>
+        <jar href='jai_imageio.jar'/>
+        <jar href='jcl-over-slf4j-1.6.1.jar'/>
+        <jar href='jdcm.jar'/>
+        <jar href='jdcmtest.jar' main='false' />
+        <jar href='jul-to-slf4j-1.6.1.jar'/>
+        <jar href='log4j-1.2.16.jar'/>
+        <jar href='slf4j-api-1.6.1.jar'/>
+        <jar href='slf4j-log4j12-1.6.1.jar'/>
+        <!-- Add all extra jars below here, or the app may break -->
+
+
+    </resources>
+
+  <applet-desc
+      documentbase="file:./"
+      name="JdcmtestApplet"
+      main-class="griffon.swing.SwingApplet"
+      width="240"
+      height="320">
+      <!-- params are ignored when referenced from web page for 6u10 -->
+    <!--<param name="key1" value="value1"/>-->
+    <!--<param name="key2" value="value2"/>-->
+
+  </applet-desc>
+</jnlp>

@@ -17,41 +17,33 @@ eventSetClasspath = { cl ->
     eventClosure2(cl)
     if(compilingPlugin('gremlin')) return
 
-
+println "----a"
     //test\cli\org\codehaus\griffon\resolve\IvyDependencyManagerTests.groovy see
     def manager = griffonSettings.dependencyManager
 
-    //manager.flatDirResolver name: 'gremlinPluginLib', dirs: "${gremlinPluginDir}/lib"
+println "----b"
     manager.parseDependencies {
-           repositories {
-				        flatDir name: 'gremlinPluginLib', dirs: "${gremlinPluginDir}/lib"
-
-                griffonPlugins()
-                griffonHome()
-                griffonCentral()
-
-                //mavenLocal()
-                mavenCentral()
-
-                mavenRepo "http://snapshots.repository.codehaus.org" 
-                mavenRepo "http://repository.codehaus.org" 
-                mavenRepo "http://download.java.net/maven/2/" 
-                mavenRepo "http://repository.jboss.com/maven2/" 
-                // Tinkerpop Maven2 Repository 
-                mavenRepo "http://tinkerpop.com/maven2" 
-                mavenRepo "http://repo.aduna-software.org/maven2/releases/" 
-								mavenRepo "http://www.orientechnologies.com/listing/m2"
-								mavenRepo "https://repo.neo4j.org/content/groups/dev/"
-           }
-           dependencies  {
-                // Gremlin 
-                compile 'com.tinkerpop:gremlin:1.1' 
-                compile 'com.tinkerpop.blueprints:blueprints-neo4j-graph:0.8'
-
-								compile 'com.tinkerpop.blueprints.pgm:blueprints-core:0.8'
-
-								compile 'net.fortytwo:linked-data-sail:0.7-SNAPSHOT'
-           }
+          inherits "global"
+          resolvers {
+							mavenRepo "http://repo1.maven.org/maven2/"
+			        griffonCentral()
+			        mavenCentral()
+              mavenRepo "http://tinkerpop.com/maven2"
+							mavenRepo "http://fortytwo.net/maven2"
+							mavenRepo "http://www.orientechnologies.com/listing/m2/"
+          }
+					compile 'com.tinkerpop:gremlin:1.2' 
      }
+println "----c"
+/*
+    manager.addPluginDependency('gremlin', [
+        conf: 'compile',
+        group: 'com.tinkerpop',
+        name: 'gremlin',
+        version: '1.2'
+    ])
+*/
+println "----d"
+
 }
 

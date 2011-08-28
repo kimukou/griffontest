@@ -46,7 +46,6 @@
 
 //Exception handing logger
 import groovy.swing.SwingBuilder
-import griffon.util.GriffonPlatformHelper
 import static griffon.util.GriffonApplicationUtils.*
 
 if(griffon.util.RunMode.current==griffon.util.RunMode.STANDALONE && new File('setting/log4j.xml').exists()){
@@ -78,16 +77,13 @@ System.setProperty("sun.awt.exception.handler",LoggingExceptionHandler.class.get
 
 //Look abd Feel
 import groovy.swing.SwingBuilder
-import griffon.util.GriffonPlatformHelper
 import static griffon.util.GriffonApplicationUtils.*
 
-GriffonPlatformHelper.tweakForNativePlatform(app)
 SwingBuilder.lookAndFeel((isMacOSX ? 'system' : 'nimbus'), 'gtk', ['metal', [boldFonts: false]])
 
 //===============================================================================================
 
 //splash screen setting
-def splashScreen = SplashScreen.getInstance()
 
 // Setting a splash image
 //URL url = this.class.getResource("mySplash.jpg")
@@ -96,8 +92,7 @@ def splashScreen = SplashScreen.getInstance()
 // Setting Status Text
 // SplashScreen.getInstance().showStatus("Initializing the Controller")
 splashScreen.showStatus('Initialize ZZZZ')
-splashScreen.splash()
-splashScreen.waitForSplash()
+
 
 SplashGriffonAddon.display(app)
 SplashGriffonAddon.display(app)
