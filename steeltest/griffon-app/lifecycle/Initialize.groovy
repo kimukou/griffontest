@@ -100,3 +100,4 @@ splashScreen.splash()
 splashScreen.waitForSplash()
 
 SplashGriffonAddon.display(app)
+SplashGriffonAddon.display(app)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Auto generated on Thu Jul 21 17:25:33 JST 2011 -->
+<!-- Auto generated on Mon Aug 22 20:45:22 JST 2011 -->
 <classpath>
     <!-- source paths -->
     <classpathentry kind="src" path="griffon-app/conf" />
@@ -20,11 +20,11 @@
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.groovy/groovy-all/jars/groovy-all-1.8.0.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.griffon/griffon-rt/jars/griffon-rt-0.9.3-beta-2.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.6.1.jar" />
+    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.processing/processing-core/jars/processing-core-1.2.1.jar" />
+    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.griffon.plugins/griffon-processing-addon/jars/griffon-processing-addon-0.3.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/com.sun/jogl/jars/jogl-1.1.1.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/com.sun/gluegen-rt/jars/gluegen-rt-1.0b6.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.griffon.plugins/griffon-jogl-compat-addon/jars/griffon-jogl-compat-addon-0.1.jar" />
-    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.processing/processing-core/jars/processing-core-1.2.1.jar" />
-    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.griffon.plugins/griffon-processing-addon/jars/griffon-processing-addon-0.3.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/log4j/log4j/jars/log4j-1.2.16.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.slf4j/slf4j-log4j12/jars/slf4j-log4j12-1.6.1.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.slf4j/jcl-over-slf4j/jars/jcl-over-slf4j-1.6.1.jar" />
@@ -51,18 +51,15 @@
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/commons-io/commons-io/jars/commons-io-1.4.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/commons-lang/commons-lang/jars/commons-lang-2.5.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.codehaus.griffon/griffon-scripts/jars/griffon-scripts-0.9.3-beta-2.jar" />
-    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.s
-    <!-- platform specific -->
-</classpath>/org.springframework.core-3.0.5.RELEASE.jar" />
+    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.core/jars/org.springframework.core-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.aop/jars/org.springframework.aop-3.0.5.RELEASE.jar" />
-    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.aspects/jars/org
-    <!-- platform specific -->
-</classpath>/>
+    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.aspects/jars/org.springframework.aspects-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.asm/jars/org.springframework.asm-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.beans/jars/org.springframework.beans-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.context/jars/org.springframework.context-3.0.5.RELEASE.jar" />
-    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.context.support/jars/org.springframework.context.support-3.0.5.RELEASE.jar" />
-    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.expression/jars/org.springframework.expression-3.0.5.RELEASE.jar" />
+    <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.context.support/jars/org.springframework.context.supp
+    <!-- platform specific -->
+</classpath>y kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.expression/jars/org.springframework.expression-3.0.5.RELEASE.jar" />
     <classpathentry kind="var" path="USER_HOME/.ivy2/cache/org.springframework/org.springframework.instrument/jars/org.springframework.instrument-3.0.5.RELEASE.jar" />
     <!-- platform specific -->
 </classpath>
