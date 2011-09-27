@@ -8,7 +8,7 @@ eventSetClasspath = { cl ->
 		//test\cli\org\codehaus\griffon\resolve\IvyDependencyManagerTests.groovy see
 		def manager = griffonSettings.dependencyManager
 		manager.parseDependencies {
-            inherits "test"
+            inherits "global"
             resolvers {
                 griffonHome()
  			          mavenCentral()
