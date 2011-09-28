@@ -2,17 +2,12 @@ package twittersphere2
 
 import groovy.beans.Bindable
 
-import gov.nasa.worldwind.Model
-import gov.nasa.worldwind.WorldWind
 import ca.odell.glazedlists.EventList
-import gov.nasa.worldwind.avlist.AVKey
 import ca.odell.glazedlists.BasicEventList
 import gov.nasa.worldwind.render.Annotation
 import ca.odell.glazedlists.swing.EventComboBoxModel
 
-class Twittersphere2Model {
-  Model worldWindModel = WorldWind.createConfigurationComponent(AVKey.MODEL_CLASS_NAME)
-
+@Bindable class Twittersphere2Model {
   boolean animate
   String searchMode
   String searchText

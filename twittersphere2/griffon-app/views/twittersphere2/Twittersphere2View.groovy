@@ -1,6 +1,5 @@
 package twittersphere2
 
-import gov.nasa.worldwind.awt.WorldWindowGLCanvas
 import gov.nasa.worldwind.examples.ApplicationTemplate
 import gov.nasa.worldwind.layers.*
 import gov.nasa.worldwind.layers.Mercator.examples.OSMMapnikLayer
@@ -21,7 +20,9 @@ application(title: 'twittersphere2',
                imageIcon('/griffon-icon-32x32.png').image,
                imageIcon('/griffon-icon-16x16.png').image]) {
 
-   wwd = worldwind(preferredSize: [300, 300])
+  wwd = worldwind(preferredSize: [700, 500],
+    	 constraints: BorderLayout.CENTER
+	)
 
   hbox(border:emptyBorder(6), constraints:BorderLayout.SOUTH) {
     

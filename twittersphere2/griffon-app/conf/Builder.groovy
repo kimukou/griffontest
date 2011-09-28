@@ -14,3 +14,5 @@ root.'JoglCompatGriffonAddon'.addon=true
 root.'WorldwindGriffonAddon'.addon=true
 
 root.'GlazedlistsGriffonAddon'.addon=true
+
+root.'I18nGriffonAddon'.addon=true

@@ -4,6 +4,8 @@ import gov.nasa.worldwind.geom.Position
 import gov.nasa.worldwind.geom.Angle
 import gov.nasa.worldwind.globes.Globe
 import gov.nasa.worldwind.view.orbit.OrbitView
+import gov.nasa.worldwind.view.orbit.OrbitViewInputHandler
+
 import groovy.util.slurpersupport.GPathResult
 import java.beans.PropertyChangeListener
 import java.net.URL
@@ -17,6 +19,7 @@ class Twittersphere2Controller {
     // these will be injected by Griffon
     def model
     def view
+		def twitter
 
     // void mvcGroupInit(Map args) {
     //    // this method is called after model and view are injected
@@ -28,6 +31,8 @@ class Twittersphere2Controller {
 
 
     def onStartupEnd = {
+				 gov.nasa.worldwind.WorldWind.setOfflineMode(true)
+
         //def trends = getTrends()
         //println trends
         edt {
@@ -51,7 +56,7 @@ class Twittersphere2Controller {
                         newTweets = getPublicResults()
                         break
                     case 'Search' :
-                        if (text == null || text.trim().equals("")) {
+                        if (text == null || "".equals(text?.trim())) {
                             edt {
                                 view.searchBox.setSelectedItem("Enter a search term")
                             }
@@ -147,8 +152,11 @@ class Twittersphere2Controller {
                         view.addTweet(tweet.pos, tweet.user, tweet.tweet, tweet.icon)
                         if (model.animate) {
                             OrbitView orbitView = view.wwd.view
-                            orbitView.applyStateIterator(orbitView.addPanToAnimator(
-                                 tweet.pos,Angle.ZERO, Angle.ZERO, 1000000))
+														
+														//see http://forum.worldwindcentral.com/showthread.php?t=24345
+														OrbitViewInputHandler ovih = (OrbitViewInputHandler) orbitView.getViewInputHandler()
+														ovih.addPanToAnimator(tweet.pos,Angle.ZERO, Angle.ZERO, 1000000)
+
                             //orbitView.applyStateIterator(FlyToOrbitViewStateIterator.createPanToIterator(
                             //    orbitView, view.wwd.model.globe, tweet.pos,
                             //     Angle.ZERO, Angle.ZERO, 1000000))
@@ -173,19 +181,23 @@ class Twittersphere2Controller {
     //see http://groups.google.com/group/twitter-api-announce/browse_thread/thread/bec060db85d8cf72
     //
     def getTrends = {
+				//println twitter.dump()
         def jsonText
         try {
-/*
             def parser = new JsonParser()
             jsonText = new URL("http://api.twitter.com/1/trends.json").openStream().text
             def obj = parser.parseObject(jsonText)
             def trendNames = obj.trends.collect{it.name}
-*/
-            //return trendNames[0..4]
-            //model.searchTermsList.addAll(trendNames[0..4])
-						twitter = new TwitterFactory().instance
+/*
+						//twitterF = new TwitterFactory().instance
+						//trends = twitterF.getLocationTrends(23424856).trends
 						trends = twitter.getLocationTrends(23424856).trends
-            model.searchTermsList.addAll(trends[0..4])
+						println "trends ="+ trends.dump()
+						def trendNames = trends.collect{it.name}
+						println "trendNames="+ trendNames.dump()
+            //return trendNames[0..4]
+*/
+            model.searchTermsList.addAll(trendNames[0..4])
         } catch(Exception e) {
             System.err.println jsonText
             throw e
