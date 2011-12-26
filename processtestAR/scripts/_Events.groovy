@@ -117,10 +117,10 @@ def copySetting(destDir){
   }
 
 //jogl-compat
-  srcDir  = "${basedir}/lib/jogl-compat/windows/native"
-  ant.copy(todir: destDir, overwrite: true ) {
-    fileset(dir: srcDir, includes: '*.dll')
-  }
+//  srcDir  = "${basedir}/lib/jogl-compat/windows/native"
+//  ant.copy(todir: destDir, overwrite: true ) {
+//    fileset(dir: srcDir, includes: '*.dll')
+//  }
 
 }
 

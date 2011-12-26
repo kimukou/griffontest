@@ -7,10 +7,12 @@ class ProcesstestModel {
 	@Bindable pApplet2D = new e2DProcessing()
 	@Bindable pApplet3D = new e3DProcessing()
 	@Bindable pAppletAR = new NyARBoardProcessing()
+	@Bindable pAppletOpenNI = new SimpleOpenNITest()
 
 	ProcesstestModel(){
 			pApplet2D.init()
 			pApplet3D.init()
 			pAppletAR.init()
+			pAppletOpenNI.init()
 	}
 }
