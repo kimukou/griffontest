@@ -31,8 +31,9 @@ println "----b"
               mavenRepo "http://tinkerpop.com/maven2"
 							mavenRepo "http://fortytwo.net/maven2"
 							mavenRepo "http://www.orientechnologies.com/listing/m2/"
+							mavenRepo "http://repo.aduna-software.org/maven2/releases"
           }
-					compile 'com.tinkerpop:gremlin:1.2' 
+					compile 'com.tinkerpop:gremlin:1.3' 
      }
 println "----c"
 /*

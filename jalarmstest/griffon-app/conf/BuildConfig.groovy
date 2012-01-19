@@ -120,6 +120,7 @@ griffon.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
         //mavenRepo "http://java-jml.sourceforge.net/maven"
 				mavenRepo "http://bleu.west.spy.net/~dustin/m2repo/"
+				mavenRepo "http://java-jml.sourceforge.net/maven/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.

@@ -41,6 +41,11 @@ eventCompileEnd = {msg->
     fileset(dir: libDir, includes: '*.dll')
   }
 
+  ant.copy( todir: "${basedir}/staging", overwrite: true ) {
+    fileset( dir: "${basedir}/setting/data", includes: "**" )
+  }
+
+
   //libDir  = "${basedir}/lib/libraries/opengl/library"
   //ant.copy(todir: destDir) {
   //  fileset(dir: libDir, includes: '*.dll,*.so')

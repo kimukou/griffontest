@@ -1,0 +1,30 @@
+import SimpleOpenNI.*;
+import processing.core.*;
+
+public class KinectUtil {
+
+	private static SimpleOpenNI kinect;
+
+	public static SimpleOpenNI getInstance(PApplet applet){
+		if(kinect!=null)return kinect;
+
+		kinect = new SimpleOpenNI(applet);
+	  kinect.setMirror(true);
+
+	  //enable depthMap generation 
+	  kinect.enableDepth();
+	  kinect.enableRGB();
+	  kinect.alternativeViewPointDepthToImage();
+	  
+	  // enable hands + gesture generation <1>
+	  kinect.enableGesture();
+	  kinect.enableHands();
+	  kinect.addGesture("RaiseHand"); // <2>
+
+	  size(kinect.depthWidth(), kinect.depthHeight());
+	  stroke(255, 0, 0);
+	  strokeWeight(2);
+		
+		return kinect;
+	}
+}

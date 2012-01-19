@@ -1,13 +1,16 @@
-now only window project
-
 [griffon processing plugin additional command]
 griffon create-processing-view
 
 
-[use library(Win)]
+[use library]
 NyARToolkit for processing
 	http://d.hatena.ne.jp/nyatla/20081225
 
+
+[use library(Other)]
+QuickTime
+
+[use library(Win)]
 CaptureDS
 	http://digitalmuseum.jp/software/nui/processing/
 
@@ -15,19 +18,9 @@ DirectShow Java
 	http://www.humatic.de/htools/dsj.htm
 
 
-
 ref 
 	http://www.atmarkit.co.jp/fsmart/articles/armobile02/01.html
 	http://kougaku.blog28.fc2.com/blog-entry-288.html
 	http://sixwish.jp/Nyartoolkit/
 
-
-[OpenNI(WIn)]
-
-simple-openi
-	http://code.google.com/p/simple-openni/
-
-ref 
-	http://d.hatena.ne.jp/moccos_info/20101220/p1
-	http://kgxpx834.blog58.fc2.com/blog-entry-22.html
 

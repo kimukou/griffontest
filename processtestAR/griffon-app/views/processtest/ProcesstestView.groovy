@@ -25,9 +25,6 @@ application(title: 'processtest',
 		panel(title:"ARtest",border: emptyBorder(0)) {
 			widget(model.pAppletAR)
 		}
-		panel(title:"OpenNItest",border: emptyBorder(0)) {
-			widget(model.pAppletOpenNI)
-		}
 	}
 
 

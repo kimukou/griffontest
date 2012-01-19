@@ -13,7 +13,7 @@ eventSetClasspath = { cl ->
         conf: 'compile',
         group: 'net.sf.opencsv',
         name: 'opencsv',
-        version: '2.1'
+        version: '2.3'
     ])
 }
 

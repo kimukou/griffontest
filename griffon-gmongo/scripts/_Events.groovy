@@ -26,7 +26,7 @@ eventSetClasspath = { cl ->
         conf: 'compile',
         group: 'com.gmongo',
         name: 'gmongo',
-        version: '0.9'
+        version: '0.9.2'
     ])
 }
 

@@ -1,11 +1,11 @@
 ::set GROOVY_HOME=C:\opt\groovypp-0.4.116
-set GROOVY_HOME=C:\opt\Groovy-1.8.3
+set GROOVY_HOME=C:\opt\Groovy-1.8.5
 
 set JAVA_HOME=c:\opt\jdk
 set GRIFFON_HOME=C:\opt\griffon-0.9.4
 set GRAILS_HOME=C:\opt\grails-1.3.7
 
-set GRADLE_HOME=D:\Tooldev\gradle-1.0-milestone-5
+set GRADLE_HOME=D:\Tooldev\gradle-1.0-milestone-7
 set GIT_HOME=D:\ToolDev\Git
 set MVN_HOME=D:\Tooldev\apache-maven-3.0.3
 set ANT_HOME=D:\Tooldev\ant
