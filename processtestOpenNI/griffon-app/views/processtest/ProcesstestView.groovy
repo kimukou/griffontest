@@ -1,7 +1,7 @@
 package processtest
 
 application(title: 'processtest',
-  size: [400,400],
+  size: [640,480],
   //pack: true,
   //location: [50,50],
   locationByPlatform:true,
@@ -12,7 +12,8 @@ application(title: 'processtest',
     // add content here
     label('Content Goes Here') // deleteme
 
-	tabbedPane(){
+	tabbedPane(id:'tab'){
+/*
 		panel(title:"normal",border: emptyBorder(0)) {
 			label('Content Goes Here') // deleteme
 		}
@@ -22,18 +23,37 @@ application(title: 'processtest',
 		panel(title:"3Dtest",border: emptyBorder(0)) {
 			widget(model.pApplet3D)
 		}
-		panel(title:"OpenNItest",border: emptyBorder(0)) {
-			widget(model.pAppletOpenNI)
+*/
+		if(model.pAppletOpenNI!=null){
+			panel(title:"OpenNItest",border: emptyBorder(0)) {
+				widget(model.pAppletOpenNI)
+			}
 		}
 
-		panel(title:"HandTracking",border: emptyBorder(0)) {
-			widget(model.pHandTracking)
+		if(model.pHandTracking!=null){
+			panel(title:"HandTracking",border: emptyBorder(0)) {
+				widget(model.pHandTracking)
+			}
 		}
 
-		panel(title:"HandTrackingJP",border: emptyBorder(0)) {
-			widget(model.pHandTrackingJP)
+		if(model.pHandTrackingJP!=null){
+			panel(title:"HandTrackingJP",border: emptyBorder(0)) {
+				widget(model.pHandTrackingJP)
+			}
 		}
 	}
 
+	def model_ = model
+
+	tab.addChangeListener(
+		 new ChangeListener() {
+      public void stateChanged(ChangeEvent changeEvent) {
+        JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+        int index = sourceTabbedPane.getSelectedIndex();
+        println "Tab changed to: " + sourceTabbedPane.getTitleAt(index)
+				model_.title = sourceTabbedPane.getTitleAt(index)
+      }
+		}
+	)
 
 }

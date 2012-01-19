@@ -16,10 +16,12 @@ public class HandTracking extends PApplet {
 	PVector previousHand;
 
 	public void setup() {
-		//kinect = KinectUtil.getInstance(this);
+	  kinect = KinectUtil.getInstance(this);
+/*	  
+	  //kinect = KinectUtil.getInstance(this);
 	  kinect = new SimpleOpenNI(this,SimpleOpenNI.RUN_MODE_MULTI_THREADED);
 	  kinect.setMirror(true);
-
+	  
 	  //enable depthMap generation 
 	  kinect.enableDepth();
 	  kinect.enableRGB();
@@ -28,14 +30,17 @@ public class HandTracking extends PApplet {
 	  // enable hands + gesture generation <1>
 	  kinect.enableGesture();
 	  kinect.enableHands();
-
+*/
+	  
 	  kinect.addGesture("RaiseHand"); // <2>
-
 	  size(kinect.depthWidth(), kinect.depthHeight());
+
 	  stroke(255, 0, 0);
 	  strokeWeight(2);
-
+	  
 	  handPositions = new ArrayList(); // <3>
+
+		//noLoop();
 	}
 
 	public void draw() {
@@ -54,16 +59,19 @@ public class HandTracking extends PApplet {
 	// -----------------------------------------------------------------
 	// hand events <5>
 	public void onCreateHands(int handId, PVector position, float time) {
+		println("onCreateHands:"+handId);
 	  kinect.convertRealWorldToProjective(position, position);
 	  handPositions.add(position);
 	}
 
 	public void onUpdateHands(int handId, PVector position, float time) {
+		println("onUpdateHands:"+handId);
 	  kinect.convertRealWorldToProjective(position, position);
 	  handPositions.add(position);
 	}
 
 	public void onDestroyHands(int handId, float time) {
+		println("onDestroyHands:"+handId);
 	  handPositions.clear();
 	  kinect.addGesture("RaiseHand");
 	}
@@ -74,6 +82,7 @@ public class HandTracking extends PApplet {
 	                        PVector idPosition, 
 	                        PVector endPosition) 
 	{
+		println("onRecognizeGesture:"+strGesture);
 	  kinect.startTrackingHands(endPosition);
 	  kinect.removeGesture("RaiseHand"); 
 	}

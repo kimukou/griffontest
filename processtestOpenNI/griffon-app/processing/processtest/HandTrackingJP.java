@@ -15,7 +15,8 @@ public class HandTrackingJP extends PApplet {
 	int t;
 
 
-	String moji = "臨兵闘者皆陣裂在前";
+	//String moji = "臨兵闘者皆陣裂在前";
+	String moji = "ＪＧＧＵＧ";
 	int len = moji.length();
 	int angle = 360 / len;
 	int radius = 50;
@@ -25,6 +26,8 @@ public class HandTrackingJP extends PApplet {
 	Map hands = new HashMap();
 
 	public void setup() {
+	  kinect = KinectUtil.getInstance(this);
+	  /*
 	  kinect = new SimpleOpenNI(this,SimpleOpenNI.RUN_MODE_MULTI_THREADED);
 	  kinect.setMirror(true);
 
@@ -34,26 +37,30 @@ public class HandTrackingJP extends PApplet {
 
 	  kinect.enableGesture();
 	  kinect.enableHands();
-	  
+	  */
+
+
 	  //kinect.addGesture("Wave");
 	  //kinect.addGesture("Click");
 	  //kinect.addGesture("RaiseHand");//腕あげる
-
+	  addGesture();
 	  size(kinect.depthWidth(), kinect.depthHeight());
+
+
 	  //PFont mahou = loadFont("mahou.vlw");
 	  PFont mahou = createFont("メイリオ", 30);
 	  textFont(mahou, 20*b);
 	  colorMode(HSB, 360, 100, 100);
 	  textAlign(CENTER);
 	  smooth();
-
-	  addGesture();
+	  
+		//noLoop();
 	}
 
 
 	private void addGesture(){
-	  //kinect.addGesture("Wave");
-	  //kinect.addGesture("Click");
+	  kinect.addGesture("Wave");
+	  kinect.addGesture("Click");
 	  kinect.addGesture("RaiseHand");//腕あげる
 	}
 
@@ -63,7 +70,6 @@ public class HandTrackingJP extends PApplet {
 	  image(kinect.rgbImage(), 0, 0);
 	  mahoujin();
 	}
-
 
 
 	private void mahoujin() {
@@ -76,11 +82,12 @@ public class HandTrackingJP extends PApplet {
 	    PVector posScreen = new PVector();
 	    kinect.convertRealWorldToProjective(pos3d, posScreen);
 
-	    translate(posScreen.x, posScreen.y);
-	    for (int i = 0; i  < 9; i++) {
+	    translate((float)posScreen.x, (float)posScreen.y);
+			int len_moji = moji == null ? 0 :moji.length();
+	    for (int i = 0; i  < len_moji; i++) {
 	      pushMatrix();
 	      rotate(radians(i * angle));
-	      translate(radius*0.9*b, 0);
+	      translate((float)(radius*0.9*b), 0L);
 	      rotate(radians(90));
 	      fill(179, 53, 100);
 	      text(moji.charAt(i), 0, 0);
@@ -90,7 +97,7 @@ public class HandTrackingJP extends PApplet {
 
 	    rectMode(CENTER);
 	    noFill();
-	    strokeWeight(2.5*b);
+	    strokeWeight((float)2.5*b);
 	    stroke(179, 53, 100);
 	    rect(0, 0, 50*b, 50*b);
 	    pushMatrix();
@@ -113,34 +120,40 @@ public class HandTrackingJP extends PApplet {
 	    ellipse(0, 0, 140*b, 140*b);
 
 	    t += 2;
-	    filter(BLUR, 1.5);
+	    filter(BLUR, (float)1.5);
 	  }
 
 	}
 	// -----------------------------------------------------------------
 	// hand events <5>
 	public void onCreateHands(int handId, PVector pos , float time) {
+		println("onCreateHands:"+handId);
+
 	  //kinect.convertRealWorldToProjective(pos, pos);
 	  hands.put(handId, pos);
 	}
 
 	public void onUpdateHands(int handId, PVector pos, float time) {
+		println("onUpdateHands:"+handId);
+
 	  //kinect.convertRealWorldToProjective(pos, pos);
 	  hands.put(handId, pos);
 	}
 
 	public void onDestroyHands(int handId, float time) {
+		println("onDestroyHands:"+handId);
 	  //hands.remove(handId);
+
 	  hands.clear();
-	  //kinect.addGesture("RaiseHand");
 	  addGesture();
 	}
 
 	// -----------------------------------------------------------------
 	// gesture events <4>
 	public void onRecognizeGesture(String strGesture, PVector idPosition, PVector endPosition) {
-	  println("ジェスチャー名: "+ strGesture);
+	  println("onRecognizeGesture: "+ strGesture);
 	  kinect.startTrackingHands(endPosition);
+
 	  kinect.removeGesture(strGesture); 
 	}
 

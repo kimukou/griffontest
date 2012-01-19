@@ -1,6 +1,3 @@
-[griffon processing plugin additional command]
-griffon create-processing-view
-
 [OpenNI(WIn)]
 
 simple-openi
@@ -9,4 +6,7 @@ simple-openi
 ref 
 	http://d.hatena.ne.jp/moccos_info/20101220/p1
 	http://kgxpx834.blog58.fc2.com/blog-entry-22.html
+
+
+
 
