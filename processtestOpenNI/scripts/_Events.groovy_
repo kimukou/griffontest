@@ -33,14 +33,14 @@ eventCompileStart = {msg->
 eventCompileEnd = {msg->
   println "==compile end(${msg})=="
   growlNotify("eventCompileEnd")
-
+/*
   libDir  = "${basedir}/lib/native"
   destDir = "${basedir}/staging/${griffon.util.PlatformUtils.platform}/native"
 
   ant.copy(todir: destDir) {
     fileset(dir: libDir, includes: '*.dll')
   }
-
+*/
   //libDir  = "${basedir}/lib/libraries/opengl/library"
   //ant.copy(todir: destDir) {
   //  fileset(dir: libDir, includes: '*.dll,*.so')

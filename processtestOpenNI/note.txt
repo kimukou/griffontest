@@ -8,5 +8,8 @@ ref
 	http://kgxpx834.blog58.fc2.com/blog-entry-22.html
 
 
+using 
+ griffon 0.9.4 and https://github.com/kimukou/griffon-openni-plugin
 
+ griffon install-plugin griffon-openni-0.1.zip
 

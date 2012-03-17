@@ -96,3 +96,4 @@ splashScreen.showStatus('Initialize ZZZZ')
 
 SplashGriffonAddon.display(app)
 SplashGriffonAddon.display(app)
+SplashGriffonAddon.display(app)

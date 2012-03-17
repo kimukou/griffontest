@@ -3,7 +3,7 @@ package processtest
 application(title: 'processtest',
   size: [640,480],
   //pack: true,
-  //location: [50,50],
+  location: [600,50],
   locationByPlatform:true,
   iconImage: imageIcon('/griffon-icon-48x48.png').image,
   iconImages: [imageIcon('/griffon-icon-48x48.png').image,
